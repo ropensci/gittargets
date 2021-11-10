@@ -25,23 +25,29 @@ pipeline.
 | Release     | CRAN   | `install.packages("targit")`                |
 | Development | GitHub | `remotes::install_github("wlandau/targit")` |
 
+## Code of Conduct
 
-    ## Citation
+Please note that the `targit` project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
+## Citation
 
-    ```r
-    citation("targit")
-    #> 
-    #> To cite package 'targit' in publications use:
-    #> 
-    #>   William Michael Landau (NA). targit: Version Control for the Targets
-    #>   Package. https://wlandau.github.io/targit/,
-    #>   https://github.com/wlandau/targit.
-    #> 
-    #> A BibTeX entry for LaTeX users is
-    #> 
-    #>   @Manual{,
-    #>     title = {targit: Version Control for the Targets Package},
-    #>     author = {William Michael Landau},
-    #>     note = {https://wlandau.github.io/targit/, https://github.com/wlandau/targit},
-    #>   }
+``` r
+citation("targit")
+#> 
+#> To cite package 'targit' in publications use:
+#> 
+#>   William Michael Landau (NA). targit: Version Control for the Targets
+#>   Package. https://wlandau.github.io/targit/,
+#>   https://github.com/wlandau/targit.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {targit: Version Control for the Targets Package},
+#>     author = {William Michael Landau},
+#>     note = {https://wlandau.github.io/targit/, https://github.com/wlandau/targit},
+#>   }
+```

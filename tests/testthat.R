@@ -1,4 +1,4 @@
 library(testthat)
-library(targit)
+library(gittargets)
 
-test_check("targit")
+test_check("gittargets")

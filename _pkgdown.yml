@@ -21,7 +21,7 @@ navbar:
 reference:
 - title: Help
   contents:
-  - '`targit-package`'
+  - '`gittargets-package`'
 - title: Git
   contents:
   - '`tar_git_checkout`'

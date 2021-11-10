@@ -1,10 +1,10 @@
-Package: targit
+Package: gittargets
 Title: Version Control for the Targets Package
 Description: Version control systems such as Git help researchers
   track changes and history in data science projects,
   and the 'targets' package (2021, <doi:10.21105/joss.02959>)
   minimizes the computational cost of keeping the latest results
-  reproducible and up to date. The 'targit' package
+  reproducible and up to date. The 'gittargets' package
   combines these two capabilities. The 'targets' data store
   becomes a version control repository and stays synchronized
   with the Git repository of the source code.
@@ -12,8 +12,8 @@ Description: Version control systems such as Git help researchers
   without invalidating the 'targets' pipeline.
 Version: 0.0.0.9000
 License: MIT + file LICENSE
-URL: https://wlandau.github.io/targit/, https://github.com/wlandau/targit
-BugReports: https://github.com/wlandau/targit/issues
+URL: https://wlandau.github.io/gittargets/, https://github.com/wlandau/gittargets
+BugReports: https://github.com/wlandau/gittargets/issues
 Authors@R: c(
   person(
     given = c("William", "Michael"),

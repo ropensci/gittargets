@@ -32,17 +32,11 @@ jobs:
           key: macOS-r-4.0-2-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: macOS-r-4.0-2-
 
-      - name: Install system requirements
-        run: |
-          brew install zeromq
-
       - name: Install packages
         run: |
           install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE, type = ifelse(tolower(Sys.info()["sysname"]) == "linux", "source", "binary"))
           remotes::install_cran("covr")
-          torch::install_torch()
-          install.packages("arrow", type = "source")
         shell: Rscript {0}
 
       - name: Test coverage

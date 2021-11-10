@@ -22,10 +22,6 @@ jobs:
     env:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      TORCH_INSTALL: 1
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: false
 
     steps:
@@ -61,7 +57,7 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          sudo apt-get install libglpk40
+          sudo apt-get install libgit2-dev
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
@@ -70,12 +66,6 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE, type = ifelse(tolower(Sys.info()["sysname"]) == "linux", "source", "binary"))
           remotes::install_cran("rcmdcheck")
-          torch::install_torch()
-        shell: Rscript {0}
-
-      - name: Mac arrow
-        if: runner.os == 'macOS'
-        run: install.packages("arrow", type = "source")
         shell: Rscript {0}
 
       - name: Check

@@ -1,0 +1,43 @@
+Package: targit
+Title: Version Control for the Targets Package
+Description: Version control systems such as Git help researchers
+  track changes and history in data science projects,
+  and the 'targets' package (2021, <doi:10.21105/joss.02959>)
+  minimizes the computational cost of keeping the latest results
+  reproducible and up to date. The 'targit' package
+  combines these two capabilities. The 'targets' data store
+  becomes a version control repository and stays synchronized
+  with the Git repository of the source code.
+  Users can switch commits and branches
+  without invalidating the 'targets' pipeline.
+Version: 0.0.0.9000
+License: MIT + file LICENSE
+URL: https://wlandau.github.io/targit/, https://github.com/wlandau/targit
+BugReports: https://github.com/wlandau/targit/issues
+Authors@R: c(
+  person(
+    given = c("William", "Michael"),
+    family = "Landau",
+    role = c("aut", "cre"),
+    email = "will.landau@gmail.com",
+    comment = c(ORCID = "0000-0003-1878-3253")
+  ),
+  person(
+    family = "Eli Lilly and Company",
+    role = "cph"
+  ))
+Depends:
+  R (>= 3.5.0)
+Imports:
+  gert,
+  targets
+Suggests:
+  markdown (>= 1.1),
+  rmarkdown (>= 2.4),
+  testthat (>= 3.0.0)
+Encoding: UTF-8
+Language: en-US
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2

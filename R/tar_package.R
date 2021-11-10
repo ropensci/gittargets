@@ -11,6 +11,7 @@
 #'   invalidating the `targets` pipeline.
 #' @name targit-package
 #' @family help
-#' @importFrom gert git_add
-#' @importFrom targets tar_config_get
+#' @importFrom gert git_add git_init
+#' @importFrom targets tar_assert_chr tar_assert_path tar_assert_scalar
+#'   tar_config_get tar_config_set tar_dir
 NULL

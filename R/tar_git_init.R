@@ -4,7 +4,7 @@
 #' @description Initialize a Git repository for a `targets` data store.
 #' @inheritParams targets::tar_config_set
 #' @examples
-#' if (Sys.getenv("TARGIT_EXAMPLES") == "true") {
+#' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's filespace.
 #' targets::tar_script()
 #' targets::tar_make()

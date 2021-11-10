@@ -24,7 +24,7 @@ Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setti
 Initialize a Git repository for a \code{targets} data store.
 }
 \examples{
-if (Sys.getenv("TARGIT_EXAMPLES") == "true") {
+if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's filespace.
 targets::tar_script()
 targets::tar_make()

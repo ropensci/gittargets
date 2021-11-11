@@ -5,7 +5,7 @@ git_repo_exists <- function(repo) {
 git_stash_gitignore <- function(repo) {
   path <- file.path(repo, ".gitignore")
   if (!file.exists(path)) {
-    return()
+    return(NULL)
   }
   dir <- tools::R_user_dir("gittargets", "cache")
   stash <- file.path(dir, paste0("gitignore_", basename(tempfile())))
@@ -15,6 +15,9 @@ git_stash_gitignore <- function(repo) {
 }
 
 git_unstash_gitignore <- function(repo, stash) {
+  if (is.null(stash)) {
+    return()
+  }
   new_path <- file.path(repo, ".gitignore")
   fs::file_move(path = stash, new_path = new_path)
 }

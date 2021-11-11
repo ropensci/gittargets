@@ -1,9 +1,24 @@
-targets::tar_test("tar_git_init()", {
+targets::tar_test("tar_git_init() without .gitignore", {
   store <- targets::tar_config_get("store")
   dir.create(store)
   expect_false(file.exists(file.path(store, ".git")))
+  expect_false(file.exists(file.path(store, ".gitignore")))
   dir <- getwd()
   tar_git_init(store = store)
   expect_equal(getwd(), dir)
   expect_true(file.exists(file.path(store, ".git")))
+  expect_false(file.exists(file.path(store, ".gitignore")))
+})
+
+targets::tar_test("tar_git_init() with .gitignore", {
+  store <- targets::tar_config_get("store")
+  targets::tar_script()
+  targets::tar_make(callr_function = NULL)
+  expect_false(file.exists(file.path(store, ".git")))
+  expect_true(file.exists(file.path(store, ".gitignore")))
+  dir <- getwd()
+  tar_git_init(store = store)
+  expect_equal(getwd(), dir)
+  expect_true(file.exists(file.path(store, ".git")))
+  expect_true(file.exists(file.path(store, ".gitignore")))
 })

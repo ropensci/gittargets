@@ -3,6 +3,21 @@
 #' @family git
 #' @description Initialize a Git repository for a `targets` data store.
 #' @inheritParams targets::tar_config_set
+#' @return `NULL` (invisibly).
+#' @param stash_gitignore Logical of length 1, whether to temporarily
+#'   stash the `.gitignore` file of the data store.
+#'   The `targets` package writes a `.gitignore` file to new data stores
+#'   in order to prevent accidental commits to the code Git repository.
+#'   Unfortunatly, for `gittargets`, this automatic `.gitignore` file
+#'   interferes with proper data versioning. So by default, `gittargets`
+#'   temporarily stashes it in
+#'   `tools::R_user_dir(package = "gittargets", which = "cache")`
+#'   while querying and modifying the data store. As long as the R
+#'   session does not crash unexpectedly, the `.gitignore` file
+#'   is returned to its proper location when `gittargets` is finished
+#'   working with the data store.
+#' @param verbose Logical of length 1, whether to print messages to the
+#'   R console.
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's file space.

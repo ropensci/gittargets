@@ -23,6 +23,25 @@ For optimal performance, choose a storage location
 with fast read/write access.
 If the argument \code{NULL}, the setting is not modified.
 Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
+
+\item{stash_gitignore}{Logical of length 1, whether to temporarily
+stash the \code{.gitignore} file of the data store.
+The \code{targets} package writes a \code{.gitignore} file to new data stores
+in order to prevent accidental commits to the code Git repository.
+Unfortunatly, for \code{gittargets}, this automatic \code{.gitignore} file
+interferes with proper data versioning. So by default, \code{gittargets}
+temporarily stashes it in
+\code{tools::R_user_dir(package = "gittargets", which = "cache")}
+while querying and modifying the data store. As long as the R
+session does not crash unexpectedly, the \code{.gitignore} file
+is returned to its proper location when \code{gittargets} is finished
+working with the data store.}
+
+\item{verbose}{Logical of length 1, whether to print messages to the
+R console.}
+}
+\value{
+\code{NULL} (invisibly).
 }
 \description{
 Initialize a Git repository for a \code{targets} data store.

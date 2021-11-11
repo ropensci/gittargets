@@ -2,7 +2,9 @@
 #' @export
 #' @family git
 #' @description Show which targets are outdated.
-#' @details This function has prettier printing than `targets::tar_outdated()`.
+#' @details This function has prettier output than `targets::tar_outdated()`,
+#'   and it mainly serves [tar_git_status()].
+#' @return A `tibble` with the names of outdated targets.
 #' @inheritParams targets::tar_outdated
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {

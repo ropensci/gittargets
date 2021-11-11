@@ -69,11 +69,15 @@ reproducible work.}
 
 \item{callr_arguments}{A list of arguments to \code{callr_function}.}
 }
+\value{
+A \code{tibble} with the names of outdated targets.
+}
 \description{
 Show which targets are outdated.
 }
 \details{
-This function has prettier printing than \code{targets::tar_outdated()}.
+This function has prettier output than \code{targets::tar_outdated()},
+and it mainly serves \code{\link[=tar_git_status]{tar_git_status()}}.
 }
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {

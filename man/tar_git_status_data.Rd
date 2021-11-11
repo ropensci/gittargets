@@ -10,14 +10,36 @@ tar_git_status_data(
 )
 }
 \arguments{
-\item{store}{Character of length 1, path to the
-\code{targets} data store. Defaults to \code{tar_config_get("store")},
-which in turn defaults to \verb{_targets/}.
-When you set this argument, the value of \code{tar_config_get("store")}
-is temporarily changed for the current function call.
-See \code{\link[targets:tar_config_get]{tar_config_get()}} and \code{\link[targets:tar_config_set]{tar_config_set()}} for details
-about how to set the data store path persistently
-for a project.}
+\item{store}{Character of length 1, path to the data store of the pipeline.
+If \code{NULL}, the \code{store} setting is left unchanged in the
+YAML configuration file (default: \verb{_targets.yaml}).
+Usually, the data store lives at \verb{_targets}.
+Set \code{store} to a custom directory
+to specify a path other than \verb{_targets/}. The path need not exist
+before the pipeline begins, and it need not end with "_targets",
+but it must be writeable.
+For optimal performance, choose a storage location
+with fast read/write access.
+If the argument \code{NULL}, the setting is not modified.
+Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
+
+\item{stash_gitignore}{Logical of length 1, whether to temporarily
+stash the \code{.gitignore} file of the data store.
+The \code{targets} package writes a \code{.gitignore} file to new data stores
+in order to prevent accidental commits to the code Git repository.
+Unfortunatly, for \code{gittargets}, this automatic \code{.gitignore} file
+interferes with proper data versioning. So by default, \code{gittargets}
+temporarily stashes it in
+\code{tools::R_user_dir(package = "gittargets", which = "cache")}
+while querying and modifying the data store. As long as the R
+session does not crash unexpectedly, the \code{.gitignore} file
+is returned to its proper location when \code{gittargets} is finished
+working with the data store.}
+}
+\value{
+If the data repository exists, the return value is the data frame
+produced by \code{gert::git_status(repo = store)}. If the data store has no Git
+repository, then the return value is \code{NULL}.
 }
 \description{
 Show the Git status of the data repository.

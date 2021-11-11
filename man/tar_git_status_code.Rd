@@ -6,6 +6,15 @@
 \usage{
 tar_git_status_code(code = getwd())
 }
+\arguments{
+\item{code}{Character of length 1, directory path to the code repository,
+usually the root of the \code{targets} project.}
+}
+\value{
+If the code repository exists, the return value is the data frame
+produced by \code{gert::git_status(repo = code)}. If the code has no Git
+repository, then the return value is \code{NULL}.
+}
 \description{
 Show the Git status of the code repository.
 }

@@ -1,10 +1,13 @@
 #' @title Status of the project (Git)
 #' @export
 #' @family git
-#' @description Show the Git status of the code repository and
-#'   data store repository, as well as the number of outdated
-#'   targets.
-#' @inheritParams targets::tar_outdated
+#' @description Print the status of the code repository,
+#'   the data repository, and the targets.
+#' @return `NULL` (invisibly). Status information is printed
+#'   to the R console.
+#' @inheritParams tar_git_status_code
+#' @inheritParams tar_git_status_data
+#' @inheritParams tar_git_status_targets
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's files pace.

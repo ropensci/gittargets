@@ -2,7 +2,10 @@
 #' @export
 #' @family git
 #' @description Show the Git status of the data repository.
-#' @inheritParams targets::tar_outdated
+#' @return If the data repository exists, the return value is the data frame
+#'   produced by `gert::git_status(repo = store)`. If the data store has no Git
+#'   repository, then the return value is `NULL`.
+#' @inheritParams tar_git_init
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's file space.

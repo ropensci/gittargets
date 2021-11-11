@@ -2,7 +2,11 @@
 #' @export
 #' @family git
 #' @description Show the Git status of the code repository.
-#' @inheritParams targets::tar_outdated
+#' @return If the code repository exists, the return value is the data frame
+#'   produced by `gert::git_status(repo = code)`. If the code has no Git
+#'   repository, then the return value is `NULL`.
+#' @param code Character of length 1, directory path to the code repository,
+#'   usually the root of the `targets` project.
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's file space.

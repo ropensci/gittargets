@@ -35,7 +35,3 @@ tar_git_status_targets <- function(
   )
   tibble::as_tibble(list(outdated = outdated))
 }
-
-tar_git_status_outdated_print <- function(outdated) {
-  print(tibble::as_tibble(list(outdated = outdated)))
-}

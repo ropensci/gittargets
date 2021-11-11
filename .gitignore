@@ -1,6 +1,7 @@
 *~
 *.out
 *.Rout
+.gittargets
 .DS_Store
 .future
 .Rapp.history

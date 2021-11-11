@@ -27,15 +27,18 @@ Authors@R: c(
     role = "cph"
   ))
 Depends:
-  R (>= 3.5.0)
+  R (>= 4.0.0)
 Imports:
-  gert,
-  targets
+  cli (>= 3.0.0),
+  gert (>= 1.0.0),
+  targets (>= 0.8.1.9000)
 Suggests:
   knitr (>= 1.30),
   markdown (>= 1.1),
   rmarkdown (>= 2.4),
   testthat (>= 3.0.0)
+Remotes:
+  ropensci/targets
 Encoding: UTF-8
 Language: en-US
 VignetteBuilder: knitr

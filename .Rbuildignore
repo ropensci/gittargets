@@ -14,6 +14,7 @@
 ^\.git$
 ^\.github$
 ^\.gitignore$
+^\.gittargets$
 ^\.httr-oauth$
 ^\.lintr$
 ^\.Rapp.history$

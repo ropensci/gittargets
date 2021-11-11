@@ -98,4 +98,3 @@ tar_git_status_tip <- function() {
 tar_git_status_outdated_print <- function(outdated) {
   print(tibble::as_tibble(list(outdated = outdated)))
 }
-

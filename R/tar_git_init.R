@@ -45,7 +45,7 @@ tar_git_init <- function(
   }
   gert::git_init(path = store)
   cli_success("Created data store Git repository", verbose = verbose)
-  git_stub_write(repo = store, lines = "")
+  git_stub_write(repo = store)
   gert::git_add(
     files = basename(git_stub_path(store)),
     force = TRUE,

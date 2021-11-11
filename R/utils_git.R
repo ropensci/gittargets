@@ -8,7 +8,8 @@ git_stash_gitignore <- function(repo) {
     return(NULL)
   }
   dir <- tools::R_user_dir("gittargets", "cache")
-  stash <- file.path(dir, paste0("gitignore_", basename(tempfile())))
+  uuid <- uuid::UUIDgenerate(use.time = NA, n = 1L)
+  stash <- file.path(dir, paste0("gitignore_", uuid))
   fs::dir_create(dirname(stash))
   fs::file_move(path = path, new_path = stash)
   stash
@@ -26,7 +27,8 @@ git_stub_path <- function(repo) {
   file.path(repo, ".gittargets")
 }
 
-git_stub_write <- function(repo, lines) {
+git_stub_write <- function(repo) {
   path <- git_stub_path(repo)
-  writeLines(lines, path)
+  uuid <- uuid::UUIDgenerate(use.time = NA, n = 1L)
+  writeLines(uuid, path)
 }

@@ -46,7 +46,7 @@ Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setti
 stash the \code{.gitignore} file of the data store.
 The \code{targets} package writes a \code{.gitignore} file to new data stores
 in order to prevent accidental commits to the code Git repository.
-Unfortunatly, for \code{gittargets}, this automatic \code{.gitignore} file
+Unfortunately, for \code{gittargets}, this automatic \code{.gitignore} file
 interferes with proper data versioning. So by default, \code{gittargets}
 temporarily stashes it in
 \code{tools::R_user_dir(package = "gittargets", which = "cache")}

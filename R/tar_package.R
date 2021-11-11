@@ -15,4 +15,5 @@
 #' @importFrom gert git_add git_commit git_init git_status
 #' @importFrom targets tar_assert_file tar_config_get tar_config_set tar_dir
 #'   tar_outdated
+#' @importFrom tibble as_tibble
 NULL

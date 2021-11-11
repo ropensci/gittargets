@@ -8,7 +8,7 @@
 #'   stash the `.gitignore` file of the data store.
 #'   The `targets` package writes a `.gitignore` file to new data stores
 #'   in order to prevent accidental commits to the code Git repository.
-#'   Unfortunatly, for `gittargets`, this automatic `.gitignore` file
+#'   Unfortunately, for `gittargets`, this automatic `.gitignore` file
 #'   interferes with proper data versioning. So by default, `gittargets`
 #'   temporarily stashes it in
 #'   `tools::R_user_dir(package = "gittargets", which = "cache")`
@@ -32,6 +32,8 @@ tar_git_init <- function(
   verbose = TRUE
 ) {
   tar_assert_file(store)
+  targets::tar_assert_lgl(verbose)
+  targets::tar_assert_scalar(verbose)
   if (git_repo_exists(store)) {
     cli_info("Data store Git repository already exists.")
     cli_info("Remove ", store, " to start over.")
@@ -44,7 +46,11 @@ tar_git_init <- function(
   gert::git_init(path = store)
   cli_success("Created data store Git repository", verbose = verbose)
   git_stub_write(repo = store, lines = "")
-  gert::git_add(files = basename(git_stub_path(store)), force = TRUE, repo = store)
+  gert::git_add(
+    files = basename(git_stub_path(store)),
+    force = TRUE,
+    repo = store
+  )
   gert::git_commit(message = "Stub commit", repo = store)
   cli_success("Created stub commit.", verbose = verbose)
   cli_info(

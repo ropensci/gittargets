@@ -22,3 +22,16 @@ targets::tar_test("tar_git_init() with .gitignore", {
   expect_true(file.exists(file.path(store, ".git")))
   expect_true(file.exists(file.path(store, ".gitignore")))
 })
+
+targets::tar_test("tar_git_init() is idempotent", {
+  store <- targets::tar_config_get("store")
+  dir.create(store)
+  expect_false(file.exists(file.path(store, ".git")))
+  expect_false(file.exists(file.path(store, ".gitignore")))
+  dir <- getwd()
+  tar_git_init(store = store)
+  tar_git_init(store = store)
+  expect_equal(getwd(), dir)
+  expect_true(file.exists(file.path(store, ".git")))
+  expect_false(file.exists(file.path(store, ".gitignore")))
+})

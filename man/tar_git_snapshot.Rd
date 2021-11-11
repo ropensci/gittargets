@@ -5,12 +5,17 @@
 \title{Snapshot the data repository (Git).}
 \usage{
 tar_git_snapshot(
+  code = getwd(),
   store = targets::tar_config_get("store"),
   prompt = interactive(),
+  status = prompt,
   verbose = TRUE
 )
 }
 \arguments{
+\item{code}{Character of length 1, directory path to the code repository,
+usually the root of the \code{targets} project.}
+
 \item{store}{Character of length 1, path to the data store of the pipeline.
 If \code{NULL}, the \code{store} setting is left unchanged in the
 YAML configuration file (default: \verb{_targets.yaml}).
@@ -23,6 +28,16 @@ For optimal performance, choose a storage location
 with fast read/write access.
 If the argument \code{NULL}, the setting is not modified.
 Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
+
+\item{prompt}{Logical of length 1, whether to prompt the user before
+creating a snapshot.}
+
+\item{status}{Logical of length 1, whether to print the project status
+with \code{\link[=tar_git_status]{tar_git_status()}} before asking whether a snapshot should be
+created.}
+
+\item{verbose}{Logical of length 1, whether to print R console messages
+confirming that a snapshot was created.}
 }
 \description{
 Snapshot the Git data repository of a \code{targets} project.
@@ -32,9 +47,7 @@ if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's filespace.
 targets::tar_script()
 targets::tar_make()
-list.files("_targets", all.files = TRUE)
 tar_git_init()
-list.files("_targets", all.files = TRUE)
 })
 }
 }

@@ -28,4 +28,7 @@ reference:
   - '`tar_git_commit`'
   - '`tar_git_init`'
   - '`tar_git_log`'
-  - '`tar_git_manifest`'
+  - '`tar_git_status`'
+  - '`tar_git_status_code`'
+  - '`tar_git_status_data`'
+  - '`tar_git_status_targets`'

@@ -1,4 +1,4 @@
-#' @title Initialize a data store Git repository.
+#' @title Initialize a data repository (Git).
 #' @export
 #' @family git
 #' @description Initialize a Git repository for a `targets` data store.
@@ -12,7 +12,6 @@
 #' })
 #' }
 tar_git_init <- function(
-  project = getwd(),
   store = targets::tar_config_get("store"),
   stash_gitignore = TRUE,
   verbose = TRUE

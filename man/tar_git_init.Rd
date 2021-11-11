@@ -2,31 +2,15 @@
 % Please edit documentation in R/tar_git_init.R
 \name{tar_git_init}
 \alias{tar_git_init}
-\title{Initialize a data store Git repository.}
+\title{Initialize a data repository (Git).}
 \usage{
 tar_git_init(
-  project = getwd(),
   store = targets::tar_config_get("store"),
   stash_gitignore = TRUE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{project}{Character of length 1, name of the current
-\code{targets} project. Thanks to the \code{config} R package,
-\code{targets} YAML configuration files can store multiple
-sets of configuration settings, with each set corresponding
-to its own project. The \code{project} argument allows you to
-set or get a configuration setting for a specific project
-for a given call to \code{tar_config_set()} or \code{tar_config_get()}.
-The default project is always called \code{"main"}
-unless you set another
-default project using the \code{TAR_PROJECT} environment variable,
-e.g. \code{Sys.setenv(tar_project = "custom")}. This also has the
-effect of temporarily modifying the default arguments to other functions
-such as \code{\link[targets:tar_make]{tar_make()}} because the default arguments
-to those functions are controlled by \code{tar_config_get()}.}
-
 \item{store}{Character of length 1, path to the data store of the pipeline.
 If \code{NULL}, the \code{store} setting is left unchanged in the
 YAML configuration file (default: \verb{_targets.yaml}).
@@ -55,6 +39,9 @@ tar_git_init()
 \seealso{
 Other git: 
 \code{\link{tar_git_snapshot}()},
+\code{\link{tar_git_status_code}()},
+\code{\link{tar_git_status_data}()},
+\code{\link{tar_git_status_targets}()},
 \code{\link{tar_git_status}()}
 }
 \concept{git}

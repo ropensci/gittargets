@@ -1,9 +1,7 @@
-#' @title Snapshot a data store Git repository. 
+#' @title Snapshot the data repository (Git). 
 #' @export
 #' @family git
-#' @description Snapshot a Git repository for a `targets` data store.
-#' @details `tar_git_snapshot()` does the following:
-#'   1. 
+#' @description Snapshot the Git data repository of a `targets` project.
 #' @inheritParams targets::tar_config_set
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {

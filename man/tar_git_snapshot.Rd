@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_git_snapshot.R
 \name{tar_git_snapshot}
 \alias{tar_git_snapshot}
-\title{Snapshot a data store Git repository.}
+\title{Snapshot the data repository (Git).}
 \usage{
 tar_git_snapshot(
   store = targets::tar_config_get("store"),
@@ -25,11 +25,7 @@ If the argument \code{NULL}, the setting is not modified.
 Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
 }
 \description{
-Snapshot a Git repository for a \code{targets} data store.
-}
-\details{
-\code{tar_git_snapshot()} does the following:
-1.
+Snapshot the Git data repository of a \code{targets} project.
 }
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
@@ -45,6 +41,9 @@ list.files("_targets", all.files = TRUE)
 \seealso{
 Other git: 
 \code{\link{tar_git_init}()},
+\code{\link{tar_git_status_code}()},
+\code{\link{tar_git_status_data}()},
+\code{\link{tar_git_status_targets}()},
 \code{\link{tar_git_status}()}
 }
 \concept{git}

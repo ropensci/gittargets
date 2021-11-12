@@ -2,6 +2,7 @@ targets::tar_test("tar_git_status_data() with no repo", {
   git_setup_init()
   store <- tar_config_get("store")
   unlink(file.path(store, ".git"), recursive = TRUE)
+  expect_false(git_repo_exists(store))
   expect_null(tar_git_status_data())
 })
 

@@ -9,5 +9,6 @@ targets::tar_test("tar_git_status() git not set up and targets outdated", {
   unlink(".git", recursive = TRUE)
   unlink(file.path(store, ".git"), recursive = TRUE)
   targets::tar_invalidate(everything())
+  expect_false(git_repo_exists(store))
   capture.output(expect_message(tar_git_status(callr_function = NULL)))
 })

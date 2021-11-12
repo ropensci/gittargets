@@ -27,3 +27,7 @@ cli_blue_bullet <- function(msg) {
   msg <- paste(symbol, msg)
   cli::cli_text(msg)
 }
+
+cli_indent <- function(msg) {
+  cli::cli_bullets(c(" " = msg))
+}

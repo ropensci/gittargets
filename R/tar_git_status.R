@@ -36,13 +36,6 @@ tar_git_status <- function(
     tar_git_status_code_none(),
     tar_git_status_code_print(status)
   )
-  cli::cli_h1("Data Git status")
-  status <- tar_git_status_data(store, stash_gitignore)
-  if_any(
-    is.null(status),
-    tar_git_status_data_none(),
-    tar_git_status_data_print(status)
-  )
   cli::cli_h1("Outdated targets")
   status <- tar_git_status_targets(
     script = script,
@@ -56,6 +49,13 @@ tar_git_status <- function(
     nrow(status),
     print(status),
     cli_success("All targets are up to date.")
+  )
+  cli::cli_h1("Data Git status")
+  status <- tar_git_status_data(store, stash_gitignore)
+  if_any(
+    is.null(status),
+    tar_git_status_data_none(),
+    tar_git_status_data_print(status)
   )
   invisible()
 }

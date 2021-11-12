@@ -5,16 +5,36 @@
 \title{Snapshot the data repository (Git).}
 \usage{
 tar_git_snapshot(
+  commit = gert::git_commit_info(repo = code)$id,
   code = getwd(),
+  script = targets::tar_config_get("script"),
   store = targets::tar_config_get("store"),
-  prompt = interactive(),
-  status = prompt,
+  stash_gitignore = TRUE,
+  reporter = targets::tar_config_get("reporter_outdated"),
+  envir = parent.frame(),
+  callr_function = callr::r,
+  callr_arguments = targets::callr_args_default(callr_function, reporter),
+  status = interactive(),
   verbose = TRUE
 )
 }
 \arguments{
+\item{commit}{Character of length 1, Git SHA1 hash of the code commit
+that will map to the new data snapshot. Defaults to the commit
+checked out right now (i.e. \code{HEAD}).}
+
 \item{code}{Character of length 1, directory path to the code repository,
 usually the root of the \code{targets} project.}
+
+\item{script}{Character of length 1, path to the
+target script file. Defaults to \code{tar_config_get("script")},
+which in turn defaults to \verb{_targets.R}. When you set
+this argument, the value of \code{tar_config_get("script")}
+is temporarily changed for the current function call.
+See \code{\link[targets:tar_script]{tar_script()}},
+\code{\link[targets:tar_config_get]{tar_config_get()}}, and \code{\link[targets:tar_config_set]{tar_config_set()}} for details
+about the target script file and how to set it
+persistently for a project.}
 
 \item{store}{Character of length 1, path to the data store of the pipeline.
 If \code{NULL}, the \code{store} setting is left unchanged in the
@@ -29,12 +49,57 @@ with fast read/write access.
 If the argument \code{NULL}, the setting is not modified.
 Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
 
-\item{prompt}{Logical of length 1, whether to prompt the user before
-creating a snapshot.}
+\item{stash_gitignore}{Logical of length 1, whether to temporarily
+stash the \code{.gitignore} file of the data store.
+The \code{targets} package writes a \code{.gitignore} file to new data stores
+in order to prevent accidental commits to the code Git repository.
+Unfortunately, for \code{gittargets}, this automatic \code{.gitignore} file
+interferes with proper data versioning. So by default, \code{gittargets}
+temporarily stashes it in
+\code{tools::R_user_dir(package = "gittargets", which = "cache")}
+while querying and modifying the data store. As long as the R
+session does not crash unexpectedly, the \code{.gitignore} file
+is returned to its proper location when \code{gittargets} is finished
+working with the data store.}
+
+\item{reporter}{Character of length 1, name of the reporter to user.
+Controls how messages are printed as targets are checked. Choices:
+\itemize{
+\item \code{"silent"}: print nothing.
+\item \code{"forecast"}: print running totals of the checked and outdated
+targets found so far.
+}}
+
+\item{envir}{An environment, where to run the target R script
+(default: \verb{_targets.R}) if \code{callr_function} is \code{NULL}.
+Ignored if \code{callr_function} is anything other than \code{NULL}.
+\code{callr_function} should only be \code{NULL} for debugging and
+testing purposes, not for serious runs of a pipeline, etc.
+
+The \code{envir} argument of \code{\link[targets:tar_make]{tar_make()}} and related
+functions always overrides
+the current value of \code{tar_option_get("envir")} in the current R session
+just before running the target script file,
+so whenever you need to set an alternative \code{envir}, you should always set
+it with \code{tar_option_set()} from within the target script file.
+In other words, if you call \code{tar_option_set(envir = envir1)} in an
+interactive session and then
+\code{tar_make(envir = envir2, callr_function = NULL)},
+then \code{envir2} will be used.}
+
+\item{callr_function}{A function from \code{callr} to start a fresh clean R
+process to do the work. Set to \code{NULL} to run in the current session
+instead of an external process (but restart your R session just before
+you do in order to clear debris out of the global environment).
+\code{callr_function} needs to be \code{NULL} for interactive debugging,
+e.g. \code{tar_option_set(debug = "your_target")}.
+However, \code{callr_function} should not be \code{NULL} for serious
+reproducible work.}
+
+\item{callr_arguments}{A list of arguments to \code{callr_function}.}
 
 \item{status}{Logical of length 1, whether to print the project status
-with \code{\link[=tar_git_status]{tar_git_status()}} before asking whether a snapshot should be
-created.}
+with \code{\link[=tar_git_status]{tar_git_status()}} and ask whether a snapshot should be created.}
 
 \item{verbose}{Logical of length 1, whether to print R console messages
 confirming that a snapshot was created.}
@@ -45,7 +110,10 @@ Snapshot the Git data repository of a \code{targets} project.
 A Git-backed \code{gittargets} data snapshot is a special kind of
 Git commit. Every data commit gets its own branch,
 and the branch name is equal to the Git SHA1 hash
-of the code commit that was checked out at the time.
+of the current code commit.
+In addition, a special \code{.gittargets} file gets written
+to the data store so you can create a new snapshot even when the
+working tree is clean.
 That way, when you switch branches or commits in the code,
 \code{\link[=tar_git_checkout]{tar_git_checkout()}} can revert the data to match.
 Ideally, your targets should stay up to date even as you

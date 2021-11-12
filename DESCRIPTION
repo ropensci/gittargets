@@ -34,6 +34,7 @@ Imports:
   gert (>= 1.0.0),
   targets (>= 0.8.1.9000),
   tibble (>= 3.0.0),
+  utils,
   uuid (>= 1.0.0)
 Suggests:
   knitr (>= 1.30),

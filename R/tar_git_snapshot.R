@@ -10,7 +10,7 @@
 #'   to the data store so you can create a new snapshot even when the
 #'   working tree is clean.
 #'   That way, when you switch branches or commits in the code,
-#'   [tar_git_checkout()] can revert the data to match.
+#'   `tar_git_checkout()` can revert the data to match.
 #'   Ideally, your targets should stay up to date even as you
 #'   transition among multiple branches.
 #' @inheritParams tar_git_status

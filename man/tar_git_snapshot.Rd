@@ -115,7 +115,7 @@ In addition, a special \code{.gittargets} file gets written
 to the data store so you can create a new snapshot even when the
 working tree is clean.
 That way, when you switch branches or commits in the code,
-\code{\link[=tar_git_checkout]{tar_git_checkout()}} can revert the data to match.
+\code{tar_git_checkout()} can revert the data to match.
 Ideally, your targets should stay up to date even as you
 transition among multiple branches.
 }

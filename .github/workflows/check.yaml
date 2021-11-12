@@ -17,8 +17,6 @@ jobs:
           - {os: ubuntu-20.04,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-20.04,   r: 'release'}
           - {os: ubuntu-20.04,   r: 'oldrel-1'}
-          - {os: ubuntu-20.04,   r: 'oldrel-2'}
-          - {os: ubuntu-20.04,   r: 'oldrel-3'}
     env:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -67,6 +65,11 @@ jobs:
           remotes::install_deps(dependencies = TRUE, type = ifelse(tolower(Sys.info()["sysname"]) == "linux", "source", "binary"))
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
+
+      - name: Git config
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
 
       - name: Check
         env:

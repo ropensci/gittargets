@@ -12,7 +12,7 @@ targets::tar_test("tar_git_init() without .gitignore", {
 
 targets::tar_test("tar_git_init() with .gitignore", {
   store <- targets::tar_config_get("store")
-  targets::tar_script()
+  targets::tar_script(targets::tar_target(x, 1))
   targets::tar_make(callr_function = NULL)
   expect_false(file.exists(file.path(store, ".git")))
   expect_true(file.exists(file.path(store, ".gitignore")))

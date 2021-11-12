@@ -100,13 +100,14 @@ tar_git_snapshot <- function(
     on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
   }
   git_stub_write(repo = store)
-  cli_info(sprintf("Creating data branch %s.", commit), verbose = verbose)
+  cli_success(sprintf("Created data branch %s.", commit), verbose = verbose)
   gert::git_branch_create(branch = commit, checkout = TRUE, repo = store)
   cli_info("Staging files:", verbose = verbose)
   changes <- gert::git_add(files = "*", repo = store)
-  cli_info("Creating the commit.", verbose = verbose)
+  print(changes)
+  cli_info("Committing changes.", verbose = verbose)
   commit <- gert::git_commit_all(message = message, repo = store)
-  cli_info(
+  cli_success(
     sprintf("Created new data snapshot %s.", commit),
     verbose = verbose
   )

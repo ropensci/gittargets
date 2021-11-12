@@ -113,7 +113,7 @@ and the branch name is equal to the Git SHA1 hash
 of the current code commit.
 In addition, a special \code{.gittargets} file gets written
 to the data store so you can create a new snapshot even when the
-working tree is clean.
+data working tree is clean.
 That way, when you switch branches or commits in the code,
 \code{tar_git_checkout()} can revert the data to match.
 Ideally, your targets should stay up to date even as you

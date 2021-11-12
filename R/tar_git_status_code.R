@@ -21,7 +21,7 @@
 tar_git_status_code <- function(code = getwd()) {
   targets::tar_assert_file(code)
   if_any(
-    git_repo_exists(code),
+    git_repo_exists(repo = code),
     gert::git_status(repo = code),
     NULL
   )

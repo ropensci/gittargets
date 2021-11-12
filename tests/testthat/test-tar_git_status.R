@@ -4,6 +4,7 @@ targets::tar_test("tar_git_status() git set up and targets up to date", {
 })
 
 targets::tar_test("tar_git_status() git not set up and targets outdated", {
+  skip_on_os("windows")
   git_setup_init()
   store <- tar_config_get("store")
   unlink(".git", recursive = TRUE)

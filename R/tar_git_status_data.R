@@ -27,7 +27,7 @@ tar_git_status_data <- function(
     on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
   }
   if_any(
-    git_repo_exists(store),
+    git_repo_exists(repo = store),
     gert::git_status(repo = store),
     NULL
   )

@@ -2,6 +2,14 @@
 #' @export
 #' @family git
 #' @description Snapshot the Git data repository of a `targets` project.
+#' @description A Git-backed `gittargets` data snapshot is a special kind of
+#'   Git commit. Every data commit gets its own branch,
+#'   and the branch name is equal to the Git SHA1 hash
+#'   of the code commit that was checked out at the time.
+#'   That way, when you switch branches or commits in the code,
+#'   [tar_git_checkout()] can revert the data to match.
+#'   Ideally, your targets should stay up to date even as you
+#'   transition among multiple branches.
 #' @inheritParams tar_git_status
 #' @param prompt Logical of length 1, whether to prompt the user before
 #'   creating a snapshot.
@@ -16,6 +24,10 @@
 #' targets::tar_script()
 #' targets::tar_make()
 #' tar_git_init()
+#' gert::git_init()
+#' gert::git_add("_targets.R")
+#' gert::git_commit("First commit")
+#' tar_git_snapshot()
 #' })
 #' }
 tar_git_snapshot <- function(

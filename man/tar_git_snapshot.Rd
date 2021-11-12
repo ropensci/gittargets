@@ -41,6 +41,15 @@ confirming that a snapshot was created.}
 }
 \description{
 Snapshot the Git data repository of a \code{targets} project.
+
+A Git-backed \code{gittargets} data snapshot is a special kind of
+Git commit. Every data commit gets its own branch,
+and the branch name is equal to the Git SHA1 hash
+of the code commit that was checked out at the time.
+That way, when you switch branches or commits in the code,
+\code{\link[=tar_git_checkout]{tar_git_checkout()}} can revert the data to match.
+Ideally, your targets should stay up to date even as you
+transition among multiple branches.
 }
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
@@ -48,6 +57,10 @@ targets::tar_dir({ # Containing code does not modify the user's filespace.
 targets::tar_script()
 targets::tar_make()
 tar_git_init()
+gert::git_init()
+gert::git_add("_targets.R")
+gert::git_commit("First commit")
+tar_git_snapshot()
 })
 }
 }

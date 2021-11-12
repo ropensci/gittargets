@@ -2,7 +2,7 @@
 # gittargets
 
 [![CRAN](https://www.r-pkg.org/badges/version/gittargets)](https://CRAN.R-project.org/package=gittargets)
-[![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![status](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![check](https://github.com/wlandau/gittargets/workflows/check/badge.svg)](https://github.com/wlandau/gittargets/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/wlandau/gittargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://codecov.io/gh/wlandau/gittargets)
 [![lint](https://github.com/wlandau/gittargets/workflows/lint/badge.svg)](https://github.com/wlandau/gittargets/actions?query=workflow%3Alint)
@@ -20,15 +20,14 @@ pipeline.
 
 ## Installation
 
-| Type        | Source | Command                                     |
-|-------------|--------|---------------------------------------------|
-| Release     | CRAN   | `install.packages("gittargets")`                |
+| Type        | Source | Command                                         |
+|-------------|--------|-------------------------------------------------|
 | Development | GitHub | `remotes::install_github("wlandau/gittargets")` |
 
 ## Code of Conduct
 
-Please note that the `gittargets` project is released with a [Contributor
-Code of
+Please note that the `gittargets` project is released with a
+[Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
 
@@ -39,8 +38,8 @@ citation("gittargets")
 #> 
 #> To cite package 'gittargets' in publications use:
 #> 
-#>   William Michael Landau (NA). gittargets: Version Control for the Targets
-#>   Package. https://wlandau.github.io/gittargets/,
+#>   William Michael Landau (NA). gittargets: Version Control for the
+#>   Targets Package. https://wlandau.github.io/gittargets/,
 #>   https://github.com/wlandau/gittargets.
 #> 
 #> A BibTeX entry for LaTeX users is

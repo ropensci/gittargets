@@ -1,4 +1,6 @@
 targets::tar_test("tar_git_status_data() with no repo", {
+  skip_on_cran()
+  skip_on_os("windows")
   git_setup_init()
   store <- tar_config_get("store")
   unlink(file.path(store, ".git"), recursive = TRUE)

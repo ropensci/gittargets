@@ -24,10 +24,10 @@ reference:
   - '`gittargets-package`'
 - title: Git
   contents:
-  - '`tar_git_checkout`'
   - '`tar_git_commit`'
   - '`tar_git_init`'
   - '`tar_git_log`'
+  - '`tar_git_snapshot`'
   - '`tar_git_status`'
   - '`tar_git_status_code`'
   - '`tar_git_status_data`'

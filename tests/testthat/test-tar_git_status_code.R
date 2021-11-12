@@ -1,6 +1,4 @@
 targets::tar_test("tar_git_status_code() with no repo", {
-  git_setup_init()
-  unlink(".git", recursive = TRUE)
   expect_null(tar_git_status_code())
 })
 

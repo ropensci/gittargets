@@ -42,9 +42,8 @@ tar_git_snapshot <- function(
   targets::tar_assert_scalar(prompt)
   targets::tar_assert_lgl(status)
   targets::tar_assert_scalar(status)
-  if (!git_repo_exists(store)) {
-    cli_danger("No Git repository for the data store.")
-    cli_danger("Create one with tar_git_init().")
-    return(invisible())
-  }
+  tar_git_assert_repo_code(code)
+  tar_git_assert_commits_code(code)
+  tar_git_assert_repo_data(store)
+  
 }

@@ -55,6 +55,8 @@ tar_git_snapshot <- function(
   tar_git_assert_repo_data(store)
   log <- gert::git_log(repo = code, max = 1L)
   message <- gert::git_commit_info(repo = code, ref = commit)$message
+  # Covered in tests/interactive/test-tar_git_snapshot.R
+  # nocov start
   if (status) {
     tar_git_status(
       code = code,
@@ -88,6 +90,7 @@ tar_git_snapshot <- function(
       return(invisible())
     }
   }
+  # nocov end
   if (gert::git_branch_exists(branch = commit, repo = store)) {
     targets::tar_throw_validate(
       "Data snapshot already exists for code commit ",

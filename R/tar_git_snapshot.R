@@ -104,7 +104,7 @@ tar_git_snapshot <- function(
   gert::git_branch_create(branch = commit, checkout = TRUE, repo = store)
   cli_info("Staging files.", verbose = verbose)
   changes <- gert::git_add(files = "*", repo = store)
-  cli_success("Stageed files:", verbose = verbose)
+  cli_success("Staged files:", verbose = verbose)
   if (verbose) {
     print(changes)
   }

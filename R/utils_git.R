@@ -7,7 +7,7 @@ git_stash_gitignore <- function(repo) {
   if (!file.exists(path)) {
     return(NULL)
   }
-  dir <- tools::R_user_dir("gittargets", "cache")
+  dir <- tools::R_user_dir(package = "gittargets", which = "cache")
   uuid <- uuid::UUIDgenerate(use.time = NA, n = 1L)
   stash <- file.path(dir, paste0("gitignore_", uuid))
   fs::dir_create(dirname(stash))

@@ -40,7 +40,7 @@ tar_git_log <- function(
   log_code <- tibble::tibble(
     commit_code = raw_code$commit,
     time_code = raw_code$time,
-    message = raw_code$message
+    message = trimws(raw_code$message)
   )
   log_data <- tibble::tibble(
     commit_code = raw_data$name,

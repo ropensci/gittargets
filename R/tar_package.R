@@ -16,9 +16,11 @@
 #' @importFrom fs dir_create file_move
 #' @importFrom gert git_add git_branch git_commit git_commit_info git_init
 #'   git_log git_status
+#' @importFrom stats complete.cases
 #' @importFrom targets tar_assert_file tar_config_get tar_config_set tar_dir
 #'   tar_outdated tar_throw_validate
 #' @importFrom tibble as_tibble tibble
+#' @importFrom tools R_user_dir
 #' @importFrom utils head menu
 #' @importFrom uuid UUIDgenerate
 NULL

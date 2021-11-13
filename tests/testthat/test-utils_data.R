@@ -1,4 +1,4 @@
-tar_test("left_merge()", {
+targets::tar_test("left_merge()", {
   x <- tibble::tibble(by = letters[c(1, 1, 2, 2, 3, 3)], x = seq_len(6))
   y <- tibble::tibble(by = letters[c(1, 2, 3)], y = LETTERS[c(1, 2, 3)])
   out <- left_merge(x = x, y = y, by = "by")

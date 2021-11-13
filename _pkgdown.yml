@@ -8,14 +8,14 @@ navbar:
   - text: Functions
     href: reference/index.html
   - text: targets
-    href: https://books.ropensci.org/targets
+    href: https://docs.ropensci.org/targets
   - text: Vignettes
     href: articles/index.html
   - text: News
     href: news/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/ropensci/targets
+    href: https://github.com/wlandau/gittargets
 reference:
 - title: Help
   contents:

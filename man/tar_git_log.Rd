@@ -41,7 +41,7 @@ Show data snapshots together with their code commits.
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's filespace.
-targets::tar_script()
+targets::tar_script(tar_target(data, 1))
 targets::tar_make()
 tar_git_init()
 gert::git_init()

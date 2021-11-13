@@ -82,7 +82,7 @@ and it mainly serves \code{\link[=tar_git_status]{tar_git_status()}}.
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's file space.
-targets::tar_script()
+targets::tar_script(tar_target(data, 1))
 targets::tar_make()
 list.files("_targets", all.files = TRUE)
 gert::git_init()

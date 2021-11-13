@@ -49,7 +49,7 @@ Initialize a Git repository for a \code{targets} data store.
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's file space.
-targets::tar_script()
+targets::tar_script(tar_target(data, 1))
 targets::tar_make()
 tar_git_init()
 })

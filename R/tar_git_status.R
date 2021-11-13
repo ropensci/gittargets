@@ -11,7 +11,7 @@
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's files pace.
-#' targets::tar_script()
+#' targets::tar_script(tar_target(data, 1))
 #' targets::tar_make()
 #' list.files("_targets", all.files = TRUE)
 #' gert::git_init()

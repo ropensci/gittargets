@@ -1,5 +1,5 @@
 
-# gittargets
+# gittargets <img src='man/figures/logo.png' align="right" height="139"/>
 
 [![CRAN](https://www.r-pkg.org/badges/version/gittargets)](https://CRAN.R-project.org/package=gittargets)
 [![status](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)

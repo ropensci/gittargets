@@ -30,3 +30,6 @@ reference:
   - '`tar_git_status_code`'
   - '`tar_git_status_data`'
   - '`tar_git_status_targets`'
+- title: Extra
+  contents:
+  - '`zzz_dpm_write_manifest`'

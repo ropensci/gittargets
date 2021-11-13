@@ -38,6 +38,9 @@ If the argument \code{NULL}, the setting is not modified.
 Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
 
 \item{force}{ignore conflicts and overwrite modified files}
+
+\item{verbose}{Logical of length 1, whether to print R console messages
+confirming that a snapshot was created.}
 }
 \value{
 Nothing (invisibly).

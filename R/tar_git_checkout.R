@@ -12,7 +12,7 @@
 #'   the `commit_code` column of the data frame produced by [tar_git_log()]
 #'   shows possible options.
 #' @inheritParams gert::git_branch_checkout
-#' @inheritParams tar_git_status
+#' @inheritParams tar_git_snapshot
 #' @examples
 #' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's filespace.

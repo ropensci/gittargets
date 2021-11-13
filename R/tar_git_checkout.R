@@ -68,6 +68,6 @@ tar_git_checkout <- function(
   branch <- gert::git_branch(repo = store)
   cli_success("Checked out data snapshot ", commit, ".", verbose = verbose)
   cli_info("Code commit: ", branch, verbose = verbose)
-  cli_info(first_line(message), verbose = verbose)
+  cli_info("Message: ", first_line(message), verbose = verbose)
   invisible()
 }

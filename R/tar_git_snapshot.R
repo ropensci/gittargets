@@ -77,10 +77,7 @@ tar_git_snapshot <- function(
     )
     cli_info(line)
     cli_indent(commit)
-    cli_message <- trimws(
-      utils::head(unlist(strsplit(message, split = "\n")), n = 1L)
-    )
-    cli_indent(cli_message)
+    cli_indent(first_line(message))
     line <- paste(
       "Please make sure the code repo and",
       "{.pkg targets} pipeline are clean and up to date."

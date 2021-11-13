@@ -49,7 +49,8 @@ tar_git_checkout <- function(
   ref = "HEAD",
   code = getwd(),
   store = targets::tar_config_get("store"),
-  force = FALSE
+  force = FALSE,
+  verbose = TRUE
 ) {
   targets::tar_assert_file(code)
   targets::tar_assert_file(store)
@@ -62,5 +63,11 @@ tar_git_checkout <- function(
   commit <- gert::git_commit_info(repo = code, ref = ref)$id
   tar_git_assert_snapshot(branch = commit, store = store)
   gert::git_branch_checkout(branch = commit, force = force, repo = store)
+  commit <- gert::git_commit_info(repo = store)$id
+  message <- first_line(gert::git_commit_info(repo = code, ref = commit)$message)
+  branch <- gert::git_branch(repo = store)
+  cli_success("Checked out data snapshot ", branch, ".", verbose = verbose)
+  cli_indent("Code commit: ", commit, verbose = verbose)
+  cli_indent(first_line(message))
   invisible()
 }

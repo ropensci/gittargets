@@ -6,7 +6,7 @@ cli_danger <- function(..., verbose = TRUE) {
 
 cli_info <- function(..., verbose = TRUE) {
   if (verbose) {
-    cli_blue_bullet(paste0(...))
+    cli_blue_bullet(paste0(...), verbose = verbose)
   }
 }
 
@@ -22,12 +22,15 @@ cli_warning <- function(..., verbose = TRUE) {
   }
 }
 
-cli_blue_bullet <- function(msg) {
-  symbol <- cli::col_blue(cli::symbol$bullet)
-  msg <- paste(symbol, msg)
-  cli::cli_text(msg)
+cli_blue_bullet <- function(..., verbose = TRUE) {
+  if (verbose) {
+    symbol <- cli::col_blue(cli::symbol$bullet)
+    cli::cli_text(paste(symbol, paste0(...)))
+  }
 }
 
-cli_indent <- function(msg, verbose = TRUE) {
-  cli::cli_bullets(c(" " = msg))
+cli_indent <- function(..., verbose = TRUE) {
+  if (verbose) {
+    cli::cli_bullets(c(" " = paste0(...)))
+  }
 }

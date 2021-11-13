@@ -1,3 +1,7 @@
+first_line <- function(x) {
+  trimws(utils::head(unlist(strsplit(x, split = "\n")), n = 1L))
+}
+
 left_merge <- function(x, y, by) {
   out <- merge(
     x = data.table::as.data.table(x),

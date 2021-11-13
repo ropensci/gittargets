@@ -8,7 +8,8 @@ tar_git_checkout(
   ref = "HEAD",
   code = getwd(),
   store = targets::tar_config_get("store"),
-  force = FALSE
+  force = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{

@@ -5,7 +5,7 @@
 \title{Snapshot the data repository (Git).}
 \usage{
 tar_git_snapshot(
-  commit = gert::git_commit_info(repo = code)$id,
+  ref = "HEAD",
   code = getwd(),
   script = targets::tar_config_get("script"),
   store = targets::tar_config_get("store"),
@@ -19,9 +19,10 @@ tar_git_snapshot(
 )
 }
 \arguments{
-\item{commit}{Character of length 1, Git SHA1 hash of the code commit
+\item{ref}{Character of length 1, reference
+(branch name, Git SHA1 hash, etc.) of the code commit
 that will map to the new data snapshot. Defaults to the commit
-checked out right now (i.e. \code{HEAD}).}
+checked out right now.}
 
 \item{code}{Character of length 1, directory path to the code repository,
 usually the root of the \code{targets} project.}
@@ -128,12 +129,13 @@ tar_git_init()
 gert::git_init()
 gert::git_add("_targets.R")
 gert::git_commit("First commit")
-tar_git_snapshot()
+tar_git_snapshot(status = FALSE)
 })
 }
 }
 \seealso{
 Other git: 
+\code{\link{tar_git_checkout}()},
 \code{\link{tar_git_init}()},
 \code{\link{tar_git_log}()},
 \code{\link{tar_git_status_code}()},

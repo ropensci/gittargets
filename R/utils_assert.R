@@ -41,3 +41,14 @@ tar_git_assert_repo_data <- function(store) {
     targets::tar_throw_validate(msg)
   }
 }
+
+tar_git_assert_snapshot <- function(branch, store) {
+  if (!gert::git_branch_exists(branch = branch, repo = store, local = TRUE)) {
+    msg <- paste0(
+      "No data snapshot for code commit ",
+      branch,
+      ". Create one with gittargets::tar_git_snapshot()."
+    )
+    targets::tar_throw_validate(msg)
+  }
+}

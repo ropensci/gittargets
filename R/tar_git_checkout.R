@@ -1,0 +1,53 @@
+#' @title Check out a snapshot of the data (Git)
+#' @export
+#' @family git
+#' @description Check out a snapshot of the data associated with
+#'   a particular code commit (default: `HEAD`).
+#' @return Nothing (invisibly).
+#' @param ref Character of length 1, reference
+#'   (branch name, Git SHA1 hash, etc.) of the code commit
+#'   associated with the data snapshot to check out.
+#'   In most cases, it is best to switch branches in the code
+#'   instead of manually setting `ref`. But if you do need to set `ref`,
+#'   the `commit_code` column of the data frame produced by [tar_git_log()]
+#'   shows possible options.
+#' @inheritParams gert::git_branch_checkout
+#' @inheritParams tar_git_status
+#' @examples
+#' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
+#' targets::tar_dir({ # Containing code does not modify the user's filespace.
+#' targets::tar_script()
+#' targets::tar_make()
+#' tar_git_init()
+#' gert::git_init()
+#' gert::git_add("_targets.R")
+#' gert::git_commit("First commit")
+#' tar_git_snapshot(status = FALSE, verbose = FALSE)
+#' targets::tar_script(tar_target(new_target, 1))
+#' targets::tar_make()
+#' old_branch <- gert::git_branch()
+#' gert::git_branch_create("new_branch")
+#' gert::git_add("_targets.R")
+#' gert::git_commit("Second commit")
+#' tar_git_snapshot(status = FALSE, verbose = FALSE)
+#' })
+#' }
+tar_git_checkout <- function(
+  ref = "HEAD",
+  code = getwd(),
+  store = targets::tar_config_get("store"),
+  force = FALSE
+) {
+  targets::tar_assert_file(code)
+  targets::tar_assert_file(store)
+  targets::tar_assert_chr(ref)
+  targets::tar_assert_scalar(ref)
+  tar_git_assert_repo_code(code)
+  tar_git_assert_commits_code(code)
+  tar_git_assert_repo_data(store)
+  tar_git_assert_commits_data(store)
+  commit <- gert::git_commit_info(repo = code, ref = ref)$id
+  tar_git_assert_snapshot(branch = commit, store = store)
+  gert::git_branch_checkout(branch = commit, force = force, repo = store)
+  invisible()
+}

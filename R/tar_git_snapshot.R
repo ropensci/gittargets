@@ -14,9 +14,10 @@
 #'   Ideally, your targets should stay up to date even as you
 #'   transition among multiple branches.
 #' @inheritParams tar_git_status
-#' @param commit Character of length 1, Git SHA1 hash of the code commit
+#' @param ref Character of length 1, reference
+#'   (branch name, Git SHA1 hash, etc.) of the code commit
 #'   that will map to the new data snapshot. Defaults to the commit
-#'   checked out right now (i.e. `HEAD`).
+#'   checked out right now.
 #' @param status Logical of length 1, whether to print the project status
 #'   with [tar_git_status()] and ask whether a snapshot should be created.
 #' @param verbose Logical of length 1, whether to print R console messages
@@ -30,11 +31,11 @@
 #' gert::git_init()
 #' gert::git_add("_targets.R")
 #' gert::git_commit("First commit")
-#' tar_git_snapshot()
+#' tar_git_snapshot(status = FALSE)
 #' })
 #' }
 tar_git_snapshot <- function(
-  commit = gert::git_commit_info(repo = code)$id,
+  ref = "HEAD",
   code = getwd(),
   script = targets::tar_config_get("script"),
   store = targets::tar_config_get("store"),
@@ -54,7 +55,8 @@ tar_git_snapshot <- function(
   tar_git_assert_commits_code(code)
   tar_git_assert_repo_data(store)
   log <- gert::git_log(repo = code, max = 1L)
-  message <- gert::git_commit_info(repo = code, ref = commit)$message
+  commit <- gert::git_commit_info(repo = code, ref = ref)$id
+  message <- gert::git_commit_info(repo = code, ref = ref)$message
   # Covered in tests/interactive/test-tar_git_snapshot.R
   # nocov start
   if (status) {

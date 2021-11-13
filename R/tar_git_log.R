@@ -1,4 +1,4 @@
-#' @title Joint log of code and data (Git)
+#' @title Joint log of the code and data (Git)
 #' @export
 #' @family git
 #' @description Show data snapshots together with their code commits.
@@ -14,7 +14,7 @@
 #' gert::git_init()
 #' gert::git_add("_targets.R")
 #' gert::git_commit("First commit")
-#' tar_git_snapshot()
+#' tar_git_snapshot(status = FALSE, verbose = FALSE)
 #' tar_git_log()
 #' })
 #' }

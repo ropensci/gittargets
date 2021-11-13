@@ -32,4 +32,4 @@ reference:
   - '`tar_git_status_targets`'
 - title: Extra
   contents:
-  - '`zzz_dpm_write_manifest`'
+  - '`zzz_write_manifest`'

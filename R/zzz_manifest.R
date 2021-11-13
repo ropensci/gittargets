@@ -5,8 +5,8 @@
 #'   can be deployed to RStudio Connect as Git-backed content.
 #' @return `NULL` (invisibly).
 #' @examples
-#' zzz_dpm_write_manifest()
-zzz_dpm_write_manifest <- function() {
+#' zzz_write_manifest()
+zzz_write_manifest <- function() {
   # nocov start
   pkgdown <- requireNamespace("pkgdown", quietly = TRUE) &&
     eval(parse(text = "pkgdown::in_pkgdown()"))

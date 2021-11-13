@@ -33,6 +33,7 @@ tar_git_status_code()
 \seealso{
 Other git: 
 \code{\link{tar_git_init}()},
+\code{\link{tar_git_log}()},
 \code{\link{tar_git_snapshot}()},
 \code{\link{tar_git_status_data}()},
 \code{\link{tar_git_status_targets}()},

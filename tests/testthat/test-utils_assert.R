@@ -8,6 +8,16 @@ targets::tar_test("tar_git_assert_commits_code()", {
   expect_silent(tar_git_assert_commits_code(getwd()))
 })
 
+targets::tar_test("tar_git_assert_commits_data()", {
+  gert::git_init()
+  expect_error(
+    tar_git_assert_commits_data(getwd()),
+    class = "tar_condition_validate"
+  )
+  git_setup_init()
+  expect_silent(tar_git_assert_commits_data(getwd()))
+})
+
 targets::tar_test("tar_git_assert_repo_code()", {
   expect_error(
     tar_git_assert_repo_code(getwd()),

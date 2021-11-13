@@ -30,6 +30,7 @@ Depends:
   R (>= 4.0.0)
 Imports:
   cli (>= 3.0.0),
+  data.table (>= 1.12.8),
   fs (>= 1.0.0),
   gert (>= 1.0.0),
   targets (>= 0.8.1.9000),

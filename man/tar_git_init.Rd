@@ -57,6 +57,7 @@ tar_git_init()
 }
 \seealso{
 Other git: 
+\code{\link{tar_git_log}()},
 \code{\link{tar_git_snapshot}()},
 \code{\link{tar_git_status_code}()},
 \code{\link{tar_git_status_data}()},

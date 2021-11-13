@@ -7,12 +7,10 @@ navbar:
     href: index.html
   - text: Functions
     href: reference/index.html
-  - text: Overview
-    href: articles/overview.html
-  - text: Manual
+  - text: targets
     href: https://books.ropensci.org/targets
-  - text: Design
-    href: https://books.ropensci.org/targets-design
+  - text: Vignettes
+    href: articles/index.html
   - text: News
     href: news/index.html
   right:

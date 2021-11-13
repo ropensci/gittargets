@@ -19,6 +19,7 @@
 #' # Work on an initial branch.
 #' targets::tar_script(tar_target(data, "old_data"))
 #' targets::tar_make()
+#' targets::tar_read(data) # "old_data"
 #' gert::git_init()
 #' gert::git_add("_targets.R")
 #' gert::git_commit("First commit")
@@ -28,6 +29,7 @@
 #' tar_git_snapshot(status = FALSE, verbose = FALSE)
 #' targets::tar_script(tar_target(data, "new_data"))
 #' targets::tar_make()
+#' targets::tar_read(data) # "new_data"
 #' gert::git_branch_create("new_branch")
 #' gert::git_add("_targets.R")
 #' gert::git_commit("Second commit")
@@ -38,6 +40,7 @@
 #' targets::tar_outdated()
 #' # But tar_git_checkout() lets us restore the old version of the data!
 #' tar_git_checkout()
+#' targets::tar_read(data) # "old_data"
 #' # Now, the target is up to date! And we did not even have to rerun it!
 #' targets::tar_outdated()
 #' })

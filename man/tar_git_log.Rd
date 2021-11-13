@@ -43,10 +43,10 @@ if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's filespace.
 targets::tar_script(tar_target(data, 1))
 targets::tar_make()
-tar_git_init()
 gert::git_init()
 gert::git_add("_targets.R")
 gert::git_commit("First commit")
+tar_git_init()
 tar_git_snapshot(status = FALSE, verbose = FALSE)
 tar_git_log()
 })

@@ -1,8 +1,8 @@
 ---
-title: "How to use gittargets with the Git backend"
+title: "How to use gittargets with the Git data backend"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{git}
+  %\VignetteIndexEntry{How to use gittargets with the Git data backend}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -44,8 +44,8 @@ pipeline.
 
 ### Development
 
-When you develop a reproducible analysis project, you write R code,
-commit the code to a branch, run the pipeline, and repeat. `gittargets`
+When you develop a reproducible analysis project, you write R code, run
+the pipeline, commit the code to a branch, and repeat. `gittargets`
 enters the picture at the end of each one of these development cycles.
 When the code files are up to date in the Git repository and the targets
 are up to date in the pipeline, `gittargets` can snapshot the [`targets`

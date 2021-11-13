@@ -1,0 +1,192 @@
+---
+title: "How to use gittargets with the Git backend"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{git}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(gert)
+library(gittargets)
+library(targets)
+knitr::opts_knit$set(root.dir = fs::dir_create(tempfile()))
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+This tutorial shows how to use `gittargets` with the Git-based data versioning backend. Before proceeding, please read the [README](https://github.com/wlandau/gittargets/blob/main/README.md) file or [documentation website front page](https://wlandau.github.io/gittargets/) for an overview of the package and the workflow diagram for data analysis projects.
+
+![](./workflow.png)
+
+## Write code
+
+To begin development, we write `_targets.R` file for a [`targets`](https://docs.ropensci.org/targets/) pipeline. [`targets`](https://docs.ropensci.org/targets/) can handle large complex pipelines for [machine learning](https://github.com/wlandau/targets-keras), [Bayesian data analysis](http://github.com/wlandau/rmedicine2021-pipeline), and much more. However, this tutorial focuses on a much simpler pipeline for the sake of pedagogical simplicity.
+
+```{r, eval = FALSE}
+# _targets.R
+library(targets)
+list(
+  tar_target(data, datasets::airquality),
+  tar_target(result, summary(data))
+)
+```
+
+```{r, echo = FALSE}
+tar_script(
+  list(
+    tar_target(data, datasets::airquality),
+    tar_target(result, summary(data))
+  )
+)
+```
+
+## Run pipeline
+
+With our target script in hand, we run the pipeline.^[<http://books.ropensci.org/targets/hpc.html> describes heavy-duty alternatives to `tar_make()`.]
+
+```{r}
+tar_make()
+```
+
+We inspect the output with `tar_read()`.
+
+```{r}
+tar_read(result)
+```
+
+## Commit code
+
+We usually iterate between writing code and running the pipeline until we have a decent set of results. After that, we commit the code to a [Git](https://git-scm.com/docs/git-pack-refs) repository, which may or may not live on [GitHub](https://github.com).^[Alternatives to GitHub include GitLab and Bitbucket.] [Happy Git with R](https://happygitwithr.com) is a great way to learn Git, and the [`gert`](https://docs.ropensci.org/gert/) package is a convenient way to interact with Git from R.
+
+```{r, message = FALSE, output = FALSE, results = "hide"}
+library(gert)
+git_init()
+git_add("_targets.R")
+git_commit("Begin analyzing the airquality dataset")
+git_branch_create("airquality")
+```
+
+## Snapshot data
+
+Before we snapshot the data, we should check that the code is up to date in the Git repository and the targets in the pipeline are up to date with the code. The `tar_git_status()` function is an easy way to do this.^[Helper functions `tar_git_status_code()`, `tar_git_status_targets()`, and `tar_git_status_data()` each generate a piece of the `tar_git_status()` output.]
+
+```{r}
+tar_git_status()
+```
+
+Our code and pipeline look ready for a data snapshot. First, we initialize the data repository with `tar_git_init()`.
+
+```{r}
+tar_git_init()
+```
+
+Then, we create our first data commit with `tar_git_snapshot()`.^[Ordinarily, `tar_git_snapshot()` shows runs `tar_git_status()` and prompts the user to confirm the snapshot. But in this example, we skip this step.]
+
+```{r, eval = FALSE}
+tar_git_snapshot()
+```
+
+```{r, echo = FALSE}
+tar_git_snapshot(status = FALSE)
+```
+
+Each data snapshot is a Git commit and a one-time Git branch. The branch associates the data commit with the code commit that was checked out when the snapshot was created.
+
+## Repeat
+
+Development typically happens in cycles: develop the code, run the pipeline, commit the code, snapshot the data, and repeat. To experiment with the pipeline and investigate alternate research questions, it is common to commit the code multiple times and create branches to organize each line of inquiry. For example, suppose we want to run our existing pipeline on a different dataset and explore questions about that dataset later in subsequent commits. We start by modifying the code.
+
+```{r, eval = FALSE}
+# _targets.R
+library(targets)
+list(
+  tar_target(data, datasets::UKgas), # different dataset
+  tar_target(result, summary(data))
+)
+```
+
+```{r, echo = FALSE}
+tar_script(
+  list(
+    tar_target(data, datasets::UKgas),
+    tar_target(result, summary(data))
+  )
+)
+```
+
+Then, we run the pipeline and inspect the new output.
+
+```{r}
+tar_make()
+```
+
+```{r}
+tar_read(result)
+```
+
+Because this new dataset opens a new line of investigation, we put the code in a new Git branch.
+
+```{r}
+git_branch_create("UKgas")
+git_add("_targets.R")
+git_commit("Switch to UKgas dataset")
+```
+
+Finally, we create a data snapshot for the new code commit.
+
+```{r, eval = FALSE}
+tar_git_snapshot()
+```
+
+```{r, echo = FALSE}
+tar_git_snapshot(status = FALSE)
+```
+
+## View log
+
+Now, suppose we want to switch the project back to the original line of inquiry on the `airquality` dataset. To transition, we need to revert both the code and the data. If we only revert the code, then the `_targets/` data store will sill reflect the `UKgas` dataset, and none of our targets will be up to date. To help the transition go smoothly, this is a good time to check the `gittargets` log to see which code commits have available data snapshots.^[If you chose not to call `tar_git_snapshot()` for some code commits, then not all your code commits will have available data snapshots.]
+
+```{r}
+tar_git_log()
+```
+
+## Check out code
+
+To check out the old `airquality` code, we use `gert::git_branch_checkout()`.
+
+```{r, message = FALSE, output = FALSE, results = "hide"}
+git_branch_checkout("airquality")
+```
+
+But because we did not revert the data, our data still reflects the `UKgas` dataset.
+
+```{r}
+tar_read(result)
+```
+
+Thus, all our targets are out of date.
+
+```{r}
+tar_outdated()
+```
+
+## Check out data
+
+To bring our targets back up to date with the `airquality` investigation, instead of wasting time running `tar_make()`, we can check out the data snapshot that matches our current code commit.
+
+```{r}
+tar_git_checkout()
+```
+
+Now, our data reflects the `airquality` dataset we previously analyzed.
+
+```{r}
+tar_read(result)
+```
+
+And all our targets are up to date.
+
+```{r}
+tar_outdated()
+```

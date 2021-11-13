@@ -109,9 +109,9 @@ tar_git_snapshot <- function(
   changes <- gert::git_add(files = "*", repo = store)
   cli_success("Staged files:", verbose = verbose)
   if (verbose) {
-    cat("\n")
+    message()
     print(changes)
-    cat("\n")
+    message()
   }
   cli_info("Committing changes.", verbose = verbose)
   commit <- gert::git_commit_all(message = message, repo = store)

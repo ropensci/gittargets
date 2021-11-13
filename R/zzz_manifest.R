@@ -11,9 +11,9 @@ zzz_write_manifest <- function() {
   pkgdown <- requireNamespace("pkgdown", quietly = TRUE) &&
     eval(parse(text = "pkgdown::in_pkgdown()"))
   if (pkgdown) {
-    withr::with_dir(
+    eval(parse(text = "withr::with_dir"))(
       "..",
-      rsconnect::writeManifest(
+      eval(parse(text = "rsconnect::writeManifest"))(
         appPrimaryDoc = "index.html",
         contentCategory = "site"
       )

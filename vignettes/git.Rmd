@@ -69,7 +69,7 @@ git_branch_create("airquality")
 
 ## Snapshot data
 
-Before we snapshot the data, we should check that the code is up to date in the Git repository and the targets in the pipeline are up to date with the code. The `tar_git_status()` function is an easy way to do this.^[Helper functions `tar_git_status_code()`, `tar_git_status_targets()`, and `tar_git_status_data()` each generate a piece of the `tar_git_status()` output.]
+Before we snapshot the data, we should check that the code is up to date in the Git repository and the targets are up to date in the pipeline. The `tar_git_status()` function is an easy way to do this.^[Helper functions `tar_git_status_code()`, `tar_git_status_targets()`, and `tar_git_status_data()` each generate a piece of the `tar_git_status()` output.]
 
 ```{r}
 tar_git_status()
@@ -95,7 +95,7 @@ Each data snapshot is a Git commit and a one-time Git branch. The branch associa
 
 ## Repeat
 
-Development typically happens in cycles: develop the code, run the pipeline, commit the code, snapshot the data, and repeat. To experiment with the pipeline and investigate alternate research questions, it is common to commit the code multiple times and create branches to organize each line of inquiry. For example, suppose we want to run our existing pipeline on a different dataset and explore questions about that dataset later in subsequent commits. We start by modifying the code.
+Development typically happens in cycles: develop the code, run the pipeline, commit the code, snapshot the data, and repeat. Not all code commits need a data snapshot, especially if the [`targets`](https://docs.ropensci.org/targets/) pipeline generates a lot of data. But even then, it is helpful to snapshot the data at key milestones, e.g. if an alternative research question comes up and it is desirable to create a new Git branch for the code. For example, suppose we wish to apply the same pipeline to a different dataset. The code changes:
 
 ```{r, eval = FALSE}
 # _targets.R
@@ -115,7 +115,7 @@ tar_script(
 )
 ```
 
-Then, we run the pipeline and inspect the new output.
+We run the pipeline and inspect the new output.
 
 ```{r}
 tar_make()
@@ -125,7 +125,7 @@ tar_make()
 tar_read(result)
 ```
 
-Because this new dataset opens a new line of investigation, we put the code in a new Git branch.
+We put the code in a new Git branch.
 
 ```{r}
 git_branch_create("UKgas")
@@ -145,7 +145,7 @@ tar_git_snapshot(status = FALSE)
 
 ## View log
 
-Now, suppose we want to switch the project back to the original line of inquiry on the `airquality` dataset. To transition, we need to revert both the code and the data. If we only revert the code, then the `_targets/` data store will sill reflect the `UKgas` dataset, and none of our targets will be up to date. To help the transition go smoothly, this is a good time to check the `gittargets` log to see which code commits have available data snapshots.^[If you chose not to call `tar_git_snapshot()` for some code commits, then not all your code commits will have available data snapshots.]
+Now, suppose we want to switch the project back to the original dataset (`airquality`). To transition completely, we need to revert both the code and the data. If we only revert the code, then the data store will sill reflect the `UKgas` dataset, and none of our targets will be up to date. At this point, it is a good time to pause and check the `gittargets` log to see which code commits have available data snapshots.^[If you chose not to call `tar_git_snapshot()` for some code commits, then not all your code commits will have available data snapshots.]
 
 ```{r}
 tar_git_log()
@@ -159,7 +159,7 @@ To check out the old `airquality` code, we use `gert::git_branch_checkout()`.
 git_branch_checkout("airquality")
 ```
 
-But because we did not revert the data, our data still reflects the `UKgas` dataset.
+But because we did not revert the data, our results still reflect the `UKgas` dataset.
 
 ```{r}
 tar_read(result)
@@ -173,13 +173,13 @@ tar_outdated()
 
 ## Check out data
 
-To bring our targets back up to date with the `airquality` investigation, instead of wasting time running `tar_make()`, we can check out the data snapshot that matches our current code commit.
+To bring our targets back up to date with the `airquality` data, instead of beginning a potentially long computation with `tar_make()`, we can check out the data snapshot that matches our current code commit.
 
 ```{r}
 tar_git_checkout()
 ```
 
-Now, our data reflects the `airquality` dataset we previously analyzed.
+Now, our results reflect the `airquality` dataset we previously analyzed.
 
 ```{r}
 tar_read(result)

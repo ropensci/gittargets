@@ -75,16 +75,6 @@ store](https://books.ropensci.org/targets/files.html#internal-data-files).
 If you check out both the code commit and its matching data snapshot,
 then you will restore your old targets and they will all be up to date.
 
-## Performance
-
-Every data snapshot with `tar_git_snapshot()` creates a new Git branch.
-With thousands of commits and thus thousands of branches, performance
-may suffer. If you notice slowness, run
-[`git pack-refs --all`](https://git-scm.com/docs/git-pack-refs) on the
-[`targets` data
-store](https://books.ropensci.org/targets/files.html#internal-data-files)
-repository.
-
 ## Future directions
 
 The first data versioning system in `gittargets` uses

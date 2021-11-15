@@ -86,10 +86,10 @@ tar_git_snapshot <- function(
     )
   }
   if (stash_gitignore) {
-    gitignore <- git_stash_gitignore(repo = store)
-    on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
+    gitignore <- tar_git_stash_gitignore(repo = store)
+    on.exit(tar_git_unstash_gitignore(repo = store, stash = gitignore))
   }
-  git_stub_write(repo = store)
+  tar_git_stub_write(repo = store)
   cli_info(sprintf("Creating data branch %s.", commit), verbose = verbose)
   gert::git_branch_create(branch = commit, checkout = TRUE, repo = store)
   cli_info("Staging data files.", verbose = verbose)

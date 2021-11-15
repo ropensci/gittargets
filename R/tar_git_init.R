@@ -37,14 +37,14 @@ tar_git_init <- function(
   tar_assert_file(store)
   targets::tar_assert_lgl(verbose)
   targets::tar_assert_scalar(verbose)
-  if (git_repo_exists(store)) {
+  if (tar_git_repo_exists(store)) {
     cli_info("Data store Git repository already exists.")
     cli_info("Remove ", store, " to start over.")
     return(invisible())
   }
   if (stash_gitignore) {
-    gitignore <- git_stash_gitignore(repo = store)
-    on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
+    gitignore <- tar_git_stash_gitignore(repo = store)
+    on.exit(tar_git_unstash_gitignore(repo = store, stash = gitignore))
   }
   gert::git_init(path = store)
   cli_success("Created data store Git repository", verbose = verbose)
@@ -72,9 +72,9 @@ tar_git_init_stub_commit <- function(repo, verbose) {
     " for git-lfs: {.url https://git-lfs.github.com}.",
     verbose = verbose
   )
-  git_stub_write(repo = repo)
+  tar_git_stub_write(repo = repo)
   gert::git_add(
-    files = basename(c(git_stub_path(repo), gitattributes)),
+    files = basename(c(tar_git_stub_path(repo), gitattributes)),
     force = TRUE,
     repo = repo
   )

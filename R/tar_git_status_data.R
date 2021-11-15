@@ -23,11 +23,11 @@ tar_git_status_data <- function(
 ) {
   targets::tar_assert_file(store)
   if (stash_gitignore) {
-    gitignore <- git_stash_gitignore(repo = store)
-    on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
+    gitignore <- tar_git_stash_gitignore(repo = store)
+    on.exit(tar_git_unstash_gitignore(repo = store, stash = gitignore))
   }
   if_any(
-    git_repo_exists(repo = store),
+    tar_git_repo_exists(repo = store),
     gert::git_status(repo = store),
     NULL
   )

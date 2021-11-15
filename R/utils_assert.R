@@ -23,7 +23,7 @@ tar_git_assert_commits_data <- function(store) {
 }
 
 tar_git_assert_repo_code <- function(code) {
-  if (!git_repo_exists(code)) {
+  if (!tar_git_repo_exists(code)) {
     msg <- paste(
       "No Git repository for the code.",
       "Create one with gert::git_init()."
@@ -33,7 +33,7 @@ tar_git_assert_repo_code <- function(code) {
 }
 
 tar_git_assert_repo_data <- function(store) {
-  if (!git_repo_exists(store)) {
+  if (!tar_git_repo_exists(store)) {
     msg <- paste(
       "No Git repository for the data store.",
       "Create one with gittargets::tar_git_init()."

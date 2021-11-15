@@ -1,8 +1,8 @@
-git_repo_exists <- function(repo) {
+tar_git_repo_exists <- function(repo) {
   file.exists(file.path(repo, ".git"))
 }
 
-git_stash_gitignore <- function(repo) {
+tar_git_stash_gitignore <- function(repo) {
   path <- file.path(repo, ".gitignore")
   if (!file.exists(path)) {
     return(NULL)
@@ -15,7 +15,7 @@ git_stash_gitignore <- function(repo) {
   stash
 }
 
-git_unstash_gitignore <- function(repo, stash) {
+tar_git_unstash_gitignore <- function(repo, stash) {
   if (is.null(stash)) {
     return()
   }
@@ -23,12 +23,12 @@ git_unstash_gitignore <- function(repo, stash) {
   fs::file_move(path = stash, new_path = new_path)
 }
 
-git_stub_path <- function(repo) {
+tar_git_stub_path <- function(repo) {
   file.path(repo, ".gittargets")
 }
 
-git_stub_write <- function(repo) {
-  path <- git_stub_path(repo)
+tar_git_stub_write <- function(repo) {
+  path <- tar_git_stub_path(repo)
   uuid <- uuid::UUIDgenerate(use.time = NA, n = 1L)
   writeLines(uuid, path)
 }

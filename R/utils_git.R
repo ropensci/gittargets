@@ -53,6 +53,9 @@ tar_git_stash_gitignore <- function(repo) {
   dir <- tools::R_user_dir(package = "gittargets", which = "cache")
   uuid <- uuid::UUIDgenerate(use.time = NA, n = 1L)
   stash <- file.path(dir, paste0("gitignore_", uuid))
+  
+  stash <- tempfile()
+  
   fs::dir_create(dirname(stash))
   fs::file_move(path = path, new_path = stash)
   stash

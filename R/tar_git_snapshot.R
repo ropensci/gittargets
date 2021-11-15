@@ -57,6 +57,7 @@ tar_git_snapshot <- function(
   tar_git_assert_repo_data(store)
   log <- gert::git_log(repo = code, max = 1L)
   commit <- gert::git_commit_info(repo = code, ref = ref)$id
+  branch <- tar_git_branch_snapshot(commit)
   message <- gert::git_commit_info(repo = code, ref = ref)$message
   # Covered in tests/interactive/test-tar_git_snapshot.R
   # nocov start
@@ -79,7 +80,7 @@ tar_git_snapshot <- function(
     }
   }
   # nocov end
-  if (gert::git_branch_exists(branch = commit, repo = store)) {
+  if (gert::git_branch_exists(branch = branch, repo = store)) {
     targets::tar_throw_validate(
       "Data snapshot already exists for code commit ",
       commit,
@@ -92,9 +93,9 @@ tar_git_snapshot <- function(
     on.exit(tar_git_gitignore_unstash(repo = store))
   }
   tar_git_stub_write(repo = store)
-  cli_info(sprintf("Creating data branch %s.", commit), verbose = verbose)
-  tar_git_branch_create(branch = commit, repo = store)
-  tar_git_branch_checkout(branch = commit, repo = store, force = FALSE)
+  cli_info(sprintf("Creating data branch %s.", branch), verbose = verbose)
+  tar_git_branch_create(branch = branch, repo = store)
+  tar_git_branch_checkout(branch = branch, repo = store, force = FALSE)
   cli_info("Staging data files.", verbose = verbose)
   tar_git_add(files = "*", repo = store)
   staged <- gert::git_status(staged = TRUE, repo = store)

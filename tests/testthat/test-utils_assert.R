@@ -40,7 +40,7 @@ targets::tar_test("tar_git_assert_repo_data()", {
   expect_silent(tar_git_assert_repo_data(getwd()))
 })
 
-targets::tar_test("tar_git_assert_repo_data()", {
+targets::tar_test("tar_git_assert_repo_data() no branch", {
   skip_no_git()
   utils::capture.output(git_setup_init())
   store <- targets::tar_config_get("store")
@@ -49,6 +49,6 @@ targets::tar_test("tar_git_assert_repo_data()", {
     class = "tar_condition_validate"
   )
   utils::capture.output(tar_git_snapshot(status = FALSE, verbose = FALSE))
-  branch <- tar_git_log()$commit_code
+  branch <- tar_git_branch_snapshot(tar_git_log()$commit_code)
   expect_silent(tar_git_assert_snapshot(branch = branch, store = store))
 })

@@ -17,6 +17,14 @@ tar_git_branch_create <- function(branch, repo) {
   processx::run(command = "git", args = c("branch", branch), wd = repo)
 }
 
+tar_git_branch_snapshot <- function(commit) {
+  sprintf("code=%s", commit)
+}
+
+tar_git_commit_code <- function(branch) {
+  gsub(pattern = "^code=", replacement = "", x = branch)
+}
+
 tar_git_commit <- function(message, repo, echo = TRUE, spinner = TRUE) {
   processx::run(
     command = "git",

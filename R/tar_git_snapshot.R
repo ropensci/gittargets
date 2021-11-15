@@ -31,7 +31,7 @@
 #' gert::git_add("_targets.R")
 #' gert::git_commit("First commit")
 #' tar_git_init()
-#' tar_git_snapshot(status = FALSE)
+#' tar_git_snapshot(status = T)
 #' })
 #' }
 tar_git_snapshot <- function(
@@ -60,7 +60,9 @@ tar_git_snapshot <- function(
   # Covered in tests/interactive/test-tar_git_snapshot.R
   # nocov start
   if (status) {
-    tar_git_status(
+    choice <- tar_git_snapshot_menu(
+      commit = commit,
+      message = message,
       code = code,
       script = script,
       store = store,
@@ -70,20 +72,6 @@ tar_git_snapshot <- function(
       callr_function = callr_function,
       callr_arguments = callr_arguments
     )
-    cli::cli_h1("Snapshot the data?")
-    line <- paste(
-      "The new snapshot will be a data commit",
-      "that maps to the following code commit:"
-    )
-    cli_info(line)
-    cli_indent(commit)
-    cli_indent(first_line(message))
-    line <- paste(
-      "Please make sure the code repo and",
-      "{.pkg targets} pipeline are clean and up to date."
-    )
-    cli_info(line)
-    choice <- utils::menu(c("yes", "no"))
     if (!identical(as.integer(choice), 1L)) {
       cli_info("Snapshot skipped", verbose = verbose)
       return(invisible())
@@ -115,10 +103,52 @@ tar_git_snapshot <- function(
     message()
   }
   cli_info("Committing data changes.", verbose = verbose)
-  commit <- gert::git_commit_all(message = message, repo = store)
+  gert::git_commit_all(message = message, repo = store)
+  commit <- gert::git_commit_info(repo = store)$id
   cli_success(
     sprintf("Created new data snapshot %s.", commit),
     verbose = verbose
   )
   invisible()
 }
+
+# Covered in tests/interactive/test-tar_git_snapshot.R
+# nocov start
+tar_git_snapshot_menu <- function(
+  commit,
+  message,
+  code,
+  script,
+  store,
+  stash_gitignore,
+  reporter,
+  envir,
+  callr_function,
+  callr_arguments
+) {
+  tar_git_status(
+    code = code,
+    script = script,
+    store = store,
+    stash_gitignore = stash_gitignore,
+    reporter = reporter,
+    envir = envir,
+    callr_function = callr_function,
+    callr_arguments = callr_arguments
+  )
+  cli::cli_h1("Snapshot the data?")
+  line <- paste(
+    "The new snapshot will be a data commit",
+    "that maps to the following code commit:"
+  )
+  cli_info(line)
+  cli_indent(commit)
+  cli_indent(first_line(message))
+  line <- paste(
+    "Please make sure the code repo and",
+    "{.pkg targets} pipeline are clean and up to date."
+  )
+  cli_info(line)
+  utils::menu(c("yes", "no"))
+}
+# nocov end

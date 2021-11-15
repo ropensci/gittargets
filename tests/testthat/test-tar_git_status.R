@@ -1,5 +1,5 @@
 targets::tar_test("tar_git_status() git set up and targets up to date", {
-  git_setup_init()
+  utils::capture.output(git_setup_init())
   capture.output(expect_message(tar_git_status(callr_function = NULL)))
 })
 

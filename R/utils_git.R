@@ -18,6 +18,16 @@ tar_git_commit <- function(message, repo, echo = TRUE, spinner = TRUE) {
   )
 }
 
+tar_git_commit_all <- function(message, repo, echo = TRUE, spinner = TRUE) {
+  processx::run(
+    command = "git",
+    args = c("commit", "--all", "--message", message),
+    wd = repo,
+    echo = echo,
+    spinner = spinner
+  )
+}
+
 tar_git_repo_exists <- function(repo) {
   file.exists(file.path(repo, ".git"))
 }

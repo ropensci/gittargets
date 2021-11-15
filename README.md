@@ -33,10 +33,18 @@ pipeline.
 
 ## Installation
 
-| Type        | Source | Command                                         |
-|-------------|--------|-------------------------------------------------|
-| Release     | CRAN   | Not yet published.                              |
-| Development | GitHub | `remotes::install_github("wlandau/gittargets")` |
+Install the development version from R with:
+
+``` r
+install.packages("remotes")
+remotes::install_github("wlandau/gittargets")
+```
+
+To boost performance of the Git data backend, consider installing
+[`git-lfs`](https://git-lfs.github.com). `tar_git_init()` automatically
+configures new data repositories with
+[`git-lfs`](https://git-lfs.github.com), so no user-side setup is
+required beyond installation.
 
 ## How it works
 

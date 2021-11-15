@@ -48,6 +48,7 @@ Suggests:
   testthat (>= 3.0.0)
 Remotes:
   ropensci/targets
+SystemRequirements: Git (>= 2.0.0)
 Encoding: UTF-8
 Language: en-US
 VignetteBuilder: knitr

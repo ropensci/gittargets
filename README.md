@@ -40,9 +40,19 @@ install.packages("remotes")
 remotes::install_github("wlandau/gittargets")
 ```
 
-<!--
-To boost performance of the Git data backend, consider installing [`git-lfs`](https://git-lfs.github.com). `tar_git_init()` automatically configures new data repositories with [`git-lfs`](https://git-lfs.github.com), so no user-side setup is required beyond installation.
--->
+You will also need command line Git, available at
+<https://git-scm.com/downloads>. Please make sure Git is reachable from
+your system path environment variables. The following R code should run
+without error if Git is ready to use.
+
+``` r
+processx::run("git", "--version")$stdout
+#> [1] "git version 2.30.1 (Apple Git-130)\n"
+```
+
+There are also backend-specific installation requirements and
+recommendations in the [package
+vignettes](https://wlandau.github.io/gittargets/articles/index.html).
 
 ## How it works
 

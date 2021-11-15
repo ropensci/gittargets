@@ -8,3 +8,7 @@ git_setup_init <- function() {
   utils::capture.output(tar_git_init())
   invisible()
 }
+
+skip_no_git <- function() {
+  skip_if(!nzchar(Sys.which("git")))
+}

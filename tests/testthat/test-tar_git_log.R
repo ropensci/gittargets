@@ -1,4 +1,5 @@
 targets::tar_test("tar_git_log()", {
+  skip_no_git()
   git_setup_init()
   utils::capture.output(tar_git_snapshot(status = FALSE, verbose = FALSE))
   out <- tar_git_log()

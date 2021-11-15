@@ -4,7 +4,7 @@
 #' @description Snapshot the Git data repository of a `targets` project.
 #' @details A Git-backed `gittargets` data snapshot is a special kind of
 #'   Git commit. Every data commit gets its own branch,
-#'   and the branch name is equal to the Git SHA1 hash
+#'   and the branch name contains the Git SHA1 hash
 #'   of the current code commit.
 #'   In addition, a special `.gittargets` file gets written
 #'   to the data store so you can create a new snapshot even when the

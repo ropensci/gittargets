@@ -60,6 +60,7 @@ tar_git_checkout <- function(
   tar_git_assert_commits_code(code)
   tar_git_assert_repo_data(store)
   tar_git_assert_commits_data(store)
+  ref <- tar_git_commit_code(ref)
   commit <- gert::git_commit_info(repo = code, ref = ref)$id
   branch <- tar_git_branch_snapshot(commit)
   tar_git_assert_snapshot(branch = branch, store = store)

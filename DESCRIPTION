@@ -33,6 +33,7 @@ Imports:
   data.table (>= 1.12.8),
   fs (>= 1.0.0),
   gert (>= 1.0.0),
+  processx (>= 3.0.0),
   stats,
   targets (>= 0.8.1.9000),
   tibble (>= 3.0.0),

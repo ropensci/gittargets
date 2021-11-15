@@ -1,3 +1,13 @@
+tar_git_add <- function(files, repo, verbose = TRUE) {
+  processx::run(
+    command = "git",
+    args = c("add", files),
+    wd = repo,
+    echo = verbose,
+    spinner = verbose
+  )
+}
+
 tar_git_repo_exists <- function(repo) {
   file.exists(file.path(repo, ".git"))
 }

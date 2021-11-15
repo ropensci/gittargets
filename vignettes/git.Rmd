@@ -83,7 +83,7 @@ Before we snapshot the data, we should check that the code is up to date in the 
 tar_git_status()
 ```
 
-Our code and pipeline look ready for a data snapshot. First, we initialize the data repository with `tar_git_init()`.
+Our code and pipeline look ready for a data snapshot. First, we initialize the data repository with `tar_git_init()`. `tar_git_init()` writes a `.gitattributes` file in the data store that automatically opts into [`git-lfs`](https://git-lfs.github.com). If you have [`git-lfs`](https://git-lfs.github.com) but do not wish to use it, please remove the `.gitattributes` after calling `tar_git_init()`.
 
 ```{r}
 tar_git_init()

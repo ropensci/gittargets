@@ -49,7 +49,7 @@ tar_git_init <- function(
   gert::git_init(path = store)
   cli_success("Created data store Git repository", verbose = verbose)
   git_stub_write(repo = store)
-  lines <- "objects filter=lfs diff=lfs merge=lfs -text"
+  lines <- "objects/** filter=lfs diff=lfs merge=lfs -text"
   gitattributes <- file.path(store, ".gitattributes")
   usethis::write_union(path = gitattributes, lines = lines, quiet = TRUE)
   cli_success(

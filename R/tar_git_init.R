@@ -44,7 +44,7 @@ tar_git_init <- function(
     return(invisible())
   }
   if (stash_gitignore) {
-    tar_git_gitignore_unstash(repo = store)
+    tar_git_gitignore_restore(repo = store)
     tar_git_gitignore_stash(repo = store)
     on.exit(tar_git_gitignore_unstash(repo = store))
   }

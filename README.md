@@ -40,11 +40,9 @@ install.packages("remotes")
 remotes::install_github("wlandau/gittargets")
 ```
 
-To boost performance of the Git data backend, consider installing
-[`git-lfs`](https://git-lfs.github.com). `tar_git_init()` automatically
-configures new data repositories with
-[`git-lfs`](https://git-lfs.github.com), so no user-side setup is
-required beyond installation.
+<!--
+To boost performance of the Git data backend, consider installing [`git-lfs`](https://git-lfs.github.com). `tar_git_init()` automatically configures new data repositories with [`git-lfs`](https://git-lfs.github.com), so no user-side setup is required beyond installation.
+-->
 
 ## How it works
 

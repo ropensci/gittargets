@@ -193,10 +193,12 @@ tar_outdated()
 
 ## Performance
 
-If your `targets` pipeline generates large data files, consider installing [`git-lfs`](https://git-lfs.github.com). This may not necessarily speed up the process of staging files, but commits should be much faster. Once you install [`git-lfs`](https://git-lfs.github.com), it should just work on your project right out of the box because `tar_git_init()` writes the following to `_targets/.gitattributes`:
+<!--
+If your `targets` pipeline generates large data files, consider installing [`git-lfs`](https://git-lfs.github.com). Once you install [`git-lfs`](https://git-lfs.github.com), it should just work on your project right out of the box because `tar_git_init()` writes the following to `_targets/.gitattributes`:
 
 ```{sh, eval = FALSE}
 objects filter=lfs diff=lfs merge=lfs -text
 ```
+-->
 
 In addition, every data snapshot with `tar_git_snapshot()` creates a new Git branch. With thousands of commits and thus thousands of branches, performance may suffer. If you notice slowness, run [`git pack-refs --all`](https://git-scm.com/docs/git-pack-refs) on the [`targets` data store](https://books.ropensci.org/targets/files.html#internal-data-files) repository.

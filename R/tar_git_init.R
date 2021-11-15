@@ -42,6 +42,14 @@ tar_git_init <- function(
     cli_info("Remove ", store, " to start over.")
     return(invisible())
   }
+  gitattributes <- file.path(store, ".gitattributes")
+  usethis::write_union(path = gitattributes, lines = lines, quiet = TRUE)
+  cli_success(
+    "Wrote to ",
+    gitattributes,
+    " for git-lfs: {.url https://git-lfs.github.com}.",
+    verbose = verbose
+  )
   if (stash_gitignore) {
     gitignore <- git_stash_gitignore(repo = store)
     on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
@@ -54,14 +62,6 @@ tar_git_init <- function(
     "objects/* filter=lfs diff=lfs merge=lfs -text",
     "objects/** filter=lfs diff=lfs merge=lfs -text",
     "objects/**/* filter=lfs diff=lfs merge=lfs -text"
-  )
-  gitattributes <- file.path(store, ".gitattributes")
-  usethis::write_union(path = gitattributes, lines = lines, quiet = TRUE)
-  cli_success(
-    "Wrote to ",
-    gitattributes,
-    " for git-lfs: {.url https://git-lfs.github.com}.",
-    verbose = verbose
   )
   gert::git_add(
     files = basename(c(git_stub_path(store), gitattributes)),

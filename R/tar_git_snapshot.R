@@ -107,6 +107,7 @@ tar_git_snapshot <- function(
   cli_info("Staging data files.", verbose = verbose)
   gert::git_add(files = "*", repo = store)
   staged <- gert::git_status(staged = TRUE, repo = store)
+  staged$staged <- NULL
   cli_success("Staged files in the data store:", verbose = verbose)
   if (verbose) {
     message()

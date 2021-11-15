@@ -134,7 +134,7 @@ gert::git_init()
 gert::git_add("_targets.R")
 gert::git_commit("First commit")
 tar_git_init()
-tar_git_snapshot(status = T)
+tar_git_snapshot(status = FALSE)
 })
 }
 }

@@ -37,10 +37,13 @@ install.packages("remotes")
 remotes::install_github("wlandau/gittargets")
 ```
 
-You will also need command line Git, available at <https://git-scm.com/downloads>. Please make sure Git is reachable from your system path environment variables. The following R code should run without error if Git is ready to use.
+You will also need command line Git, available at <https://git-scm.com/downloads>. Please make sure Git is reachable from your system path environment variables. To control which Git executable `gittargets` uses, you may set the `TAR_GIT` environment variable with `usethis::edit_r_environ()` or `Sys.setenv()`. The following R code will run without error if Git is ready to use.
 
 ```{r}
-processx::run("git", "--version")$stdout
+processx::run(
+  command = Sys.getenv("TAR_GIT", unset = Sys.which("git")),
+  args = "--version"
+)$stdout
 ```
 
 There are also backend-specific installation requirements and recommendations in the [package vignettes](https://wlandau.github.io/gittargets/articles/index.html).

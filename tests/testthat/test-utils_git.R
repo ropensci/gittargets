@@ -34,3 +34,13 @@ targets::tar_test("tar_git_gitignore_restore(), no .gitignore", {
   tar_git_gitignore_restore(tmp)
   expect_equal(readLines(from), "*")
 })
+
+targets::tar_test("tar_git_binary()", {
+  skip_no_git()
+  old <- Sys.getenv("TAR_GIT")
+  on.exit(Sys.setenv(TAR_GIT = old))
+  Sys.setenv(TAR_GIT = "nope")
+  expect_error(tar_git_binary(), condition = "tar_condition_validate")
+  file.create("nope")
+  expect_equal(tar_git_binary(), "nope")
+})

@@ -56,7 +56,7 @@ tar_git_init_repo <- function(path) {
 tar_git_binary <- function() {
   out <- Sys.getenv("TAR_GIT", unset = Sys.which("git"))
   msg <- paste(
-    "no Git installation found.",
+    "no existing Git installation found.",
     "Install from https://git-scm.com/downloads.",
     "If you already installed Git",
     "set the TAR_GIT environment variable to the path of the",
@@ -64,6 +64,7 @@ tar_git_binary <- function() {
     "Sys.setenv() can help."
   )
   targets::tar_assert_nzchar(out, msg = msg)
+  targets::tar_assert_path(out, msg = msg)
   out
 }
 

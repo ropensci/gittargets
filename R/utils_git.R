@@ -8,6 +8,10 @@ tar_git_add <- function(files, repo, verbose = TRUE) {
   )
 }
 
+tar_git_commit <- function(message, repo, verbose = TRUE) {
+  
+}
+
 tar_git_repo_exists <- function(repo) {
   file.exists(file.path(repo, ".git"))
 }

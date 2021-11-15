@@ -2,6 +2,9 @@
 #' @export
 #' @family git
 #' @description Initialize a Git repository for a `targets` data store.
+#' @details `tar_git_init()` also writes a `.gitattributes` file to the
+#'   store to automatically track target output date with `git-lfs`
+#'   if it is installed on your system.
 #' @inheritParams targets::tar_config_set
 #' @return `NULL` (invisibly).
 #' @param stash_gitignore Logical of length 1, whether to temporarily
@@ -46,13 +49,22 @@ tar_git_init <- function(
   gert::git_init(path = store)
   cli_success("Created data store Git repository", verbose = verbose)
   git_stub_write(repo = store)
+  lines <- "objects/* filter=lfs diff=lfs merge=lfs -text"
+  gitattributes <- file.path(store, ".gitattributes")
+  usethis::write_union(path = gitattributes, lines = lines, quiet = TRUE)
+  cli_success(
+    "Wrote to ",
+    gitattributes,
+    " for git-lfs: {.url https://git-lfs.github.com}.",
+    verbose = verbose
+  )
   gert::git_add(
-    files = basename(git_stub_path(store)),
+    files = basename(c(git_stub_path(store), gitattributes)),
     force = TRUE,
     repo = store
   )
   gert::git_commit(message = "Stub commit", repo = store)
-  cli_success("Created stub commit.", verbose = verbose)
+  cli_success("Created stub commit without data.", verbose = verbose)
   cli_info(
     "Run tar_git_snapshot() to put the data files under version control.",
     verbose = verbose

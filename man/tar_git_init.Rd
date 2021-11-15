@@ -46,6 +46,11 @@ R console.}
 \description{
 Initialize a Git repository for a \code{targets} data store.
 }
+\details{
+\code{tar_git_init()} also writes a \code{.gitattributes} file to the
+store to automatically track target output date with \code{git-lfs}
+if it is installed on your system.
+}
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's file space.

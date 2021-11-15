@@ -47,6 +47,10 @@ When you develop a reproducible analysis project, you write R code, run the pipe
 
 To reproducibly track alternative versions of your project, it is good practice to create multiple Git commits and Git branches for your R code during development. That way, you can transition among multiple versions of your code with [`git checkout`](https://git-scm.com/docs/git-checkout). But your code commits probably do not contain the [`targets` data store](https://books.ropensci.org/targets/files.html#internal-data-files) because it is too big to fit on [GitHub](https://github.com). If so, switching to a different branch will most likely invalidate the [`targets`](https://docs.ropensci.org/targets/) pipeline, causing you to rerun hours of computation you should not have to run. But with `gittargets`, once you check out a branch in the code, you can also check out the corresponding snapshot of the [data store](https://books.ropensci.org/targets/files.html#internal-data-files). If you check out both the code commit and its matching data snapshot, then you will restore your old targets and they will all be up to date.
 
+### Performance
+
+`targets` generates a large amount of data in `_targets/objects/`, so data snapshots and checkouts may take a long time. To work around performance limitations, you may wish to only snapshot the data at the most important milestones of your project. Please refer to the [package vignettes](https://wlandau.github.io/gittargets/articles/index.html) for specific recommendations on optimizing performance. 
+
 ## Future directions
 
 The first data versioning system in `gittargets` uses [Git](https://git-scm.com), which is designed for source code and may not scale to enormous amounts of compressed data. Future releases of `gittargets` may explore other potential data backends such as [`git-annex`](https://git-annex.branchable.com) and [DVC](https://dvc.org).

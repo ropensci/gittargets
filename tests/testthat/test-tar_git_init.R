@@ -10,6 +10,20 @@ targets::tar_test("tar_git_init() without .gitignore", {
   expect_false(file.exists(file.path(store, ".gitignore")))
 })
 
+targets::tar_test("tar_git_init() .gitattributes under vcs", {
+  store <- targets::tar_config_get("store")
+  dir.create(store)
+  expect_false(file.exists(file.path(store, ".gitattributes")))
+  dir <- getwd()
+  tar_git_init(store = store)
+  expect_true(file.exists(file.path(store, ".gitattributes")))
+  unlink(file.path(store, ".gitattributes"))
+  status <- tar_git_status_data(store = store)
+  expect_equal(status$file, ".gitattributes")
+  expect_equal(status$status, "deleted")
+  expect_equal(status$staged, FALSE)
+})
+
 targets::tar_test("tar_git_init() with .gitignore", {
   store <- targets::tar_config_get("store")
   targets::tar_script(targets::tar_target(x, 1))

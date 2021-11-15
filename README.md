@@ -75,6 +75,15 @@ store](https://books.ropensci.org/targets/files.html#internal-data-files).
 If you check out both the code commit and its matching data snapshot,
 then you will restore your old targets and they will all be up to date.
 
+### Performance
+
+`targets` generates a large amount of data in `_targets/objects/`, so
+data snapshots and checkouts may take a long time. To work around
+performance limitations, you may wish to only snapshot the data at the
+most important milestones of your project. Please refer to the [package
+vignettes](https://wlandau.github.io/gittargets/articles/index.html) for
+specific recommendations on optimizing performance.
+
 ## Future directions
 
 The first data versioning system in `gittargets` uses

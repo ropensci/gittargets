@@ -21,6 +21,7 @@
 #'   tar_outdated tar_throw_validate
 #' @importFrom tibble as_tibble tibble
 #' @importFrom tools R_user_dir
+#' @importFrom usethis write_union
 #' @importFrom utils head menu
 #' @importFrom uuid UUIDgenerate
 NULL

@@ -91,7 +91,8 @@ tar_git_snapshot <- function(
   }
   tar_git_stub_write(repo = store)
   cli_info(sprintf("Creating data branch %s.", commit), verbose = verbose)
-  gert::git_branch_create(branch = commit, checkout = TRUE, repo = store)
+  tar_git_branch_create(branch = commit, repo = store)
+  tar_git_branch_checkout(branch = commit, repo = store, force = FALSE)
   cli_info("Staging data files.", verbose = verbose)
   tar_git_add(files = "*", repo = store)
   staged <- gert::git_status(staged = TRUE, repo = store)

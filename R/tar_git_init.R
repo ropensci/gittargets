@@ -46,7 +46,7 @@ tar_git_init <- function(
     gitignore <- tar_git_stash_gitignore(repo = store)
     on.exit(tar_git_unstash_gitignore(repo = store, stash = gitignore))
   }
-  gert::git_init(path = store)
+  tar_git_init_repo(path = store)
   cli_success("Created data store Git repository", verbose = verbose)
   tar_git_init_stub_commit(repo = store, verbose = verbose)
   cli_success("Created stub commit without data.", verbose = verbose)

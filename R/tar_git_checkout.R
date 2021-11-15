@@ -62,7 +62,7 @@ tar_git_checkout <- function(
   tar_git_assert_commits_data(store)
   commit <- gert::git_commit_info(repo = code, ref = ref)$id
   tar_git_assert_snapshot(branch = commit, store = store)
-  gert::git_branch_checkout(branch = commit, force = force, repo = store)
+  tar_git_branch_checkout(branch = commit, repo = store, force = force)
   commit <- gert::git_commit_info(repo = store)$id
   message <- gert::git_commit_info(repo = store, ref = commit)$message
   message <- first_line(message)

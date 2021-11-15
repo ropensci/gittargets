@@ -8,6 +8,15 @@ tar_git_add <- function(files, repo, echo = TRUE, spinner = TRUE) {
   )
 }
 
+tar_git_branch_checkout <- function(branch, repo, force) {
+  args <- c("checkout", if_any(force, "--force", character(0)), branch)
+  processx::run(command = "git", args = args, wd = repo)
+}
+
+tar_git_branch_create <- function(branch, repo) {
+  processx::run(command = "git", args = c("branch", branch), wd = repo)
+}
+
 tar_git_commit <- function(message, repo, echo = TRUE, spinner = TRUE) {
   processx::run(
     command = "git",
@@ -26,6 +35,10 @@ tar_git_commit_all <- function(message, repo, echo = TRUE, spinner = TRUE) {
     echo = echo,
     spinner = spinner
   )
+}
+
+tar_git_init_repo <- function(path) {
+  processx::run(command = "git", args = "init", wd = path)
 }
 
 tar_git_repo_exists <- function(repo) {

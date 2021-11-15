@@ -3,6 +3,7 @@
 #' @family git
 #' @description Print the status of the code repository,
 #'   the data repository, and the targets.
+#' @inheritSection tar_git_init Stashing .gitignore
 #' @return `NULL` (invisibly). Status information is printed
 #'   to the R console.
 #' @inheritParams tar_git_status_code

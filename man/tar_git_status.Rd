@@ -43,17 +43,8 @@ If the argument \code{NULL}, the setting is not modified.
 Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
 
 \item{stash_gitignore}{Logical of length 1, whether to temporarily
-stash the \code{.gitignore} file of the data store.
-The \code{targets} package writes a \code{.gitignore} file to new data stores
-in order to prevent accidental commits to the code Git repository.
-Unfortunately, for \code{gittargets}, this automatic \code{.gitignore} file
-interferes with proper data versioning. So by default, \code{gittargets}
-temporarily stashes it in
-\code{tools::R_user_dir(package = "gittargets", which = "cache")}
-while querying and modifying the data store. As long as the R
-session does not crash unexpectedly, the \code{.gitignore} file
-is returned to its proper location when \code{gittargets} is finished
-working with the data store.}
+stash the \code{.gitignore} file of the data store. See the
+"Stashing .gitignore" section for details.}
 
 \item{reporter}{Character of length 1, name of the reporter to user.
 Controls how messages are printed as targets are checked. Choices:
@@ -99,6 +90,19 @@ to the R console.
 Print the status of the code repository,
 the data repository, and the targets.
 }
+\section{Stashing .gitignore}{
+
+The \code{targets} package writes a \code{.gitignore} file to new data stores
+in order to prevent accidental commits to the code Git repository.
+Unfortunately, for \code{gittargets}, this automatic \code{.gitignore} file
+interferes with proper data versioning. So by default, \code{gittargets}
+temporarily stashes it to a file called \code{gitignore_stash}
+inside the data store. If your R program crashes while the stash
+is active, you can simply move it manually back to \code{.gitignore}
+or run \code{tar_git_status_data()} to restore the stash automatically
+if no \code{.gitignore} already exists.
+}
+
 \examples{
 if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's files pace.

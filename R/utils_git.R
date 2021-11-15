@@ -45,28 +45,39 @@ tar_git_repo_exists <- function(repo) {
   file.exists(file.path(repo, ".git"))
 }
 
-tar_git_stash_gitignore <- function(repo) {
-  path <- file.path(repo, ".gitignore")
-  if (!file.exists(path)) {
-    return(NULL)
+tar_git_gitignore_stash <- function(repo) {
+  from <- file.path(repo, ".gitignore")
+  to <- file.path(repo, "gitignore_stash")
+  if (file.exists(from)) {
+    file.rename(from = from, to = to)
+    writeLines(tar_git_gitignore_lines(), from)
   }
-  dir <- tools::R_user_dir(package = "gittargets", which = "cache")
-  uuid <- uuid::UUIDgenerate(use.time = NA, n = 1L)
-  stash <- file.path(dir, paste0("gitignore_", uuid))
-  
-  stash <- tempfile()
-  
-  fs::dir_create(dirname(stash))
-  fs::file_move(path = path, new_path = stash)
-  stash
+  invisible()
 }
 
-tar_git_unstash_gitignore <- function(repo, stash) {
-  if (is.null(stash)) {
-    return()
+tar_git_gitignore_restore <- function(repo) {
+  from <- file.path(repo, "gitignore_stash")
+  to <- file.path(repo, ".gitignore")
+  restore <- file.exists(from) &&
+    !file.exists(to) &&
+    identical(readLines(to), tar_git_gitignore_lines())
+  if (restore) {
+    file.rename(from = from, to = to)
   }
-  new_path <- file.path(repo, ".gitignore")
-  fs::file_move(path = stash, new_path = new_path)
+  invisible()
+}
+
+tar_git_gitignore_unstash <- function(repo) {
+  from <- file.path(repo, "gitignore_stash")
+  to <- file.path(repo, ".gitignore")
+  if (file.exists(from)) {
+    file.rename(from = from, to = to)
+  }
+  invisible()
+}
+
+tar_git_gitignore_lines <- function() {
+  c(".gitignore", "gitignore_stash")
 }
 
 tar_git_stub_path <- function(repo) {

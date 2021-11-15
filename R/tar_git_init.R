@@ -5,20 +5,21 @@
 #' @details `tar_git_init()` also writes a `.gitattributes` file to the
 #'   store to automatically track target output date with `git-lfs`
 #'   if it is installed on your system.
-#' @inheritParams targets::tar_config_set
-#' @return `NULL` (invisibly).
-#' @param stash_gitignore Logical of length 1, whether to temporarily
-#'   stash the `.gitignore` file of the data store.
+#' @section Stashing .gitignore:
 #'   The `targets` package writes a `.gitignore` file to new data stores
 #'   in order to prevent accidental commits to the code Git repository.
 #'   Unfortunately, for `gittargets`, this automatic `.gitignore` file
 #'   interferes with proper data versioning. So by default, `gittargets`
-#'   temporarily stashes it in
-#'   `tools::R_user_dir(package = "gittargets", which = "cache")`
-#'   while querying and modifying the data store. As long as the R
-#'   session does not crash unexpectedly, the `.gitignore` file
-#'   is returned to its proper location when `gittargets` is finished
-#'   working with the data store.
+#'   temporarily stashes it to a file called `gitignore_stash`
+#'   inside the data store. If your R program crashes while the stash
+#'   is active, you can simply move it manually back to `.gitignore`
+#'   or run `tar_git_status_data()` to restore the stash automatically
+#'   if no `.gitignore` already exists.
+#' @inheritParams targets::tar_config_set
+#' @return `NULL` (invisibly).
+#' @param stash_gitignore Logical of length 1, whether to temporarily
+#'   stash the `.gitignore` file of the data store. See the
+#'   "Stashing .gitignore" section for details.
 #' @param verbose Logical of length 1, whether to print messages to the
 #'   R console.
 #' @examples
@@ -43,8 +44,9 @@ tar_git_init <- function(
     return(invisible())
   }
   if (stash_gitignore) {
-    gitignore <- tar_git_stash_gitignore(repo = store)
-    on.exit(tar_git_unstash_gitignore(repo = store, stash = gitignore))
+    tar_git_gitignore_unstash(repo = store)
+    tar_git_gitignore_stash(repo = store)
+    on.exit(tar_git_gitignore_unstash(repo = store))
   }
   tar_git_init_repo(path = store)
   cli_success("Created data store Git repository", verbose = verbose)

@@ -2,6 +2,7 @@
 #' @export
 #' @family git
 #' @description Show the Git status of the data repository.
+#' @inheritSection tar_git_init Stashing .gitignore
 #' @return If the data repository exists, the return value is the data frame
 #'   produced by `gert::git_status(repo = store)`. If the data store has no Git
 #'   repository, then the return value is `NULL`.
@@ -23,8 +24,9 @@ tar_git_status_data <- function(
 ) {
   targets::tar_assert_file(store)
   if (stash_gitignore) {
-    gitignore <- tar_git_stash_gitignore(repo = store)
-    on.exit(tar_git_unstash_gitignore(repo = store, stash = gitignore))
+    tar_git_gitignore_unstash(repo = store)
+    tar_git_gitignore_stash(repo = store)
+    on.exit(tar_git_gitignore_unstash(repo = store))
   }
   if_any(
     tar_git_repo_exists(repo = store),

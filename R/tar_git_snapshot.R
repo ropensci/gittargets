@@ -2,7 +2,7 @@
 #' @export
 #' @family git
 #' @description Snapshot the Git data repository of a `targets` project.
-#' @description A Git-backed `gittargets` data snapshot is a special kind of
+#' @details A Git-backed `gittargets` data snapshot is a special kind of
 #'   Git commit. Every data commit gets its own branch,
 #'   and the branch name is equal to the Git SHA1 hash
 #'   of the current code commit.
@@ -13,6 +13,7 @@
 #'   `tar_git_checkout()` can revert the data to match.
 #'   Ideally, your targets should stay up to date even as you
 #'   transition among multiple branches.
+#' @inheritSection tar_git_init Stashing .gitignore
 #' @inheritParams tar_git_status
 #' @param ref Character of length 1, reference
 #'   (branch name, Git SHA1 hash, etc.) of the code commit
@@ -86,8 +87,9 @@ tar_git_snapshot <- function(
     )
   }
   if (stash_gitignore) {
-    gitignore <- tar_git_stash_gitignore(repo = store)
-    on.exit(tar_git_unstash_gitignore(repo = store, stash = gitignore))
+    tar_git_gitignore_unstash(repo = store)
+    tar_git_gitignore_stash(repo = store)
+    on.exit(tar_git_gitignore_unstash(repo = store))
   }
   tar_git_stub_write(repo = store)
   cli_info(sprintf("Creating data branch %s.", commit), verbose = verbose)

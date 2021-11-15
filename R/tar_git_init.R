@@ -42,7 +42,29 @@ tar_git_init <- function(
     cli_info("Remove ", store, " to start over.")
     return(invisible())
   }
-  gitattributes <- file.path(store, ".gitattributes")
+  if (stash_gitignore) {
+    gitignore <- git_stash_gitignore(repo = store)
+    on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
+  }
+  gert::git_init(path = store)
+  cli_success("Created data store Git repository", verbose = verbose)
+  tar_git_init_stub_commit(repo = store, verbose = verbose)
+  cli_success("Created stub commit without data.", verbose = verbose)
+  cli_info(
+    "Run tar_git_snapshot() to put the data files under version control.",
+    verbose = verbose
+  )
+  invisible()
+}
+
+tar_git_init_stub_commit <- function(repo, verbose) {
+  gitattributes <- file.path(repo, ".gitattributes")
+  lines <- c(
+    "objects filter=lfs diff=lfs merge=lfs -text",
+    "objects/* filter=lfs diff=lfs merge=lfs -text",
+    "objects/** filter=lfs diff=lfs merge=lfs -text",
+    "objects/**/* filter=lfs diff=lfs merge=lfs -text"
+  )
   usethis::write_union(path = gitattributes, lines = lines, quiet = TRUE)
   cli_success(
     "Wrote to ",
@@ -50,29 +72,11 @@ tar_git_init <- function(
     " for git-lfs: {.url https://git-lfs.github.com}.",
     verbose = verbose
   )
-  if (stash_gitignore) {
-    gitignore <- git_stash_gitignore(repo = store)
-    on.exit(git_unstash_gitignore(repo = store, stash = gitignore))
-  }
-  gert::git_init(path = store)
-  cli_success("Created data store Git repository", verbose = verbose)
-  git_stub_write(repo = store)
-  lines <- c(
-    "objects filter=lfs diff=lfs merge=lfs -text",
-    "objects/* filter=lfs diff=lfs merge=lfs -text",
-    "objects/** filter=lfs diff=lfs merge=lfs -text",
-    "objects/**/* filter=lfs diff=lfs merge=lfs -text"
-  )
+  git_stub_write(repo = repo)
   gert::git_add(
-    files = basename(c(git_stub_path(store), gitattributes)),
+    files = basename(c(git_stub_path(repo), gitattributes)),
     force = TRUE,
-    repo = store
+    repo = repo
   )
-  gert::git_commit(message = "Stub commit", repo = store)
-  cli_success("Created stub commit without data.", verbose = verbose)
-  cli_info(
-    "Run tar_git_snapshot() to put the data files under version control.",
-    verbose = verbose
-  )
-  invisible()
+  gert::git_commit(message = "Stub commit", repo = repo)
 }

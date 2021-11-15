@@ -105,11 +105,12 @@ tar_git_snapshot <- function(
   cli_info(sprintf("Creating data branch %s.", commit), verbose = verbose)
   gert::git_branch_create(branch = commit, checkout = TRUE, repo = store)
   cli_info("Staging data files.", verbose = verbose)
-  changes <- gert::git_add(files = "*", repo = store)
+  gert::git_add(files = "*", repo = store)
+  staged <- gert::git_status(staged = TRUE, repo = store)
   cli_success("Staged files in the data store:", verbose = verbose)
   if (verbose) {
     message()
-    print(changes)
+    print(staged)
     message()
   }
   cli_info("Committing data changes.", verbose = verbose)

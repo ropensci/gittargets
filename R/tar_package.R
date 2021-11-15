@@ -21,4 +21,5 @@
 #'   tar_outdated tar_throw_validate
 #' @importFrom tibble as_tibble tibble
 #' @importFrom utils head menu
+#' @importFrom uuid UUIDgenerate
 NULL

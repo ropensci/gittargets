@@ -13,9 +13,11 @@ tar_git_checkout(
 )
 }
 \arguments{
-\item{ref}{Character of length 1, reference
-(branch name, Git SHA1 hash, etc.) of the code commit
-associated with the data snapshot to check out.
+\item{ref}{Character of length 1, reference of the data snapshot.
+Could be \code{"HEAD"}, a data repository branch name,
+or a code repository commit hash. You could also refer to a
+branch in the code repository, but any leading \code{"code="}
+string will be removed.
 In most cases, it is best to switch branches in the code
 instead of manually setting \code{ref}. But if you do need to set \code{ref},
 the \code{commit_code} column of the data frame produced by \code{\link[=tar_git_log]{tar_git_log()}}

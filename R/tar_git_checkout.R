@@ -4,9 +4,11 @@
 #' @description Check out a snapshot of the data associated with
 #'   a particular code commit (default: `HEAD`).
 #' @return Nothing (invisibly).
-#' @param ref Character of length 1, reference
-#'   (branch name, Git SHA1 hash, etc.) of the code commit
-#'   associated with the data snapshot to check out.
+#' @param ref Character of length 1, reference of the data snapshot.
+#'   Could be `"HEAD"`, a data repository branch name,
+#'   or a code repository commit hash. You could also refer to a
+#'   branch in the code repository, but any leading `"code="`
+#'   string will be removed.
 #'   In most cases, it is best to switch branches in the code
 #'   instead of manually setting `ref`. But if you do need to set `ref`,
 #'   the `commit_code` column of the data frame produced by [tar_git_log()]

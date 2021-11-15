@@ -36,7 +36,8 @@ Imports:
   stats,
   targets (>= 0.8.1.9000),
   tibble (>= 3.0.0),
-  utils
+  utils,
+  uuid (>= 1.0.0)
 Suggests:
   knitr (>= 1.30),
   markdown (>= 1.1),

@@ -1,6 +1,6 @@
 tar_git_add <- function(files, repo, echo = TRUE, spinner = TRUE) {
   processx::run(
-    command = "git",
+    command = tar_git_binary(),
     args = c("add", files),
     wd = repo,
     echo = echo,
@@ -10,11 +10,15 @@ tar_git_add <- function(files, repo, echo = TRUE, spinner = TRUE) {
 
 tar_git_branch_checkout <- function(branch, repo, force) {
   args <- c("checkout", if_any(force, "--force", character(0)), branch)
-  processx::run(command = "git", args = args, wd = repo)
+  processx::run(command = tar_git_binary(), args = args, wd = repo)
 }
 
 tar_git_branch_create <- function(branch, repo) {
-  processx::run(command = "git", args = c("branch", branch), wd = repo)
+  processx::run(
+    command = tar_git_binary(),
+    args = c("branch", branch),
+    wd = repo
+  )
 }
 
 tar_git_branch_snapshot <- function(commit) {
@@ -27,7 +31,7 @@ tar_git_commit_code <- function(branch) {
 
 tar_git_commit <- function(message, repo, echo = TRUE, spinner = TRUE) {
   processx::run(
-    command = "git",
+    command = tar_git_binary(),
     args = c("commit", "--message", message),
     wd = repo,
     echo = echo,
@@ -37,7 +41,7 @@ tar_git_commit <- function(message, repo, echo = TRUE, spinner = TRUE) {
 
 tar_git_commit_all <- function(message, repo, echo = TRUE, spinner = TRUE) {
   processx::run(
-    command = "git",
+    command = tar_git_binary(),
     args = c("commit", "--all", "--message", message),
     wd = repo,
     echo = echo,
@@ -46,7 +50,16 @@ tar_git_commit_all <- function(message, repo, echo = TRUE, spinner = TRUE) {
 }
 
 tar_git_init_repo <- function(path) {
-  processx::run(command = "git", args = "init", wd = path)
+  processx::run(command = tar_git_binary(), args = "init", wd = path)
+}
+
+tar_git_binary <- function() {
+  out <- Sys.which("git")
+  targets::tar_assert_nzchar(
+    out,
+    msg = "no Git installation found. See https://git-scm.com/downloads."
+  )
+  out
 }
 
 tar_git_repo_exists <- function(repo) {

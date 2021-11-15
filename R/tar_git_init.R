@@ -75,7 +75,14 @@ tar_git_init_stub_commit <- function(repo, verbose) {
   tar_git_stub_write(repo = repo)
   tar_git_add(
     files = basename(c(tar_git_stub_path(repo), gitattributes)),
-    repo = repo
+    repo = repo,
+    echo = verbose,
+    spinner = FALSE
   )
-  gert::git_commit(message = "Stub commit", repo = repo)
+  tar_git_commit(
+    message = "Stub commit",
+    repo = repo,
+    echo = verbose,
+    spinner = FALSE
+  )
 }

@@ -8,7 +8,7 @@ targets::tar_test("tar_git_checkout()", {
   gert::git_add("_targets.R")
   gert::git_commit("First commit")
   gert::git_branch_create("old_branch")
-  tar_git_init()
+  utils::capture.output(tar_git_init())
   # Work on a new branch.
   tar_git_snapshot(status = FALSE, verbose = FALSE)
   targets::tar_script(tar_target(data, "new_data"))

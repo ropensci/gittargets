@@ -1,15 +1,21 @@
-tar_git_add <- function(files, repo, verbose = TRUE) {
+tar_git_add <- function(files, repo, echo = TRUE, spinner = TRUE) {
   processx::run(
     command = "git",
     args = c("add", files),
     wd = repo,
-    echo = verbose,
-    spinner = verbose
+    echo = echo,
+    spinner = spinner
   )
 }
 
-tar_git_commit <- function(message, repo, verbose = TRUE) {
-  
+tar_git_commit <- function(message, repo, echo = TRUE, spinner = TRUE) {
+  processx::run(
+    command = "git",
+    args = c("commit", "--message", message),
+    wd = repo,
+    echo = echo,
+    spinner = spinner
+  )
 }
 
 tar_git_repo_exists <- function(repo) {

@@ -11,7 +11,9 @@ vignette: >
 library(gert)
 library(gittargets)
 library(targets)
-knitr::opts_knit$set(root.dir = fs::dir_create(tempfile()))
+tmp <- tempfile()
+dir.create(tmp)
+knitr::opts_knit$set(root.dir = tmp)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",

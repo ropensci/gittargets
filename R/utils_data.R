@@ -15,3 +15,9 @@ left_merge <- function(x, y, by) {
   names(out) <- names
   tibble::as_tibble(out)
 }
+
+write_new_lines <- function(lines, path) {
+  old_lines <- if_any(file.exists(path), readLines(path), character(0))
+  all_lines <- union(x = old_lines, y = lines)
+  writeLines(all_lines, path)
+}

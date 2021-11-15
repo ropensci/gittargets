@@ -67,7 +67,7 @@ tar_git_init_stub_commit <- function(repo, verbose) {
     "objects/** filter=lfs diff=lfs merge=lfs -text",
     "objects/**/* filter=lfs diff=lfs merge=lfs -text"
   )
-  usethis::write_union(path = gitattributes, lines = lines, quiet = TRUE)
+  write_new_lines(path = gitattributes, lines = lines)
   cli_success(
     "Wrote to ",
     gitattributes,

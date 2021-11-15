@@ -20,6 +20,5 @@
 #' @importFrom targets tar_assert_file tar_config_get tar_config_set tar_dir
 #'   tar_outdated tar_throw_validate
 #' @importFrom tibble as_tibble tibble
-#' @importFrom usethis write_union
 #' @importFrom utils head menu
 NULL

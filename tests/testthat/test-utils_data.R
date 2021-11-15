@@ -11,3 +11,18 @@ targets::tar_test("left_merge()", {
   )
   expect_equal(out, exp)
 })
+
+targets::tar_test("write_new_lines()", {
+  write_new_lines(lines = c("a", "b", "c"), path = "file.txt")
+  expect_equal(readLines("file.txt"), c("a", "b", "c"))
+  write_new_lines(lines = c("b", "d", "e"), path = "file.txt")
+  expect_equal(
+    sort(readLines("file.txt")),
+    sort(c("a", "b", "c", "d", "e"))
+  )
+  write_new_lines(lines = c("b", "d", "e"), path = "file.txt")
+  expect_equal(
+    sort(readLines("file.txt")),
+    sort(c("a", "b", "c", "d", "e"))
+  )
+})

@@ -36,7 +36,6 @@ Imports:
   stats,
   targets (>= 0.8.1.9000),
   tibble (>= 3.0.0),
-  usethis (>= 1.5.0),
   utils
 Suggests:
   knitr (>= 1.30),

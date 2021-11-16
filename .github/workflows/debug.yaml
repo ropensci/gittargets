@@ -14,6 +14,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
 
       - name: Run
+        shell: Rscript {0}
         run: |
           install.packages("processx")
           processx::run(Sys.which("git"), "--version")

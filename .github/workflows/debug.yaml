@@ -4,7 +4,7 @@ name: lint
 
 jobs:
   lint:
-    runs-on: macOS-latest
+    runs-on: windows-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       TORCH_INSTALL: 1

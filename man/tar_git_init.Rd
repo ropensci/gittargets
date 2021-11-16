@@ -7,6 +7,7 @@
 tar_git_init(
   store = targets::tar_config_get("store"),
   stash_gitignore = TRUE,
+  git_lfs = TRUE,
   verbose = TRUE
 )
 }
@@ -28,6 +29,12 @@ Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setti
 stash the \code{.gitignore} file of the data store. See the
 "Stashing .gitignore" section for details.}
 
+\item{git_lfs}{Logical, whether to automatically opt into Git LFS to track
+large files in \verb{_targets/objects} more efficiently. If \code{TRUE}
+and Git LFS is installed, it should work automatically. If \code{FALSE},
+you can always opt in later by running \verb{git lfs track objects}
+inside the data store.}
+
 \item{verbose}{Logical of length 1, whether to print messages to the
 R console.}
 }
@@ -48,7 +55,7 @@ The \code{targets} package writes a \code{.gitignore} file to new data stores
 in order to prevent accidental commits to the code Git repository.
 Unfortunately, for \code{gittargets}, this automatic \code{.gitignore} file
 interferes with proper data versioning. So by default, \code{gittargets}
-temporarily stashes it to a file called \code{gitignore_stash}
+temporarily stashes it to a hidden file called \code{.gittargets_gitignore}
 inside the data store. If your R program crashes while the stash
 is active, you can simply move it manually back to \code{.gitignore}
 or run \code{tar_git_status_data()} to restore the stash automatically

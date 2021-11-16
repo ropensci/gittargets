@@ -118,7 +118,7 @@ The \code{targets} package writes a \code{.gitignore} file to new data stores
 in order to prevent accidental commits to the code Git repository.
 Unfortunately, for \code{gittargets}, this automatic \code{.gitignore} file
 interferes with proper data versioning. So by default, \code{gittargets}
-temporarily stashes it to a file called \code{gitignore_stash}
+temporarily stashes it to a hidden file called \code{.gittargets_gitignore}
 inside the data store. If your R program crashes while the stash
 is active, you can simply move it manually back to \code{.gitignore}
 or run \code{tar_git_status_data()} to restore the stash automatically

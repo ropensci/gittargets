@@ -26,6 +26,16 @@ targets::tar_test("tar_git_init() .gitattributes under vcs", {
   expect_equal(status$staged, FALSE)
 })
 
+targets::tar_test("tar_git_init() with git_lfs = FALSE", {
+  skip_no_git()
+  store <- targets::tar_config_get("store")
+  dir.create(store)
+  expect_false(file.exists(file.path(store, ".gitattributes")))
+  dir <- getwd()
+  utils::capture.output(tar_git_init(store = store, git_lfs = FALSE))
+  expect_false(file.exists(file.path(store, ".gitattributes")))
+})
+
 targets::tar_test("tar_git_init() with .gitignore", {
   skip_no_git()
   store <- targets::tar_config_get("store")

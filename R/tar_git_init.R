@@ -10,7 +10,7 @@
 #'   in order to prevent accidental commits to the code Git repository.
 #'   Unfortunately, for `gittargets`, this automatic `.gitignore` file
 #'   interferes with proper data versioning. So by default, `gittargets`
-#'   temporarily stashes it to a file called `gitignore_stash`
+#'   temporarily stashes it to a hidden file called `.gittargets_gitignore`
 #'   inside the data store. If your R program crashes while the stash
 #'   is active, you can simply move it manually back to `.gitignore`
 #'   or run `tar_git_status_data()` to restore the stash automatically
@@ -20,6 +20,11 @@
 #' @param stash_gitignore Logical of length 1, whether to temporarily
 #'   stash the `.gitignore` file of the data store. See the
 #'   "Stashing .gitignore" section for details.
+#' @param git_lfs Logical, whether to automatically opt into Git LFS to track
+#'   large files in `_targets/objects` more efficiently. If `TRUE`
+#'   and Git LFS is installed, it should work automatically. If `FALSE`,
+#'   you can always opt in later by running `git lfs track objects`
+#'   inside the data store.
 #' @param verbose Logical of length 1, whether to print messages to the
 #'   R console.
 #' @examples
@@ -33,6 +38,7 @@
 tar_git_init <- function(
   store = targets::tar_config_get("store"),
   stash_gitignore = TRUE,
+  git_lfs = TRUE,
   verbose = TRUE
 ) {
   tar_assert_file(store)
@@ -50,7 +56,16 @@ tar_git_init <- function(
   }
   tar_git_init_repo(path = store)
   cli_success("Created data store Git repository", verbose = verbose)
-  tar_git_init_stub_commit(repo = store, verbose = verbose)
+  if (git_lfs) {
+    tar_git_init_lfs(repo = store, verbose = verbose)
+  }
+  tar_git_init_stub(repo = store, verbose = verbose)
+  tar_git_commit(
+    message = "Stub commit",
+    repo = store,
+    echo = verbose,
+    spinner = FALSE
+  )
   cli_success("Created stub commit without data.", verbose = verbose)
   cli_info(
     "Run tar_git_snapshot() to put the data files under version control.",
@@ -59,7 +74,7 @@ tar_git_init <- function(
   invisible()
 }
 
-tar_git_init_stub_commit <- function(repo, verbose) {
+tar_git_init_lfs <- function(repo, verbose) {
   gitattributes <- file.path(repo, ".gitattributes")
   lines <- c(
     "objects filter=lfs diff=lfs merge=lfs -text",
@@ -74,15 +89,18 @@ tar_git_init_stub_commit <- function(repo, verbose) {
     " for git-lfs: {.url https://git-lfs.github.com}.",
     verbose = verbose
   )
-  tar_git_stub_write(repo = repo)
   tar_git_add(
-    files = basename(c(tar_git_stub_path(repo), gitattributes)),
+    files = basename(gitattributes),
     repo = repo,
     echo = verbose,
     spinner = FALSE
   )
-  tar_git_commit(
-    message = "Stub commit",
+}
+
+tar_git_init_stub <- function(repo, verbose) {
+  tar_git_stub_write(repo = repo)
+  tar_git_add(
+    files = basename(tar_git_stub_path(repo)),
     repo = repo,
     echo = verbose,
     spinner = FALSE

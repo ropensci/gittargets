@@ -69,5 +69,8 @@ tar_git_ok <- function(verbose = TRUE) {
       verbose = verbose
     )
   )
-  nzchar(user_name) && nzchar(user_email)
+  length(user_name) &&
+    nzchar(user_name) &&
+    length(user_email) &&
+    nzchar(user_email)
 }

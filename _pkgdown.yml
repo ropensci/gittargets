@@ -1,6 +1,6 @@
 destination: docs/
 navbar:
-  title: targets
+  title: gittargets
   type: default
   left:
   - icon: fa-home fa-lg

@@ -17,7 +17,8 @@ knitr::opts_knit$set(root.dir = tmp)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = tar_git_ok(verbose = FALSE)
+  eval = identical(Sys.getenv("NOT_CRAN"), "true") &&
+    tar_git_ok(verbose = FALSE)
 )
 ```
 

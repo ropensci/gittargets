@@ -10,6 +10,7 @@ git_setup_init <- function() {
 }
 
 skip_os_git <- function() {
+  skip_on_cran()
   skip_on_os(os = "solaris")
   skip_on_os(os = "windows")
   skip_if(!tar_git_ok(verbose = FALSE))

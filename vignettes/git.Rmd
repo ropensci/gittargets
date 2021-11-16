@@ -28,7 +28,7 @@ This tutorial shows how to use `gittargets` with the Git-based data versioning b
 
 ## Installation
 
-Please begin with the installation instructions on the [documentation website](https://wlandau.github.io/gittargets/). In addition, if your `targets` pipeline generates large data files, consider installing [`git-lfs`](https://git-lfs.github.com). The Git data backend in `gittargets` automatically configures data repositories with [`git-lfs`](https://git-lfs.github.com), so you should not need to do any manual configuration to reap the performance benefits.
+Please begin with the installation instructions on the [documentation website](https://wlandau.github.io/gittargets/). In addition, if your `targets` pipeline generates large data files, consider installing [`git-lfs`](https://git-lfs.github.com). The Git data backend in `gittargets` automatically opts into [`git-lfs`](https://git-lfs.github.com), so you should not need to do any manual configuration to reap the performance benefits.
 
 ## Write code
 

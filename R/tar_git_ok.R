@@ -29,10 +29,13 @@ tar_git_ok <- function(verbose = TRUE) {
       verbose = verbose
     )
   )
+  # Cannot test without uninstalling Git.
+  # nocov start
   if (!nzchar(binary)) {
     cli_danger("No Git installation found.", verbose = verbose)
     return(FALSE)
   }
+  # nocov end
   user_name <- suppressWarnings(
     system2("git", c("config", "--global", "user.name"), stdout = TRUE)
   )

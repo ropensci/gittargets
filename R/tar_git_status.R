@@ -10,7 +10,7 @@
 #' @inheritParams tar_git_status_data
 #' @inheritParams tar_git_status_targets
 #' @examples
-#' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
+#' if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {
 #' targets::tar_dir({ # Containing code does not modify the user's files pace.
 #' targets::tar_script(tar_target(data, 1))
 #' targets::tar_make()

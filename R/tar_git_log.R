@@ -6,7 +6,7 @@
 #' @inheritParams gert::git_log
 #' @inheritParams tar_git_status
 #' @examples
-#' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
+#' if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {
 #' targets::tar_dir({ # Containing code does not modify the user's filespace.
 #' targets::tar_script(tar_target(data, 1))
 #' targets::tar_make()

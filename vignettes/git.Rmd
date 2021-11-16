@@ -17,7 +17,7 @@ knitr::opts_knit$set(root.dir = tmp)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = nzchar(Sys.which("git"))
+  eval = tar_git_ok(verbose = FALSE)
 )
 ```
 

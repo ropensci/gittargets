@@ -9,6 +9,8 @@ git_setup_init <- function() {
   invisible()
 }
 
-skip_no_git <- function() {
-  skip_if(!nzchar(Sys.which("git")))
+skip_os_git <- function() {
+  skip_on_os(os = "solaris")
+  skip_on_os(os = "windows")
+  skip_if(!tar_git_ok(verbose = FALSE))
 }

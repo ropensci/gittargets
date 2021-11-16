@@ -52,7 +52,7 @@ Check out a snapshot of the data associated with
 a particular code commit (default: \code{HEAD}).
 }
 \examples{
-if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
+if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {
 targets::tar_dir({ # Containing code does not modify the user's filespace.
 # Work on an initial branch.
 targets::tar_script(tar_target(data, "old_data"))
@@ -88,6 +88,7 @@ targets::tar_outdated()
 Other git: 
 \code{\link{tar_git_init}()},
 \code{\link{tar_git_log}()},
+\code{\link{tar_git_ok}()},
 \code{\link{tar_git_snapshot}()},
 \code{\link{tar_git_status_code}()},
 \code{\link{tar_git_status_data}()},

@@ -3,6 +3,7 @@
 export(tar_git_checkout)
 export(tar_git_init)
 export(tar_git_log)
+export(tar_git_ok)
 export(tar_git_snapshot)
 export(tar_git_status)
 export(tar_git_status_code)

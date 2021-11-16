@@ -41,18 +41,22 @@ remotes::install_github("wlandau/gittargets")
 ```
 
 You will also need command line Git, available at
-<https://git-scm.com/downloads>. Please make sure Git is reachable from
-your system path environment variables. To control which Git executable
-`gittargets` uses, you may set the `TAR_GIT` environment variable with
-`usethis::edit_r_environ()` or `Sys.setenv()`. The following R code will
-run without error if Git is ready to use.
+<https://git-scm.com/downloads>.[1] Please make sure Git is reachable
+from your system path environment variables. To control which Git
+executable `gittargets` uses, you may set the `TAR_GIT` environment
+variable with `usethis::edit_r_environ()` or `Sys.setenv()`. You will
+also need to configure your user name and user email at the global level
+using the instructions at
+<https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
+(or `gert::git_config_global_set()`). Run `tar_git_ok()` to check
+installation and configuration.
 
 ``` r
-processx::run(
-  command = Sys.getenv("TAR_GIT", unset = Sys.which("git")),
-  args = "--version"
-)$stdout
-#> [1] "git version 2.30.1 (Apple Git-130)\n"
+tar_git_ok()
+#> ✓ Git binary: /path/to/git
+#> ✓ Git config global user name: your_user_name
+#> ✓ Git config global user email: your_email@example.com
+#> [1] TRUE
 ```
 
 There are also backend-specific installation requirements and
@@ -140,3 +144,7 @@ citation("gittargets")
 #>     note = {https://wlandau.github.io/gittargets/, https://github.com/wlandau/gittargets},
 #>   }
 ```
+
+[1] `gert` does not have these requirements, but `gittargets` does not
+exclusively rely on `gert` because `libgit2` does not automatically work
+with `git-lfs`.

@@ -1,5 +1,5 @@
 targets::tar_test("tar_git_assert_commits_code()", {
-  skip_no_git()
+  skip_os_git()
   gert::git_init()
   expect_error(
     tar_git_assert_commits_code(getwd()),
@@ -10,7 +10,7 @@ targets::tar_test("tar_git_assert_commits_code()", {
 })
 
 targets::tar_test("tar_git_assert_commits_data()", {
-  skip_no_git()
+  skip_os_git()
   gert::git_init()
   expect_error(
     tar_git_assert_commits_data(getwd()),
@@ -21,7 +21,7 @@ targets::tar_test("tar_git_assert_commits_data()", {
 })
 
 targets::tar_test("tar_git_assert_repo_code()", {
-  skip_no_git()
+  skip_os_git()
   expect_error(
     tar_git_assert_repo_code(getwd()),
     class = "tar_condition_validate"
@@ -31,7 +31,7 @@ targets::tar_test("tar_git_assert_repo_code()", {
 })
 
 targets::tar_test("tar_git_assert_repo_data()", {
-  skip_no_git()
+  skip_os_git()
   expect_error(
     tar_git_assert_repo_data(getwd()),
     class = "tar_condition_validate"
@@ -41,7 +41,7 @@ targets::tar_test("tar_git_assert_repo_data()", {
 })
 
 targets::tar_test("tar_git_assert_repo_data() no branch", {
-  skip_no_git()
+  skip_os_git()
   utils::capture.output(git_setup_init())
   store <- targets::tar_config_get("store")
   expect_error(

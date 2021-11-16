@@ -1,5 +1,5 @@
 targets::tar_test("tar_git_init() without .gitignore", {
-  skip_no_git()
+  skip_os_git()
   store <- targets::tar_config_get("store")
   dir.create(store)
   expect_false(file.exists(file.path(store, ".git")))
@@ -12,7 +12,7 @@ targets::tar_test("tar_git_init() without .gitignore", {
 })
 
 targets::tar_test("tar_git_init() .gitattributes under vcs", {
-  skip_no_git()
+  skip_os_git()
   store <- targets::tar_config_get("store")
   dir.create(store)
   expect_false(file.exists(file.path(store, ".gitattributes")))
@@ -27,7 +27,7 @@ targets::tar_test("tar_git_init() .gitattributes under vcs", {
 })
 
 targets::tar_test("tar_git_init() with git_lfs = FALSE", {
-  skip_no_git()
+  skip_os_git()
   store <- targets::tar_config_get("store")
   dir.create(store)
   expect_false(file.exists(file.path(store, ".gitattributes")))
@@ -37,7 +37,7 @@ targets::tar_test("tar_git_init() with git_lfs = FALSE", {
 })
 
 targets::tar_test("tar_git_init() with .gitignore", {
-  skip_no_git()
+  skip_os_git()
   store <- targets::tar_config_get("store")
   targets::tar_script(targets::tar_target(x, 1))
   targets::tar_make(callr_function = NULL)
@@ -51,7 +51,7 @@ targets::tar_test("tar_git_init() with .gitignore", {
 })
 
 targets::tar_test("tar_git_init() is idempotent", {
-  skip_no_git()
+  skip_os_git()
   store <- targets::tar_config_get("store")
   dir.create(store)
   expect_false(file.exists(file.path(store, ".git")))

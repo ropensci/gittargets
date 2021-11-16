@@ -7,7 +7,7 @@
 #' @return A `tibble` with the names of outdated targets.
 #' @inheritParams targets::tar_outdated
 #' @examples
-#' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
+#' if (Sys.getenv("TAR_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's file space.
 #' targets::tar_script(tar_target(data, 1))
 #' targets::tar_make()

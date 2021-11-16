@@ -8,7 +8,7 @@
 #'   repository, then the return value is `NULL`.
 #' @inheritParams tar_git_init
 #' @examples
-#' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
+#' if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {
 #' targets::tar_dir({ # Containing code does not modify the user's file space.
 #' targets::tar_script(tar_target(data, 1))
 #' targets::tar_make()

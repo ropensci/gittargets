@@ -1,5 +1,5 @@
 targets::tar_test("tar_git_snapshot()", {
-  skip_no_git()
+  skip_os_git()
   git_setup_init()
   expect_gt(nrow(tar_git_status_data()), 0L)
   store <- targets::tar_config_get("store")

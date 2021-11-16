@@ -36,7 +36,7 @@ targets::tar_test("tar_git_gitignore_restore(), no .gitignore", {
 })
 
 targets::tar_test("tar_git_binary()", {
-  skip_no_git()
+  skip_os_git()
   old <- Sys.getenv("TAR_GIT")
   on.exit(Sys.setenv(TAR_GIT = old))
   Sys.setenv(TAR_GIT = "nope")

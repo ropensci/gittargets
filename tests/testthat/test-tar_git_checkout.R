@@ -1,5 +1,5 @@
 targets::tar_test("tar_git_checkout()", {
-  skip_no_git()
+  skip_os_git()
   # Work on an initial branch.
   targets::tar_script(tar_target(data, "old_data"))
   targets::tar_make(callr_function = NULL)

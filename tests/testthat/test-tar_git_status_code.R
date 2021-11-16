@@ -1,17 +1,17 @@
 targets::tar_test("tar_git_status_code() with no repo", {
-  skip_no_git()
+  skip_os_git()
   expect_null(tar_git_status_code())
 })
 
 targets::tar_test("tar_git_status_code() with clean worktree", {
-  skip_no_git()
+  skip_os_git()
   git_setup_init()
   out <- tar_git_status_code()
   expect_equal(nrow(out), 0L)
 })
 
 targets::tar_test("tar_git_status_code() with unclean worktree", {
-  skip_no_git()
+  skip_os_git()
   git_setup_init()
   unlink("_targets.R")
   out <- tar_git_status_code()

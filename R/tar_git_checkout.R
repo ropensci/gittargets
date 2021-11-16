@@ -16,7 +16,7 @@
 #' @inheritParams gert::git_branch_checkout
 #' @inheritParams tar_git_snapshot
 #' @examples
-#' if (Sys.getenv("GITTARGETS_EXAMPLES") == "true") {
+#' if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {
 #' targets::tar_dir({ # Containing code does not modify the user's filespace.
 #' # Work on an initial branch.
 #' targets::tar_script(tar_target(data, "old_data"))

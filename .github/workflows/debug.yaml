@@ -1,0 +1,20 @@
+on: [push, pull_request]
+
+name: lint
+
+jobs:
+  lint:
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      TORCH_INSTALL: 1
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: false
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@master
+
+      - name: Run
+        run: |
+          install.packages("processx")
+          processx::run(Sys.which("git"), "--version")

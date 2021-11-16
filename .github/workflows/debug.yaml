@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
-name: lint
+name: debug
 
 jobs:
-  lint:
+  debug:
     runs-on: windows-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

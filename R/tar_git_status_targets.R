@@ -7,16 +7,12 @@
 #' @return A `tibble` with the names of outdated targets.
 #' @inheritParams targets::tar_outdated
 #' @examples
-#' if (Sys.getenv("TAR_EXAMPLES") == "true") {
 #' targets::tar_dir({ # Containing code does not modify the user's file space.
 #' targets::tar_script(tar_target(data, 1))
 #' targets::tar_make()
 #' list.files("_targets", all.files = TRUE)
-#' gert::git_init()
-#' tar_git_init()
-#' tar_git_status_outdated()
+#' tar_git_status_targets()
 #' })
-#' }
 tar_git_status_targets <- function(
   script = targets::tar_config_get("script"),
   store = targets::tar_config_get("store"),

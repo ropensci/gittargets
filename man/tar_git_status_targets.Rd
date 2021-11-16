@@ -80,16 +80,12 @@ This function has prettier output than \code{targets::tar_outdated()},
 and it mainly serves \code{\link[=tar_git_status]{tar_git_status()}}.
 }
 \examples{
-if (Sys.getenv("TAR_EXAMPLES") == "true") {
 targets::tar_dir({ # Containing code does not modify the user's file space.
 targets::tar_script(tar_target(data, 1))
 targets::tar_make()
 list.files("_targets", all.files = TRUE)
-gert::git_init()
-tar_git_init()
-tar_git_status_outdated()
+tar_git_status_targets()
 })
-}
 }
 \seealso{
 Other git: 

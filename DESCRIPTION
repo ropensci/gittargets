@@ -1,5 +1,5 @@
 Package: gittargets
-Title: Version Control for the Targets Package
+Title: Data Version Control for the Targets Package
 Description: Version control systems such as Git help researchers
   track changes and history in data science projects,
   and the 'targets' package (2021, <doi:10.21105/joss.02959>)

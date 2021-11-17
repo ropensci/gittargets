@@ -1,3 +1,80 @@
+targets::tar_test("tar_git_add()", {
+  repo <- tempfile()
+  dir.create(repo)
+  gert::git_init(path = repo)
+  writeLines("contents", file.path(repo, "file"))
+  tar_git_add(files = "file", repo = repo)
+  status <- gert::git_status(repo = repo)
+  expect_equal(status$file, "file")
+  expect_equal(status$status, "new")
+  expect_true(status$staged)
+})
+
+targets::tar_test("tar_git_branch_checkout()", {
+  repo <- tempfile()
+  dir.create(repo)
+  gert::git_init(path = repo)
+  writeLines("contents", file.path(repo, "file"))
+  gert::git_add(files = "file", repo = repo)
+  gert::git_commit(message = "msg", repo = repo)
+  gert::git_branch_create(branch = "new_branch", repo = repo)
+  tar_git_branch_checkout(branch = "new_branch", repo = repo, force = FALSE)
+  expect_equal(gert::git_branch(repo = repo), "new_branch")
+})
+
+targets::tar_test("tar_git_branch_create()", {
+  repo <- tempfile()
+  dir.create(repo)
+  gert::git_init(path = repo)
+  writeLines("contents", file.path(repo, "file"))
+  gert::git_add(files = "file", repo = repo)
+  gert::git_commit(message = "msg", repo = repo)
+  branch <- gert::git_branch(repo = repo)
+  tar_git_branch_create(branch = "new_branch", repo = repo)
+  expect_equal(gert::git_branch(repo = repo), branch)
+  expect_true("new_branch" %in% gert::git_branch_list(repo = repo)$name)
+})
+
+targets::tar_test("tar_git_commit()", {
+  repo <- tempfile()
+  dir.create(repo)
+  gert::git_init(path = repo)
+  writeLines("contents", file.path(repo, "file"))
+  gert::git_add(files = "file", repo = repo)
+  tar_git_commit(message = "msg", repo = repo)
+  status <- gert::git_status(repo = repo)
+  expect_equal(nrow(status), 0L)
+  log <- gert::git_log(repo = repo)
+  expect_equal(trimws(log$message), "msg")
+})
+
+targets::tar_test("tar_git_commit_all()", {
+  repo <- tempfile()
+  dir.create(repo)
+  gert::git_init(path = repo)
+  writeLines("contents", file.path(repo, "file"))
+  gert::git_add(files = "file", repo = repo)
+  gert::git_commit(message = "First commit", repo = repo)
+  writeLines("new_contents", file.path(repo, "file"))
+  tar_git_commit_all(message = "msg2", repo = repo)
+  status <- gert::git_status(repo = repo)
+  expect_equal(nrow(status), 0L)
+  log <- gert::git_log(repo = repo)
+  expect_true("msg2" %in% trimws(log$message))
+})
+
+targets::tar_test("tar_git_init_repo()", {
+  repo <- tempfile()
+  dir.create(repo)
+  tar_git_init_repo(path = repo)
+  expect_true(file.exists(file.path(repo, ".git")))
+})
+
+targets::tar_test("data branch naming", {
+  expect_equal(tar_git_branch_snapshot("x"), "code=x")
+  expect_equal(tar_git_commit_code("code=x"), "x")
+})
+
 targets::tar_test("tar_git_gitignore_unstash()", {
   tmp <- tempfile()
   dir.create(tmp)

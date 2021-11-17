@@ -20,7 +20,7 @@ reference:
 - title: Help
   contents:
   - '`gittargets-package`'
-- title: Git
+- title: Git data backend
   contents:
   - '`tar_git_checkout`'
   - '`tar_git_init`'

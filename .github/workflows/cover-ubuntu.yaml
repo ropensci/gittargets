@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
-name: cover
+name: cover-ubuntu
 
 jobs:
-  cover:
+  cover-ubuntu:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

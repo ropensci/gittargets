@@ -40,7 +40,7 @@ tar_git_log <- function(
   log_code <- tibble::tibble(
     commit_code = raw_code$commit,
     time_code = raw_code$time,
-    message = trimws(raw_code$message)
+    message_code = trimws(raw_code$message)
   )
   log_data <- tibble::tibble(
     commit_code = tar_git_commit_code(raw_data$name),
@@ -49,5 +49,12 @@ tar_git_log <- function(
   )
   log <- left_merge(x = log_code, y = log_data, by = "commit_code")
   log <- log[complete.cases(log),, drop = FALSE] # nolint
-  log[, c("message", "time_code", "time_data", "commit_code", "commit_data")]
+  cols <- c(
+    "message_code",
+    "time_code",
+    "time_data",
+    "commit_code",
+    "commit_data"
+  )
+  log[, cols]
 }

@@ -76,10 +76,11 @@ When the code files are up to date in the Git repository and the targets
 are up to date in the pipeline, `gittargets` can snapshot the [`targets`
 data
 store](https://books.ropensci.org/targets/files.html#internal-data-files)
-to a local version control repository of its own. Each data snapshot is
-a Git commit and a one-time Git branch. The branch associates the data
-commit with the code commit that was checked out when the snapshot was
-created. This one-to-one code-data mapping facilitates transitions.
+to a local version control repository of its own. Data snapshots map to
+code commits in a way that facilitates data recovery. This mapping may
+differ from backend to backend, and the [package
+vignettes](https://wlandau.github.io/gittargets/articles/index.html)
+explain the details.
 
 ### Transitions
 

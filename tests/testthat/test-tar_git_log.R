@@ -5,7 +5,7 @@ targets::tar_test("tar_git_log()", {
   out <- tar_git_log()
   expect_equal(dim(out), c(1L, 5L))
   expect_false(any(is.na(out)))
-  expect_equal(out$message, "First commit")
+  expect_equal(out$message_code, "First commit")
   for (field in c("time_code", "time_data")) {
     expect_s3_class(out[[field]], "POSIXct")
   }

@@ -3,18 +3,18 @@
 #' @family git
 #' @description Snapshot the Git data repository of a `targets` project.
 #' @details A Git-backed `gittargets` data snapshot is a special kind of
-#'   Git commit. Every data commit gets its own branch,
-#'   and the branch name contains the Git SHA1 hash
-#'   of the current code commit.
-#'   In addition, a special `.gittargets` file gets written
-#'   to the data store so you can create a new snapshot even when the
-#'   data working tree is clean.
+#'   Git commit. Every data commit is part of a branch specific to
+#'   the current code commit.
 #'   That way, when you switch branches or commits in the code,
-#'   `tar_git_checkout()` can revert the data to match.
-#'   Ideally, your targets should stay up to date even as you
+#'   `tar_git_checkout()` checks out the latest data snapshot
+#'   that matches the code in your workspace.
+#'   That way, your targets can stay up to date even as you
 #'   transition among multiple branches.
 #' @inheritSection tar_git_init Stashing .gitignore
 #' @inheritParams tar_git_status
+#' @param message Optional Git commit message of the data snapshot.
+#'   If `NULL`, then the message is the Git commit message of the
+#'   matching code commit.
 #' @param ref Character of length 1, reference
 #'   (branch name, Git SHA1 hash, etc.) of the code commit
 #'   that will map to the new data snapshot. Defaults to the commit
@@ -23,6 +23,8 @@
 #'   with [tar_git_status()] and ask whether a snapshot should be created.
 #' @param verbose Logical of length 1, whether to print R console messages
 #'   confirming that a snapshot was created.
+#' @param force Logical of length 1. Force checkout the data branch
+#'   of an existing data snapshot of the current code commit?
 #' @examples
 #' if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {
 #' targets::tar_dir({ # Containing code does not modify the user's filespace.
@@ -36,6 +38,7 @@
 #' })
 #' }
 tar_git_snapshot <- function(
+  message = NULL,
   ref = "HEAD",
   code = getwd(),
   script = targets::tar_config_get("script"),
@@ -46,6 +49,7 @@ tar_git_snapshot <- function(
   callr_function = callr::r,
   callr_arguments = targets::callr_args_default(callr_function, reporter),
   status = interactive(),
+  force = FALSE,
   verbose = TRUE
 ) {
   targets::tar_assert_file(code)
@@ -58,13 +62,13 @@ tar_git_snapshot <- function(
   log <- gert::git_log(repo = code, max = 1L)
   commit <- gert::git_commit_info(repo = code, ref = ref)$id
   branch <- tar_git_branch_snapshot(commit)
-  message <- gert::git_commit_info(repo = code, ref = ref)$message
+  code_message <- gert::git_commit_info(repo = code, ref = ref)$message
   # Covered in tests/interactive/test-tar_git_snapshot.R
   # nocov start
   if (status) {
     choice <- tar_git_snapshot_menu(
       commit = commit,
-      message = message,
+      message = code_message,
       code = code,
       script = script,
       store = store,
@@ -80,22 +84,22 @@ tar_git_snapshot <- function(
     }
   }
   # nocov end
-  if (gert::git_branch_exists(branch = branch, repo = store)) {
-    targets::tar_throw_validate(
-      "Data snapshot already exists for code commit ",
-      commit,
-      ". To create a new data snapshot, please create a new code commit first."
-    )
-  }
   if (stash_gitignore) {
     tar_git_gitignore_restore(repo = store)
     tar_git_gitignore_stash(repo = store)
     on.exit(tar_git_gitignore_unstash(repo = store))
   }
   tar_git_stub_write(repo = store)
-  cli_info(sprintf("Creating data branch %s.", branch), verbose = verbose)
-  tar_git_branch_create(branch = branch, repo = store)
-  tar_git_branch_checkout(branch = branch, repo = store, force = FALSE)
+  if_any(
+    gert::git_branch_exists(branch = branch, repo = store),
+    tar_git_snapshot_branch_exists(branch = branch, verbose = verbose),
+    tar_git_snapshot_branch_create(
+      branch = branch,
+      repo = store,
+      verbose = verbose
+    )
+  )
+  tar_git_branch_checkout(branch = branch, repo = store, force = force)
   cli_info("Staging data files.", verbose = verbose)
   tar_git_add(files = "*", repo = store)
   staged <- gert::git_status(staged = TRUE, repo = store)
@@ -107,13 +111,30 @@ tar_git_snapshot <- function(
     message()
   }
   cli_info("Committing data changes.", verbose = verbose)
-  tar_git_commit_all(message = message, repo = store)
+  tar_git_commit_all(message = message %|||% code_message, repo = store)
   commit <- gert::git_commit_info(repo = store)$id
   cli_success(
     sprintf("Created new data snapshot %s.", commit),
     verbose = verbose
   )
   invisible()
+}
+
+tar_git_snapshot_branch_create <- function(branch, repo, verbose) {
+  cli_info(sprintf("Creating data branch %s.", branch), verbose = verbose)
+  tar_git_branch_create(branch = branch, repo = repo)
+}
+
+tar_git_snapshot_branch_exists <- function(branch, verbose) {
+  cli_info(
+    "Data snapshot already exists for the current code commit.",
+    verbose = verbose
+  )
+  cli_info(
+    "The new data snapshot will supersede the old one in data branch:",
+    verbose = verbose
+  )
+  cli_indent("{.field ", branch, "}", verbose = verbose)
 }
 
 # Covered in tests/interactive/test-tar_git_snapshot.R

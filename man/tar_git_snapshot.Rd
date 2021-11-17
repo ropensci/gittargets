@@ -5,6 +5,7 @@
 \title{Snapshot the data repository (Git).}
 \usage{
 tar_git_snapshot(
+  message = NULL,
   ref = "HEAD",
   code = getwd(),
   script = targets::tar_config_get("script"),
@@ -15,10 +16,15 @@ tar_git_snapshot(
   callr_function = callr::r,
   callr_arguments = targets::callr_args_default(callr_function, reporter),
   status = interactive(),
+  force = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
+\item{message}{Optional Git commit message of the data snapshot.
+If \code{NULL}, then the message is the Git commit message of the
+matching code commit.}
+
 \item{ref}{Character of length 1, reference
 (branch name, Git SHA1 hash, etc.) of the code commit
 that will map to the new data snapshot. Defaults to the commit
@@ -93,6 +99,9 @@ reproducible work.}
 \item{status}{Logical of length 1, whether to print the project status
 with \code{\link[=tar_git_status]{tar_git_status()}} and ask whether a snapshot should be created.}
 
+\item{force}{Logical of length 1. Force checkout the data branch
+of an existing data snapshot of the current code commit?}
+
 \item{verbose}{Logical of length 1, whether to print R console messages
 confirming that a snapshot was created.}
 }
@@ -101,15 +110,12 @@ Snapshot the Git data repository of a \code{targets} project.
 }
 \details{
 A Git-backed \code{gittargets} data snapshot is a special kind of
-Git commit. Every data commit gets its own branch,
-and the branch name contains the Git SHA1 hash
-of the current code commit.
-In addition, a special \code{.gittargets} file gets written
-to the data store so you can create a new snapshot even when the
-data working tree is clean.
+Git commit. Every data commit is part of a branch specific to
+the current code commit.
 That way, when you switch branches or commits in the code,
-\code{tar_git_checkout()} can revert the data to match.
-Ideally, your targets should stay up to date even as you
+\code{tar_git_checkout()} checks out the latest data snapshot
+that matches the code in your workspace.
+That way, your targets can stay up to date even as you
 transition among multiple branches.
 }
 \section{Stashing .gitignore}{

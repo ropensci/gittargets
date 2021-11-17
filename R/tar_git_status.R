@@ -61,7 +61,7 @@ tar_git_status <- function(
   invisible()
 }
 
-tar_git_status_code_print <- function(status) {
+tar_git_status_code_message <- function(status) {
   if_any(
     nrow(status),
     cli_df(status),
@@ -74,7 +74,7 @@ tar_git_status_code_none <- function() {
   tar_git_status_tip()
 }
 
-tar_git_status_data_print <- function(status) {
+tar_git_status_data_message <- function(status) {
   if_any(
     nrow(status),
     cli_df(status),

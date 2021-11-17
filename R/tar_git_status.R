@@ -35,7 +35,7 @@ tar_git_status <- function(
   if_any(
     is.null(status),
     tar_git_status_code_none(),
-    tar_git_status_code_print(status)
+    tar_git_status_code_message(status)
   )
   cli::cli_h1("Outdated targets")
   status <- tar_git_status_targets(
@@ -56,7 +56,7 @@ tar_git_status <- function(
   if_any(
     is.null(status),
     tar_git_status_data_none(),
-    tar_git_status_data_print(status)
+    tar_git_status_data_message(status)
   )
   invisible()
 }

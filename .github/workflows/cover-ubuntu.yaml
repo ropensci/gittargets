@@ -28,6 +28,15 @@ jobs:
           key: ubuntu-latest-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ubuntu-latest-1-
 
+      - name: Install Linux system dependencies
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          sudo apt-get install -y libgit2-dev libcurl4-openssl-dev
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
+
       - name: Install packages
         run: |
           install.packages(c("remotes"))

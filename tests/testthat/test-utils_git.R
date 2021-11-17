@@ -1,4 +1,5 @@
 targets::tar_test("tar_git_add()", {
+  skip_os_git()
   repo <- tempfile()
   dir.create(repo)
   gert::git_init(path = repo)
@@ -11,6 +12,7 @@ targets::tar_test("tar_git_add()", {
 })
 
 targets::tar_test("tar_git_branch_checkout()", {
+  skip_os_git()
   repo <- tempfile()
   dir.create(repo)
   gert::git_init(path = repo)
@@ -23,6 +25,7 @@ targets::tar_test("tar_git_branch_checkout()", {
 })
 
 targets::tar_test("tar_git_branch_create()", {
+  skip_os_git()
   repo <- tempfile()
   dir.create(repo)
   gert::git_init(path = repo)
@@ -36,6 +39,7 @@ targets::tar_test("tar_git_branch_create()", {
 })
 
 targets::tar_test("tar_git_commit()", {
+  skip_os_git()
   repo <- tempfile()
   dir.create(repo)
   gert::git_init(path = repo)
@@ -49,6 +53,7 @@ targets::tar_test("tar_git_commit()", {
 })
 
 targets::tar_test("tar_git_commit_all()", {
+  skip_os_git()
   repo <- tempfile()
   dir.create(repo)
   gert::git_init(path = repo)
@@ -64,6 +69,7 @@ targets::tar_test("tar_git_commit_all()", {
 })
 
 targets::tar_test("tar_git_init_repo()", {
+  skip_os_git()
   repo <- tempfile()
   dir.create(repo)
   tar_git_init_repo(path = repo)

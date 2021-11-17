@@ -48,7 +48,7 @@ tar_git_status <- function(
   )
   if_any(
     nrow(status),
-    print(status),
+    cli_df(status),
     cli_success("All targets are up to date.")
   )
   cli::cli_h1("Data Git status")
@@ -64,7 +64,7 @@ tar_git_status <- function(
 tar_git_status_code_print <- function(status) {
   if_any(
     nrow(status),
-    print(status),
+    cli_df(status),
     cli_success("Code repository is clean.")
   )
 }
@@ -77,7 +77,7 @@ tar_git_status_code_none <- function() {
 tar_git_status_data_print <- function(status) {
   if_any(
     nrow(status),
-    print(status),
+    cli_df(status),
     cli_success("Data repository is clean.")
   )
 }

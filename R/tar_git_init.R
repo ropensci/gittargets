@@ -60,12 +60,7 @@ tar_git_init <- function(
     tar_git_init_lfs(repo = store, verbose = verbose)
   }
   tar_git_init_stub(repo = store, verbose = verbose)
-  tar_git_commit(
-    message = "Stub commit",
-    repo = store,
-    echo = verbose,
-    spinner = FALSE
-  )
+  tar_git_commit(message = "Stub commit", repo = store, spinner = FALSE)
   cli_success("Created stub commit without data.", verbose = verbose)
   cli_info(
     "Run tar_git_snapshot() to put the data files under version control.",
@@ -89,12 +84,7 @@ tar_git_init_lfs <- function(repo, verbose) {
     " for git-lfs: {.url https://git-lfs.github.com}.",
     verbose = verbose
   )
-  tar_git_add(
-    files = basename(gitattributes),
-    repo = repo,
-    echo = verbose,
-    spinner = FALSE
-  )
+  tar_git_add(files = basename(gitattributes), repo = repo, spinner = FALSE)
 }
 
 tar_git_init_stub <- function(repo, verbose) {
@@ -102,7 +92,6 @@ tar_git_init_stub <- function(repo, verbose) {
   tar_git_add(
     files = basename(tar_git_stub_path(repo)),
     repo = repo,
-    echo = verbose,
     spinner = FALSE
   )
 }

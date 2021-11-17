@@ -104,12 +104,10 @@ tar_git_snapshot <- function(
   tar_git_add(files = "*", repo = store)
   staged <- gert::git_status(staged = TRUE, repo = store)
   staged$staged <- NULL
-  cli_info("Staged files in the data store:", verbose = verbose)
-  if (verbose) {
-    message()
-    print(staged)
-    message()
-  }
+  cli_success(
+    sprintf("Staged %s files in the data store.", nrow(staged)),
+    verbose = verbose
+  )
   cli_info("Committing data changes.", verbose = verbose)
   tar_git_commit_all(message = message %|||% code_message, repo = store)
   commit <- gert::git_commit_info(repo = store)$id

@@ -1,7 +1,7 @@
 targets::tar_test("tar_git_log()", {
   skip_os_git()
   git_setup_init()
-  utils::capture.output(tar_git_snapshot(status = FALSE, verbose = FALSE))
+  tar_git_snapshot(status = FALSE, verbose = FALSE)
   out <- tar_git_log()
   expect_equal(dim(out), c(1L, 5L))
   expect_false(any(is.na(out)))

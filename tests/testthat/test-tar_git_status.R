@@ -1,7 +1,7 @@
 targets::tar_test("tar_git_status() git set up and targets up to date", {
   skip_os_git()
-  utils::capture.output(git_setup_init())
-  capture.output(expect_message(tar_git_status(callr_function = NULL)))
+  git_setup_init()
+  expect_message(tar_git_status(callr_function = NULL))
 })
 
 targets::tar_test("tar_git_status() git not set up and targets outdated", {
@@ -9,5 +9,5 @@ targets::tar_test("tar_git_status() git not set up and targets outdated", {
   targets::tar_script(targets::tar_target(x, 1))
   targets::tar_make(callr_function = NULL)
   targets::tar_invalidate(everything())
-  capture.output(expect_message(tar_git_status(callr_function = NULL)))
+  expect_message(tar_git_status(callr_function = NULL))
 })

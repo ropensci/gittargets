@@ -5,7 +5,7 @@ targets::tar_test("tar_git_snapshot()", {
   store <- targets::tar_config_get("store")
   gitignore <- file.path(store, ".gitignore")
   writeLines("*", gitignore)
-  capture.output(tar_git_snapshot(status = FALSE))
+  tar_git_snapshot(status = FALSE)
   expect_equal(readLines(gitignore), "*")
   expect_equal(nrow(tar_git_status_data()), 0L)
   commit_code <- gert::git_commit_info(repo = getwd())$id
@@ -20,7 +20,7 @@ targets::tar_test("tar_git_snapshot()", {
   expect_true(commit_store %in% log$commit)
   # second data snapshot for the same code commit
   commit_store_old <- commit_store
-  capture.output(tar_git_snapshot(status = FALSE))
+  tar_git_snapshot(status = FALSE)
   commit_store <- gert::git_commit_info(repo = store)$id
   commit_code <- gert::git_commit_info(repo = getwd())$id
   expect_false(identical(commit_store, commit_store_old))
@@ -44,7 +44,7 @@ targets::tar_test("tar_git_snapshot() custom message", {
   store <- targets::tar_config_get("store")
   gitignore <- file.path(store, ".gitignore")
   writeLines("*", gitignore)
-  capture.output(tar_git_snapshot(message = "custom message", status = FALSE))
+  tar_git_snapshot(message = "custom message", status = FALSE)
   message_code <- gert::git_commit_info(repo = getwd())$message
   message_data <- gert::git_commit_info(repo = store)$message
   expect_false(identical(message_code, message_data))

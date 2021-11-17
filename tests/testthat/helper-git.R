@@ -5,7 +5,7 @@ git_setup_init <- function() {
   gert::git_init()
   gert::git_add("_targets.R")
   gert::git_commit("First commit")
-  utils::capture.output(tar_git_init())
+  tar_git_init()
   invisible()
 }
 

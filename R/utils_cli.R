@@ -4,6 +4,13 @@ cli_danger <- function(..., verbose = TRUE) {
   }
 }
 
+cli_df <- function(x, verbose = TRUE) {
+  if (verbose) {
+    lines <- utils::capture.output(x, type = "output")
+    message(cli::col_br_white(paste0(lines, "\n")))
+  }
+}
+
 cli_info <- function(..., verbose = TRUE) {
   if (verbose) {
     cli_blue_bullet(paste0(...), verbose = verbose)

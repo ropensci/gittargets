@@ -13,7 +13,7 @@ library(gittargets)
 library(targets)
 tmp <- tempfile()
 dir.create(tmp)
-knitr::opts_knit$set(root.dir = tmp)
+knitr::opts_knit$set(root.dir = tmp)t
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -32,7 +32,7 @@ Please begin with the installation instructions on the [documentation website](h
 
 ## Write code
 
-To begin development, we write `_targets.R` file for a [`targets`](https://docs.ropensci.org/targets/) pipeline. [`targets`](https://docs.ropensci.org/targets/) can handle large complex pipelines for [machine learning](https://github.com/wlandau/targets-keras), [Bayesian data analysis](http://github.com/wlandau/rmedicine2021-pipeline), and much more. However, this tutorial focuses on a much simpler pipeline for the sake of pedagogical simplicity.
+To begin development, we write `_targets.R` file for a [`targets`](https://docs.ropensci.org/targets/) pipeline. [`targets`](https://docs.ropensci.org/targets/) can handle large complex pipelines for [machine learning](https://github.com/wlandau/targets-keras), [Bayesian data analysis](https://github.com/wlandau/rmedicine2021-pipeline), and much more. However, this tutorial focuses on a much simpler pipeline for the sake of pedagogical simplicity.
 
 ```{r, eval = FALSE}
 # _targets.R
@@ -54,7 +54,7 @@ tar_script(
 
 ## Run pipeline
 
-With our target script in hand, we run the pipeline.^[<http://books.ropensci.org/targets/hpc.html> describes heavy-duty alternatives to `tar_make()`.]
+With our target script in hand, we run the pipeline.^[<https://books.ropensci.org/targets/hpc.html> describes heavy-duty alternatives to `tar_make()`.]
 
 ```{r}
 tar_make()

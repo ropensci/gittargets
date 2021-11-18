@@ -1,3 +1,12 @@
+# TODO: import this function from `targets`
+# when the version supporting it is on CRAN.
+tar_assert_file <- function(x) {
+  name <- deparse(substitute(x))
+  targets::tar_assert_chr(x, paste(name, "must be a character string."))
+  targets::tar_assert_scalar(x, paste(name, "must have length 1."))
+  targets::tar_assert_path(x)
+}
+
 tar_git_assert_commits_code <- function(code) {
   no_commits <- is.null(gert::git_branch(repo = code)) ||
     !nrow(gert::git_log(max = 1, repo = code))

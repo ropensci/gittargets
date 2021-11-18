@@ -22,7 +22,7 @@ tar_git_status_data <- function(
   store = targets::tar_config_get("store"),
   stash_gitignore = TRUE
 ) {
-  targets::tar_assert_file(store)
+  tar_assert_file(store)
   if (stash_gitignore) {
     tar_git_gitignore_restore(repo = store)
     tar_git_gitignore_stash(repo = store)

@@ -52,8 +52,8 @@ tar_git_snapshot <- function(
   force = FALSE,
   verbose = TRUE
 ) {
-  targets::tar_assert_file(code)
-  targets::tar_assert_file(store)
+  tar_assert_file(code)
+  tar_assert_file(store)
   targets::tar_assert_lgl(status)
   targets::tar_assert_scalar(status)
   tar_git_assert_repo_code(code)

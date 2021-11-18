@@ -54,8 +54,8 @@ tar_git_checkout <- function(
   force = FALSE,
   verbose = TRUE
 ) {
-  targets::tar_assert_file(code)
-  targets::tar_assert_file(store)
+  tar_assert_file(code)
+  tar_assert_file(store)
   targets::tar_assert_chr(ref)
   targets::tar_assert_scalar(ref)
   tar_git_assert_repo_code(code)

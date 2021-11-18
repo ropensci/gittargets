@@ -6,6 +6,8 @@ targets::tar_test("tar_git_status_code() with no repo", {
 targets::tar_test("tar_git_status_code() with clean worktree", {
   skip_os_git()
   git_setup_init()
+  store <- targets::tar_config_get("store")
+  writeLines("*", file.path(store, ".gitignore"))
   out <- tar_git_status_code()
   expect_equal(nrow(out), 0L)
 })

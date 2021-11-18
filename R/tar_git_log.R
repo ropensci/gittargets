@@ -24,8 +24,8 @@ tar_git_log <- function(
   ref = "HEAD",
   max = 100
 ) {
-  targets::tar_assert_file(code)
-  targets::tar_assert_file(store)
+  tar_assert_file(code)
+  tar_assert_file(store)
   targets::tar_assert_chr(ref)
   targets::tar_assert_scalar(ref)
   targets::tar_assert_dbl(max)

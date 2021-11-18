@@ -104,6 +104,8 @@ tar_git_snapshot(status = FALSE)
 
 ### Snapshot model
 
+![](./snapshot-model-git.png)
+
 In the Git data backend, a data snapshot is a special kind of Git commit. Each data commit is part of a data branch, and each data branch is specific to the current code commit. In fact, each data branch name is of the form `"code=<SHA1>"`, where `<SHA1>` is the Git SHA1 hash of the corresponding code commit. You can always create a data snapshot, but it will supersede any prior data snapshot you already have for the current code commit. To revert to a previous data snapshots for a given code snapshot, you will need to manually enter the repository and check out the relevant data commit.
 
 ## Repeat

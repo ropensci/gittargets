@@ -13,7 +13,7 @@ library(gittargets)
 library(targets)
 tmp <- tempfile()
 dir.create(tmp)
-knitr::opts_knit$set(root.dir = tmp)t
+knitr::opts_knit$set(root.dir = tmp)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",

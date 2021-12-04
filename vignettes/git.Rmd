@@ -206,6 +206,10 @@ And all our targets are up to date.
 tar_outdated()
 ```
 
+## Custom data files
+
+Only files inside the `targets` data store are tracked in a `gittargets` data snapshot. If your pipeline requires custom external files, you may put them in a folder called `_targets/user/`. That way, `gittargets` will automatically put them under data version control in the next snapshot.
+
 ## Performance
 
 If your `targets` pipeline generates large data files, consider installing [`git-lfs`](https://git-lfs.github.com). Once you install [`git-lfs`](https://git-lfs.github.com), it should just work on your project right out of the box because `tar_git_init()` writes the following to `_targets/.gitattributes`:

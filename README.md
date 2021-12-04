@@ -124,7 +124,7 @@ not scale to enormous amounts of compressed data. Future releases of
 ## Alternatives
 
 Newer versions of the `targets` package (&gt; 0.8.1) support continuous
-data versioning through [Amazon Web Services](http://aws.amazon.com) for
+data versioning through [Amazon Web Services](https://aws.amazon.com) for
 [S3 buckets](https://aws.amazon.com/s3/) with [versioning
 enabled](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html).
 In this approach, `targets` tracks the version ID of each cloud-enabled
@@ -138,7 +138,7 @@ distinct advantages over `gittargets`:
 2.  Target data is uploaded and tracked continuously, which means the
     user does not need to proactively take data snapshots.
 
-However, not all users have access to [AWS](http://aws.amazon.com), not
+However, not all users have access to [AWS](https://aws.amazon.com), not
 everyone is able or willing to pay the monetary costs of cloud storage
 for every single version of every single target, and uploads and
 downloads to and from the cloud may bottleneck some pipelines.

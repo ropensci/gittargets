@@ -121,6 +121,34 @@ not scale to enormous amounts of compressed data. Future releases of
 [`git-annex`](https://git-annex.branchable.com) and
 [DVC](https://dvc.org).
 
+## Alternatives
+
+Newer versions of the `targets` package (&gt; 0.8.1) support continuous
+data versioning through [Amazon Web Services](http://aws.amazon.com) for
+[S3 buckets](https://aws.amazon.com/s3/) with [versioning
+enabled](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html).
+In this approach, `targets` tracks the version ID of each cloud-enabled
+target. That way, when the metadata file reverts to a prior version, the
+pipeline automatically uses prior versions of targets that were up to
+date at the time the metadata was written. This approach has two
+distinct advantages over `gittargets`:
+
+1.  Cloud storage reduces the burden of local storage for large data
+    pipelines.
+2.  Target data is uploaded and tracked continuously, which means the
+    user does not need to proactively take data snapshots.
+
+However, not all users have access to [AWS](http://aws.amazon.com), not
+everyone is able or willing to pay the monetary costs of cloud storage
+for every single version of every single target, and uploads and
+downloads to and from the cloud may bottleneck some pipelines.
+`gittargets` fills this niche with a data versioning system that is
+
+1.  Entirely local, and
+2.  Entirely opt-in: users pick and choose when to register data
+    snapshots, which consumes less storage than continuous snapshots or
+    continuous cloud uploads to a versioned S3 bucket.
+
 ## Code of Conduct
 
 Please note that the `gittargets` project is released with a

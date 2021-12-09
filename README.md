@@ -123,15 +123,16 @@ not scale to enormous amounts of compressed data. Future releases of
 
 ## Alternatives
 
-Newer versions of the `targets` package (&gt; 0.8.1) support continuous
-data versioning through [Amazon Web Services](https://aws.amazon.com) for
-[S3 buckets](https://aws.amazon.com/s3/) with [versioning
+Newer versions of the `targets` package (&gt;= 0.9.0) support continuous
+data versioning through [Amazon Web Services](https://aws.amazon.com)
+for [S3 buckets](https://aws.amazon.com/s3/) with [versioning
 enabled](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html).
-In this approach, `targets` tracks the version ID of each cloud-enabled
-target. That way, when the metadata file reverts to a prior version, the
-pipeline automatically uses prior versions of targets that were up to
-date at the time the metadata was written. This approach has two
-distinct advantages over `gittargets`:
+In this approach, `targets` tracks the version ID of each [AWS-backed
+target](https://books.ropensci.org/targets/storage_amazon.html). That
+way, when the metadata file reverts to a prior version, the pipeline
+automatically uses prior versions of targets that were up to date at the
+time the metadata was written. This approach has two distinct advantages
+over `gittargets`:
 
 1.  Cloud storage reduces the burden of local storage for large data
     pipelines.

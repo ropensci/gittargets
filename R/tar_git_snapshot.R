@@ -79,7 +79,7 @@ tar_git_snapshot <- function(
       callr_arguments = callr_arguments
     )
     if (!identical(as.integer(choice), 1L)) {
-      cli_info("Snapshot skipped", verbose = verbose)
+      cli_info("Snapshot skipped.", verbose = verbose)
       return(invisible())
     }
   }

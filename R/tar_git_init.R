@@ -46,7 +46,7 @@ tar_git_init <- function(
   targets::tar_assert_scalar(verbose)
   if (tar_git_repo_exists(store)) {
     cli_info("Data store Git repository already exists.")
-    cli_info("Remove ", store, " to start over.")
+    cli_info("Remove ", file.path(store, ".git"), " to start over.")
     return(invisible())
   }
   if (stash_gitignore) {

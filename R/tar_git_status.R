@@ -30,6 +30,13 @@ tar_git_status <- function(
   callr_function = callr::r,
   callr_arguments = targets::callr_args_default(callr_function, reporter)
 ) {
+  cli::cli_h1("Data Git status")
+  status <- tar_git_status_data(store, stash_gitignore)
+  if_any(
+    is.null(status),
+    tar_git_status_data_none(),
+    tar_git_status_data_message(status)
+  )
   cli::cli_h1("Code Git status")
   status <- tar_git_status_code(code)
   if_any(
@@ -50,13 +57,6 @@ tar_git_status <- function(
     nrow(status),
     cli_df(status),
     cli_success("All targets are up to date.")
-  )
-  cli::cli_h1("Data Git status")
-  status <- tar_git_status_data(store, stash_gitignore)
-  if_any(
-    is.null(status),
-    tar_git_status_data_none(),
-    tar_git_status_data_message(status)
   )
   invisible()
 }

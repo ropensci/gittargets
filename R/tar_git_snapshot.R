@@ -25,6 +25,10 @@
 #'   confirming that a snapshot was created.
 #' @param force Logical of length 1. Force checkout the data branch
 #'   of an existing data snapshot of the current code commit?
+#' @param pack_refs Logical of length 1, whether to run `git pack-refs --all`
+#'   in the data store after taking the snapshot. Packing references
+#'   improves efficiency when the number of snapshots is large.
+#'   Learn more at <https://git-scm.com/docs/git-pack-refs>.
 #' @examples
 #' if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {
 #' targets::tar_dir({ # Containing code does not modify the user's filespace.
@@ -50,12 +54,19 @@ tar_git_snapshot <- function(
   callr_arguments = targets::callr_args_default(callr_function, reporter),
   status = interactive(),
   force = FALSE,
+  pack_refs = TRUE,
   verbose = TRUE
 ) {
   tar_assert_file(code)
   tar_assert_file(store)
   targets::tar_assert_lgl(status)
   targets::tar_assert_scalar(status)
+  targets::tar_assert_lgl(force)
+  targets::tar_assert_scalar(force)
+  targets::tar_assert_lgl(pack_refs)
+  targets::tar_assert_scalar(pack_refs)
+  targets::tar_assert_lgl(verbose)
+  targets::tar_assert_scalar(verbose)
   tar_git_assert_repo_code(code)
   tar_git_assert_commits_code(code)
   tar_git_assert_repo_data(store)
@@ -115,6 +126,10 @@ tar_git_snapshot <- function(
     sprintf("Created new data snapshot %s.", commit),
     verbose = verbose
   )
+  if (pack_refs) {
+    cli_info("Packing references.", verbose = verbose)
+    tar_git_pack_refs(repo = store, spinner = verbose)
+  }
   invisible()
 }
 

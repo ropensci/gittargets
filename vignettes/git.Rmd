@@ -218,4 +218,4 @@ If your `targets` pipeline generates large data files, consider installing [`git
 objects filter=lfs diff=lfs merge=lfs -text
 ```
 
-In addition, every data snapshot with `tar_git_snapshot()` creates a new Git branch. With thousands of commits and thus thousands of branches, performance may suffer. If you notice slowness, run [`git pack-refs --all`](https://git-scm.com/docs/git-pack-refs) on the [`targets` data store](https://books.ropensci.org/targets/files.html#internal-data-files) repository.
+In addition, every data snapshot with `tar_git_snapshot()` creates a new Git branch. With thousands of commits and thus thousands of branches, performance may suffer unless you ensure `pack_refs` is `TRUE` in the function call (default).^[Alternatively, you can call `tar_git_snapshot(pack_refs = FALSE)` and then afterwards run `git pack-refs --all`](https://git-scm.com/docs/git-pack-refs) in the command line with your working directory inside `_targets/`.]

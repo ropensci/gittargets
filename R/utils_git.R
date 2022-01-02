@@ -51,6 +51,16 @@ tar_git_init_repo <- function(path) {
   processx::run(command = tar_git_binary(), args = "init", wd = path)
 }
 
+tar_git_pack_refs <- function(repo, spinner = TRUE) {
+  processx::run(
+    command = tar_git_binary(),
+    args = c("pack-refs", "--all"),
+    wd = repo,
+    echo = FALSE,
+    spinner = spinner
+  )
+}
+
 tar_git_branch_snapshot <- function(commit) {
   sprintf("code=%s", commit)
 }

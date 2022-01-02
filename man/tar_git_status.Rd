@@ -38,7 +38,9 @@ to specify a path other than \verb{_targets/}. The path need not exist
 before the pipeline begins, and it need not end with "_targets",
 but it must be writeable.
 For optimal performance, choose a storage location
-with fast read/write access.}
+with fast read/write access.
+If the argument \code{NULL}, the setting is not modified.
+Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
 
 \item{stash_gitignore}{Logical of length 1, whether to temporarily
 stash the \code{.gitignore} file of the data store. See the

@@ -66,7 +66,8 @@ tar_git_log <- function(
     X = log$commit_data,
     FUN = tar_git_log_data_message,
     store = store,
-    FUN.VALUE = character(1)
+    FUN.VALUE = character(1),
+    USE.NAMES = FALSE
   )
   cols <- c(
     "message_code",

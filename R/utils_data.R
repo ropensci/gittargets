@@ -2,12 +2,13 @@ first_line <- function(x) {
   trimws(utils::head(unlist(strsplit(x, split = "\n")), n = 1L))
 }
 
-left_merge <- function(x, y, by) {
+inner_merge <- function(x, y, by) {
   out <- merge(
     x = data.table::as.data.table(x),
     y = data.table::as.data.table(y),
     by = by,
-    all.x = TRUE
+    all.x = FALSE,
+    all.y = FALSE
   )
   out <- as.list(out)
   names <- names(out)

@@ -2,12 +2,12 @@
 % Please edit documentation in R/tar_git_log.R
 \name{tar_git_log}
 \alias{tar_git_log}
-\title{Joint log of the code and data (Git)}
+\title{Data snapshots of a code branch (Git)}
 \usage{
 tar_git_log(
   code = getwd(),
   store = targets::tar_config_get("store"),
-  ref = "HEAD",
+  branch = gert::git_branch(repo = code),
   max = 100
 )
 }
@@ -28,15 +28,29 @@ with fast read/write access.
 If the argument \code{NULL}, the setting is not modified.
 Use \code{\link[targets:tar_config_unset]{tar_config_unset()}} to delete a setting.}
 
-\item{ref}{revision string with a branch/tag/commit value}
+\item{branch}{Character of length 1, name of the code repository branch
+to query. Defaults to the currently checked-out code branch.}
 
-\item{max}{lookup at most latest n parent commits}
+\item{max}{Positive numeric of length 1, maximum number of code commits
+to inspect for the given branch.}
 }
 \value{
-A data frame of data snapshots and code commits.
+A data frame of information about
+data snapshots and code commits.
 }
 \description{
-Show data snapshots together with their code commits.
+Show all the data snapshots of a code branch.
+}
+\details{
+By design, \code{tar_git_log()} only queries a single
+code branch at a time. This allows \code{tar_git_log()}
+to report more detailed information about the snapshots
+of the given code branch.
+To query all data snapshots over all branches, simply run
+\code{gert::git_branch_list(local = TRUE, repo = "_targets")}.
+The valid snapshots show \code{"code=<SHA1>"} in the \code{name} column,
+where \verb{<SHA1>} is the Git commit hash of the code commit
+corresponding to the data snapshot.
 }
 \examples{
 if (Sys.getenv("TAR_EXAMPLES") == "true" && tar_git_ok(verbose = FALSE)) {

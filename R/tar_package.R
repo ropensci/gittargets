@@ -1,5 +1,6 @@
 #' targets: Dynamic Function-Oriented Make-Like Declarative Pipelines for R
 #' @docType package
+#' @name gittargets-package
 #' @description Pipelines with the `targets` R package skip  steps that
 #'   are up to already date. Although this behavior reduces the runtime
 #'   of subsequent runs, it comes at the cost of overwriting previous

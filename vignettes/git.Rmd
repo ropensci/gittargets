@@ -22,15 +22,26 @@ knitr::opts_chunk$set(
 )
 ```
 
-This tutorial shows how to use `gittargets` with the Git-based data versioning backend. Before proceeding, please read the [README](https://github.com/wlandau/gittargets/blob/main/README.md) file or [documentation website front page](https://wlandau.github.io/gittargets/) for an overview of the package and the workflow diagram for data analysis projects.
-
-![](./workflow.png)
+This tutorial shows how to use `gittargets` with the Git-based data versioning backend. Before proceeding, please read the [README](https://github.com/wlandau/gittargets/blob/main/README.md) file or [documentation website front page](https://wlandau.github.io/gittargets/) for an overview of the package.
 
 ## Installation
 
 Please begin with the installation instructions on the [documentation website](https://wlandau.github.io/gittargets/). In addition, if your `targets` pipeline generates large data files, consider installing [`git-lfs`](https://git-lfs.github.com). The Git data backend in `gittargets` automatically opts into [`git-lfs`](https://git-lfs.github.com), so you should not need to do any manual configuration to reap the performance benefits.
 
-## Write code
+## Overall workflow
+
+The most important steps of the Git data backend are as follows.
+
+1. Create the source code and run the pipeline at least once so the [data store](https://books.ropensci.org/targets/files.html#internal-data-files) exists.
+1. `tar_git_init()`: initialize a [Git](https://git-scm.com)/[Git-LFS](https://git-lfs.github.com) repository for the [data store](https://books.ropensci.org/targets/files.html#internal-data-files).
+1. Bring the pipeline up to date (e.g. with [`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html)) and commit any changes to the source code.
+1. `tar_git_snapshot()`: create a data snapshot for the current code commit.
+1. Develop the pipeline. Creating new code commits and code branches early and often, and create data snapshots at key strategic milestones.
+1. `tar_git_checkout()`: revert the data to the appropriate prior snapshot.
+
+The rest of this vignette walks through these steps in greater depth.
+
+## Create code
 
 To begin development, we write `_targets.R` file for a [`targets`](https://docs.ropensci.org/targets/) pipeline. [`targets`](https://docs.ropensci.org/targets/) can handle large complex pipelines for [machine learning](https://github.com/wlandau/targets-keras), [Bayesian data analysis](https://github.com/wlandau/rmedicine2021-pipeline), and much more. However, this tutorial focuses on a much simpler pipeline for the sake of pedagogical simplicity.
 

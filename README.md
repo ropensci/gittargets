@@ -35,7 +35,7 @@ them from scratch.
 4.  [`targets`](https://docs.ropensci.org/targets/), which has resources
     on the [documentation
     website](https://docs.ropensci.org/targets/#how-to-get-started).
-5.  Familiarity with the [`_targets/` data
+5.  Familiarity with the [`targets` data
     store](https://books.ropensci.org/targets/files.html#internal-data-files).
 
 ## Installation
@@ -73,7 +73,7 @@ vignettes](https://wlandau.github.io/gittargets/articles/index.html).
 ## Motivation
 
 Consider an example pipeline with source code in `_targets.R` and output
-in the [`_targets/` data
+in the [data
 store](https://books.ropensci.org/targets/files.html#internal-data-files).
 
 ``` r
@@ -104,7 +104,7 @@ tar_outdated()
 
 It is good practice to track the source code in a [version control
 repository](https://git-scm.com) so you can revert to previous commits
-or branches. However, the [`_targets/` data
+or branches. However, the [data
 store](https://books.ropensci.org/targets/files.html#internal-data-files)
 is usually too large to keep in the same repository as the code, which
 typically lives in a cloud platform like [GitHub](http://github.com)
@@ -133,16 +133,36 @@ tar_outdated()
 ## Usage
 
 With `gittargets`, you can keep your targets up to date even as you
-check out code from different commits or branches. For specific steps,
-please refer to the [package
-vignette](https://wlandau.github.io/gittargets/articles/index.html) of
-the `gittargets` backend you prefer. Currently, the only backend is
-[Git](https://git-scm.com)/[Git-LFS](https://git-lfs.github.com), but
-`gittargets` may support more backends in the future.
+check out code from different commits or branches. The specific steps
+depend on the data backend you choose, and each supported backend has a
+[package
+vignette](https://wlandau.github.io/gittargets/articles/index.html) with
+a walkthrough. For example, the most important steps of the [Git data
+backend](https://wlandau.github.io/gittargets/articles/git.html) are as
+follows.
+
+1.  Create the source code and run the pipeline at least once so the
+    [data
+    store](https://books.ropensci.org/targets/files.html#internal-data-files)
+    exists.
+2.  `tar_git_init()`: initialize a
+    [Git](https://git-scm.com)/[Git-LFS](https://git-lfs.github.com)
+    repository for the [data
+    store](https://books.ropensci.org/targets/files.html#internal-data-files).
+3.  Bring the pipeline up to date (e.g. with
+    [`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html))
+    and commit any changes to the source code.
+4.  `tar_git_snapshot()`: create a data snapshot for the current code
+    commit.
+5.  Develop the pipeline. Creating new code commits and code branches
+    early and often, and create data snapshots at key strategic
+    milestones.
+6.  `tar_git_checkout()`: revert the data to the appropriate prior
+    snapshot.
 
 ## Performance
 
-`targets` generates a large amount of data in `_targets/objects/`, so
+`targets` generates a large amount of data in `_targets/objects/`, and
 data snapshots and checkouts may take a long time. To work around
 performance limitations, you may wish to only snapshot the data at the
 most important milestones of your project. Please refer to the [package

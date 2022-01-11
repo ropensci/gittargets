@@ -12,6 +12,10 @@ git_setup_init <- function() {
 skip_os_git <- function() {
   skip_on_cran()
   skip_on_os(os = "solaris")
-  skip_on_os(os = "windows")
+  on_windows <- identical(tolower(Sys.info()[["sysname"]]), "windows")
+  on_ci <- identical(Sys.getenv("CI"), "true")
+  if (on_windows && on_ci) {
+    skip("On Windows CI.")
+  }
   skip_if(!tar_git_ok(verbose = FALSE))
 }

@@ -1,4 +1,4 @@
-# TODO: import this function from `targets`
+# TODO: import these function from `targets`
 # when the version supporting it is on CRAN.
 tar_assert_file <- function(x) {
   name <- deparse(substitute(x))
@@ -7,6 +7,15 @@ tar_assert_file <- function(x) {
   targets::tar_assert_path(x)
 }
 
+tar_assert_finite <- function(x, msg = NULL) {
+  name <- deparse(substitute(x))
+  default <- paste("all of", name, "must be finite")
+  if (!all(is.finite(x))) {
+    targets::tar_throw_validate(msg %|||% default)
+  }
+}
+
+# gittargets-specific assertions:
 tar_git_assert_commits_code <- function(code) {
   no_commits <- is.null(gert::git_branch(repo = code)) ||
     !nrow(gert::git_log(max = 1, repo = code))

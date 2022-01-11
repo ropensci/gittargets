@@ -45,6 +45,7 @@ tar_git_log <- function(
   targets::tar_assert_dbl(max)
   targets::tar_assert_positive(max)
   targets::tar_assert_scalar(max)
+  targets::tar_assert_finite(max, msg = "max must be finite.")
   tar_git_assert_repo_code(code)
   tar_git_assert_commits_code(code)
   tar_git_assert_repo_data(store)

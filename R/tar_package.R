@@ -1,15 +1,22 @@
 #' targets: Dynamic Function-Oriented Make-Like Declarative Pipelines for R
 #' @docType package
-#' @description Version control systems such as Git help researchers
-#'   track changes and history in data science projects,
-#'   and the `targets` package minimizes the computational cost of
-#'   keeping the latest results reproducible and up to date.
-#'   The `gittargets` package combines these two capabilities.
-#'   The `targets` data store becomes a version control repository
-#'   and stays synchronized with the Git repository of the source code.
-#'   Users can switch commits and branches without
-#'   invalidating the `targets` pipeline.
-#' @name gittargets-package
+#' @description Pipelines with the `targets` R package skip  steps that
+#'   are up to already date. Although this behavior reduces the runtime
+#'   of subsequent runs, it comes at the cost of overwriting previous
+#'   results. So if the pipeline source code is under version control,
+#'   and if you revert to a previous commit or branch,
+#'   the data will no longer be up to date with the code you
+#'   just checked out. Ordinarily, you would need to rerun the
+#'   pipeline in order to recover the targets you had before.
+#'   However, `gittargets` preserves historical output,
+#'   creating version control snapshots of data store.
+#'   Each data snapshot remembers the contemporaneous Git commit
+#'   of the pipeline source code, so you can recover the right
+#'   data when you navigate the Git history. In other words,
+#'   `gittargets` makes it possible to switch commits or branches
+#'   without invalidating the pipeline. You can simply check out
+#'   the up-to-date targets from the past instead of taking the
+#'   time to recompute them from scratch.
 #' @family help
 #' @importFrom cli cli_alert_danger cli_alert_info cli_alert_success cli_h1
 #'   col_br_white

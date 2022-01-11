@@ -71,7 +71,7 @@ tar_git_status_code_message <- function(status) {
 
 tar_git_status_code_none <- function() {
   cli_danger("Code has no Git repository.")
-  tar_git_status_tip()
+  cli_warning("Create one with {.code gert::git_init()}).")
 }
 
 tar_git_status_data_message <- function(status) {
@@ -84,14 +84,5 @@ tar_git_status_data_message <- function(status) {
 
 tar_git_status_data_none <- function() {
   cli_danger("No Git repository for the data store.")
-  tar_git_status_tip()
-}
-
-tar_git_status_tip <- function() {
-  tip <- c(
-    "The code and the data store must both be Git repositories.",
-    "Ensure the code repository exists (see {.code gert::git_init()}).",
-    "Create the data repository with {.code gittargets::tar_git_init()}."
-  )
-  lapply(tip, cli_warning)
+  cli_warning("Create one with {.code gittargets::tar_git_init()}.")
 }

@@ -152,6 +152,17 @@ tar_git_snapshot_branch_exists <- function(branch, verbose) {
 
 # Covered in tests/interactive/test-tar_git_snapshot.R
 # nocov start
+#' @title Data snapshot menu (Git)
+#' @keywords internal
+#' @description Check the project status and show an interactive menu
+#'   for [tar_git_snapshot()].
+#' @return Integer of length 1: `2L` if the user agrees to snapshot,
+#'   `1L` if the user declines.
+#' @inheritParams tar_git_snapshot
+#' @param commit Character of length 1, Git SHA1 hash of the code commit
+#'   that will correspond to the data snapshot (if created).
+#' @examples
+#' # See the examples of tar_git_snapshot().
 tar_git_snapshot_menu <- function(
   commit,
   message,

@@ -90,7 +90,7 @@ tar_git_status_data_none <- function() {
 tar_git_status_tip <- function() {
   tip <- c(
     "The code and the data store must both be Git repositories.",
-    "Create the code repository with {.code gert::git_init()}.",
+    "Ensure the code repository exists (see {.code gert::git_init()}).",
     "Create the data repository with {.code gittargets::tar_git_init()}."
   )
   lapply(tip, cli_warning)

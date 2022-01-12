@@ -4,15 +4,25 @@
 #' @description Check out a snapshot of the data associated with
 #'   a particular code commit (default: `HEAD`).
 #' @return Nothing (invisibly).
-#' @param ref Character of length 1, reference of the data snapshot.
-#'   Could be `"HEAD"`, a data repository branch name,
-#'   or a code repository commit hash. You could also refer to a
-#'   branch in the code repository, but any leading `"code="`
-#'   string will be removed.
-#'   In most cases, it is best to switch branches in the code
-#'   instead of manually setting `ref`. But if you do need to set `ref`,
-#'   the `commit_code` column of the data frame produced by [tar_git_log()]
-#'   shows possible options.
+#' @param ref Character of length 1. SHA1 hash, branch name,
+#'   or other reference in the code repository
+#'   that points to a code commit. (You can also identify the code
+#'   commit by supplying a data branch of the form `code=<SHA1>`.)
+#'   Defaults to `"HEAD"`, which points to the latest code commit
+#'   in the current branch.
+#'
+#'   Once the desired code commit is identified,
+#'   `tar_git_snapshot()` checks out the latest corresponding data snapshot.
+#'   There may be earlier data snapshots corresponding to this code commit,
+#'   but `tar_git_snapshot()` only checks out the latest one.
+#'   To check out an earlier superseded data snapshot,
+#'   you will need to manually use command line Git in the data repository.
+#'
+#'   If `tar_git_snapshot()` cannot find a data snapshot for the
+#'   desired code commit, then it will throw an error.
+#'   For a list of commits in the current code branch
+#'   that have available data snapshots, see the `commit_code`
+#'   column of the output of [tar_git_log()].
 #' @inheritParams gert::git_branch_checkout
 #' @inheritParams tar_git_snapshot
 #' @examples

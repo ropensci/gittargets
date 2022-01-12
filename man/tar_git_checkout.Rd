@@ -13,15 +13,25 @@ tar_git_checkout(
 )
 }
 \arguments{
-\item{ref}{Character of length 1, reference of the data snapshot.
-Could be \code{"HEAD"}, a data repository branch name,
-or a code repository commit hash. You could also refer to a
-branch in the code repository, but any leading \code{"code="}
-string will be removed.
-In most cases, it is best to switch branches in the code
-instead of manually setting \code{ref}. But if you do need to set \code{ref},
-the \code{commit_code} column of the data frame produced by \code{\link[=tar_git_log]{tar_git_log()}}
-shows possible options.}
+\item{ref}{Character of length 1. SHA1 hash, branch name,
+or other reference in the code repository
+that points to a code commit. (You can also identify the code
+commit by supplying a data branch of the form \verb{code=<SHA1>}.)
+Defaults to \code{"HEAD"}, which points to the latest code commit
+in the current branch.
+
+Once the desired code commit is identified,
+\code{tar_git_snapshot()} checks out the latest corresponding data snapshot.
+There may be earlier data snapshots corresponding to this code commit,
+but \code{tar_git_snapshot()} only checks out the latest one.
+To check out an earlier superseded data snapshot,
+you will need to manually use command line Git in the data repository.
+
+If \code{tar_git_snapshot()} cannot find a data snapshot for the
+desired code commit, then it will throw an error.
+For a list of commits in the current code branch
+that have available data snapshots, see the \code{commit_code}
+column of the output of \code{\link[=tar_git_log]{tar_git_log()}}.}
 
 \item{code}{Character of length 1, directory path to the code repository,
 usually the root of the \code{targets} project.}

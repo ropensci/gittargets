@@ -221,7 +221,7 @@ tar_outdated()
 
 ## Merges
 
-It is common to merge code branches into one another. When this happens, a new merge commit is created in the code repository, and the data repository remains unchanged. In fact, the only change is that the code repository is now at a new commit that has no data snapshot yet. If you wish, simply create a new data snapshot with `tar_git_snapshot()`. If the code commit immediately prior had an up-to-date data snapshot of its own, then the new snapshot for the merge commit should cost little storage or runtime.
+It is common to [merge](https://git-scm.com/docs/git-merge) code branches into one another. When this happens, a new merge commit is created in the code repository, and the data repository remains unchanged. In fact, the only change is that the code repository is now at a new commit that has no data snapshot yet. If you wish, simply create a new data snapshot with `tar_git_snapshot()`. If the code commit immediately prior had an up-to-date data snapshot of its own, then the new snapshot for the merge commit should cost little storage or runtime.
 
 ## Custom data files
 

@@ -4,12 +4,12 @@ citEntry(
   entry = "Manual",
   title = "gittargets: Version Control for the Targets Package",
   author = "William Michael Landau",
-  note = "https://wlandau.github.io/gittargets/, https://github.com/wlandau/gittargets",
+  note = "https://docs.ropensci.org/gittargets/, https://github.com/ropensci/gittargets",
   year = "2021",
   textVersion = paste(
     "William Michael Landau (2021).",
     "gittargets: Version Control for the",
-    "targets Package. https://wlandau.github.io/gittargets/,",
-    "https://github.com/wlandau/gittargets."
+    "targets Package. https://docs.ropensci.org/gittargets/,",
+    "https://github.com/ropensci/gittargets."
   )
 )

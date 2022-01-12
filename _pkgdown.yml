@@ -15,7 +15,7 @@ navbar:
     href: news/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/wlandau/gittargets
+    href: https://github.com/ropensci/gittargets
 reference:
 - title: Help
   contents:

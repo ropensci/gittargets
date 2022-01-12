@@ -1,12 +1,18 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "gittargets",
-  "description": "Version control systems such as Git help researchers\n  track changes and history in data science projects,\n  and the 'targets' package (2021, <doi:10.21105/joss.02959>)\n  minimizes the computational cost of keeping the latest results\n  reproducible and up to date. The 'gittargets' package\n  combines these two capabilities. The 'targets' data store\n  becomes a version control repository and stays synchronized\n  with the Git repository of the source code.\n  Users can switch commits and branches\n  without invalidating the 'targets' pipeline.",
-  "name": "gittargets: Version Control for the Targets Package",
-  "codeRepository": "https://github.com/wlandau/gittargets",
-  "relatedLink": "https://wlandau.github.io/gittargets/",
-  "issueTracker": "https://github.com/wlandau/gittargets/issues",
+  "description": "Pipelines with the 'targets' R package\n  (2021, <doi:10.21105/joss.02959>) skip steps that\n  are up to already date. Although this behavior reduces the runtime\n  of subsequent runs, it comes at the cost of overwriting previous\n  results. So if the pipeline source code is under version control,\n  and if you revert to a previous commit or branch,\n  the data will no longer be up to date with the code you\n  just checked out. Ordinarily, you would need to rerun the\n  pipeline in order to recover the targets you had before.\n  However, 'gittargets' preserves historical output,\n  creating version control snapshots of data store.\n  Each data snapshot remembers the contemporaneous Git commit\n  of the pipeline source code, so you can recover the right\n  data when you navigate the Git history. In other words,\n  'gittargets' makes it possible to switch commits or branches\n  without invalidating the pipeline. You can simply check out\n  the up-to-date targets from the past instead of taking the\n  time to recompute them from scratch.",
+  "name": "gittargets: Data Version Control for the Targets Package",
+  "codeRepository": "https://github.com/ropensci/gittargets",
+  "relatedLink": [
+    "https://wlandau.github.io/gittargets/",
+    "https://docs.ropensci.org/gittargets/"
+  ],
+  "issueTracker": "https://github.com/ropensci/gittargets/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.0.9000",
   "programmingLanguage": {
@@ -106,7 +112,7 @@
       "@type": "SoftwareApplication",
       "identifier": "cli",
       "name": "cli",
-      "version": ">= 3.0.0",
+      "version": ">= 3.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -163,14 +169,14 @@
       "@type": "SoftwareApplication",
       "identifier": "targets",
       "name": "targets",
-      "version": ">= 0.8.1.9000",
+      "version": ">= 0.6.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/ropensci/targets"
+      "sameAs": "https://CRAN.R-project.org/package=targets"
     },
     {
       "@type": "SoftwareApplication",
@@ -194,7 +200,7 @@
       "@type": "SoftwareApplication",
       "identifier": "uuid",
       "name": "uuid",
-      "version": ">= 1.0.0",
+      "version": ">= 0.1.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -208,10 +214,41 @@
       "identifier": "https://sysreqs.r-hub.io/get/git"
     }
   ],
-  "releaseNotes": "https://github.com/wlandau/gittargets/blob/master/NEWS.md",
-  "readme": "https://github.com/wlandau/gittargets/blob/main/README.md",
-  "fileSize": "524.111KB",
-  "contIntegration": ["https://github.com/wlandau/gittargets/actions?query=workflow%3Acheck", "https://codecov.io/gh/wlandau/gittargets", "https://github.com/wlandau/gittargets/actions?query=workflow%3Alint"],
-  "developmentStatus": "https://www.repostatus.org/#wip",
-  "keywords": ["data-version-control", "data-versioning", "workflow", "data-science", "r", "reproducible-research", "rstats", "r-package", "reproducibility", "targets"]
+  "releaseNotes": "https://github.com/ropensci/gittargets/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/gittargets/blob/main/README.md",
+  "fileSize": "368.889KB",
+  "contIntegration": ["https://github.com/ropensci/gittargets/actions?query=workflow%3Acheck", "https://app.codecov.io/gh/ropensci/gittargets", "https://github.com/ropensci/gittargets/actions?query=workflow%3Alint"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": [
+    "data-version-control",
+    "data-versioning",
+    "workflow",
+    "data-science",
+    "r",
+    "reproducible-research",
+    "rstats",
+    "r-package",
+    "reproducibility",
+    "targets"
+  ],
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/486",
+    "provider": "https://ropensci.org"
+  },
+  "citation": [
+    {
+      "@type": "SoftwareSourceCode",
+      "datePublished": "2021",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": ["William", "Michael"],
+          "familyName": "Landau"
+        }
+      ],
+      "name": "gittargets: Version Control for the Targets Package",
+      "description": "https://docs.ropensci.org/gittargets/, https://github.com/ropensci/gittargets"
+    }
+  ]
 }

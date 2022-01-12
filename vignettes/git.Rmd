@@ -22,11 +22,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-This tutorial shows how to use `gittargets` with the Git-based data versioning backend. Before proceeding, please read the [README](https://github.com/wlandau/gittargets/blob/main/README.md) file or [documentation website front page](https://wlandau.github.io/gittargets/) for an overview of the package.
+This tutorial shows how to use `gittargets` with the Git-based data versioning backend. Before proceeding, please read the [README](https://github.com/ropensci/gittargets/blob/main/README.md) file or [documentation website front page](https://docs.ropensci.org/gittargets/) for an overview of the package.
 
 ## Installation
 
-Please begin with the installation instructions on the [documentation website](https://wlandau.github.io/gittargets/). In addition, if your `targets` pipeline generates large data files, consider installing [Git LFS](https://git-lfs.github.com). The Git data backend in `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com), so you should not need to do any manual configuration to reap the performance benefits.
+Please begin with the installation instructions on the [documentation website](https://docs.ropensci.org/gittargets/). In addition, if your `targets` pipeline generates large data files, consider installing [Git LFS](https://git-lfs.github.com). The Git data backend in `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com), so you should not need to do any manual configuration to reap the performance benefits.
 
 ## Remotes
 

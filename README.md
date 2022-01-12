@@ -5,9 +5,9 @@
 [![CRAN](https://www.r-pkg.org/badges/version/gittargets)](https://CRAN.R-project.org/package=gittargets)
 -->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![check](https://github.com/wlandau/gittargets/workflows/check/badge.svg)](https://github.com/wlandau/gittargets/actions?query=workflow%3Acheck)
-[![codecov](https://codecov.io/gh/wlandau/gittargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/wlandau/gittargets)
-[![lint](https://github.com/wlandau/gittargets/workflows/lint/badge.svg)](https://github.com/wlandau/gittargets/actions?query=workflow%3Alint)
+[![check](https://github.com/ropensci/gittargets/workflows/check/badge.svg)](https://github.com/ropensci/gittargets/actions?query=workflow%3Acheck)
+[![codecov](https://codecov.io/gh/ropensci/gittargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/ropensci/gittargets)
+[![lint](https://github.com/ropensci/gittargets/workflows/lint/badge.svg)](https://github.com/ropensci/gittargets/actions?query=workflow%3Alint)
 
 Pipelines with the [`targets`](https://docs.ropensci.org/targets/) R
 package skip steps that are up to already date. Although this behavior
@@ -40,12 +40,13 @@ them from scratch.
 
 ## Installation
 
-Install the development version from R with:
+The package is available to install from any of the following sources.
 
-``` r
-install.packages("remotes")
-remotes::install_github("wlandau/gittargets")
-```
+| Type        | Source   | Command                                                              |
+|-------------|----------|----------------------------------------------------------------------|
+| Release     | CRAN     | `install.packages("gittargets")`                                     |
+| Development | GitHub   | `remotes::install_github("ropensci/gittargets")`                     |
+| Development | rOpenSci | `install.packages("gittargets", repos = "https://dev.ropensci.org")` |
 
 You will also need command line Git, available at
 <https://git-scm.com/downloads>.[1] Please make sure Git is reachable
@@ -68,7 +69,7 @@ tar_git_ok()
 
 There are also backend-specific installation requirements and
 recommendations in the [package
-vignettes](https://wlandau.github.io/gittargets/articles/index.html).
+vignettes](https://docs.ropensci.org/gittargets/articles/index.html).
 
 ## Motivation
 
@@ -136,9 +137,9 @@ With `gittargets`, you can keep your targets up to date even as you
 check out code from different commits or branches. The specific steps
 depend on the data backend you choose, and each supported backend has a
 [package
-vignette](https://wlandau.github.io/gittargets/articles/index.html) with
+vignette](https://docs.ropensci.org/gittargets/articles/index.html) with
 a walkthrough. For example, the most important steps of the [Git data
-backend](https://wlandau.github.io/gittargets/articles/git.html) are as
+backend](https://docs.ropensci.org/gittargets/articles/git.html) are as
 follows.
 
 1.  Create the source code and run the pipeline at least once so the
@@ -165,7 +166,7 @@ follows.
 data snapshots and checkouts may take a long time. To work around
 performance limitations, you may wish to only snapshot the data at the
 most important milestones of your project. Please refer to the [package
-vignettes](https://wlandau.github.io/gittargets/articles/index.html) for
+vignettes](https://docs.ropensci.org/gittargets/articles/index.html) for
 specific recommendations on optimizing performance.
 
 ## Future directions
@@ -208,9 +209,8 @@ downloads to and from the cloud may bottleneck some pipelines.
 ## Code of Conduct
 
 Please note that the `gittargets` project is released with a
-[Contributor Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+[Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By
+contributing to this project, you agree to abide by its terms.
 
 ## Citation
 
@@ -220,15 +220,15 @@ citation("gittargets")
 #> To cite gittargets in publications use:
 #> 
 #>   William Michael Landau (2021). gittargets: Version Control for the
-#>   targets Package. https://wlandau.github.io/gittargets/,
-#>   https://github.com/wlandau/gittargets.
+#>   targets Package. https://docs.ropensci.org/gittargets/,
+#>   https://github.com/ropensci/gittargets.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {gittargets: Version Control for the Targets Package},
 #>     author = {William Michael Landau},
-#>     note = {https://wlandau.github.io/gittargets/, https://github.com/wlandau/gittargets},
+#>     note = {https://docs.ropensci.org/gittargets/, https://github.com/ropensci/gittargets},
 #>     year = {2021},
 #>   }
 ```

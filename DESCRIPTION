@@ -20,8 +20,8 @@ Description: Pipelines with the 'targets' R package
   time to recompute them from scratch.
 Version: 0.0.0.9000
 License: MIT + file LICENSE
-URL: https://wlandau.github.io/gittargets/, https://github.com/wlandau/gittargets
-BugReports: https://github.com/wlandau/gittargets/issues
+URL: https://docs.ropensci.org/gittargets/, https://github.com/ropensci/gittargets
+BugReports: https://github.com/ropensci/gittargets/issues
 Authors@R: c(
   person(
     given = c("William", "Michael"),

@@ -8,8 +8,8 @@ assignees: wlandau
 
 ## Prework
 
-* [ ] Read and agree to the [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html) and [contributing guidelines](https://github.com/wlandau/gittargets/blob/main/CONTRIBUTING.md).
-* [ ] If there is [already a relevant issue](https://github.com/wlandau/gittargets/issues), whether open or closed, comment on the existing thread instead of posting a new issue.
+* [ ] Read and agree to the [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/) and [contributing guidelines](https://github.com/ropensci/gittargets/blob/main/CONTRIBUTING.md).
+* [ ] If there is [already a relevant issue](https://github.com/ropensci/gittargets/issues), whether open or closed, comment on the existing thread instead of posting a new issue.
 * [ ] New features take time and effort to create, and they take even more effort to maintain. So if the purpose of the feature is to resolve a struggle you are encountering personally, please consider first posting a "trouble" or "other" issue so we can discuss your use case and search for existing solutions first.
 * [ ] Format your code according to the [tidyverse style guide](https://style.tidyverse.org/).
 

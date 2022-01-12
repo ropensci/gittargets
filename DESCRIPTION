@@ -18,7 +18,7 @@ Description: Pipelines with the 'targets' R package
   without invalidating the pipeline. You can simply check out
   the up-to-date targets from the past instead of taking the
   time to recompute them from scratch.
-Version: 0.0.0.9000
+Version: 0.0.1
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/gittargets/, https://github.com/ropensci/gittargets
 BugReports: https://github.com/ropensci/gittargets/issues

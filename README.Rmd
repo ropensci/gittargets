@@ -39,7 +39,7 @@ Type | Source | Command
 ---|---|---
 Release | CRAN | `install.packages("gittargets")`
 Development | GitHub | `remotes::install_github("ropensci/gittargets")`
-Development | rOpenSci | `install.packages("gittargets", repos = "https://dev.ropensci.org")`
+Development | rOpenSci | `install.packages("gittargets", repos = "https://ropensci.r-universe.dev")`
 
 You will also need command line Git, available at <https://git-scm.com/downloads>.^[`gert` does not have these requirements, but `gittargets` does not exclusively rely on `gert` because `libgit2` does not automatically work with [Git LFS](https://git-lfs.github.com).] Please make sure Git is reachable from your system path environment variables. To control which Git executable `gittargets` uses, you may set the `TAR_GIT` environment variable with `usethis::edit_r_environ()` or `Sys.setenv()`. You will also need to configure your user name and user email at the global level using the instructions at <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup> (or `gert::git_config_global_set()`). Run `tar_git_ok()` to check installation and configuration.
 

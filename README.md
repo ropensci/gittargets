@@ -42,11 +42,11 @@ them from scratch.
 
 The package is available to install from any of the following sources.
 
-| Type        | Source   | Command                                                              |
-|-------------|----------|----------------------------------------------------------------------|
-| Release     | CRAN     | `install.packages("gittargets")`                                     |
-| Development | GitHub   | `remotes::install_github("ropensci/gittargets")`                     |
-| Development | rOpenSci | `install.packages("gittargets", repos = "https://dev.ropensci.org")` |
+| Type        | Source   | Command                                                                     |
+|-------------|----------|-----------------------------------------------------------------------------|
+| Release     | CRAN     | `install.packages("gittargets")`                                            |
+| Development | GitHub   | `remotes::install_github("ropensci/gittargets")`                            |
+| Development | rOpenSci | `install.packages("gittargets", repos = "https://ropensci.r-universe.dev")` |
 
 You will also need command line Git, available at
 <https://git-scm.com/downloads>.[1] Please make sure Git is reachable

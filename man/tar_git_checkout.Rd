@@ -17,8 +17,8 @@ tar_git_checkout(
 or other reference in the code repository
 that points to a code commit. (You can also identify the code
 commit by supplying a data branch of the form \verb{code=<SHA1>}.)
-Defaults to \code{"HEAD"}, which points to the latest code commit
-in the current branch.
+Defaults to \code{"HEAD"}, which points to the currently
+checked out code commit.
 
 Once the desired code commit is identified,
 \code{tar_git_snapshot()} checks out the latest corresponding data snapshot.

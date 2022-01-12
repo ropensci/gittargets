@@ -61,10 +61,14 @@ tar_git_pack_refs <- function(repo, spinner = TRUE) {
   )
 }
 
+# Get a data snapshot branch name from a code commit hash.
+# The branch name refers to the code commit with "code="
+# followed by the commit hash.
 tar_git_branch_snapshot <- function(commit) {
   sprintf("code=%s", commit)
 }
 
+# Get a code commit hash from a data snapshot branch name.
 tar_git_commit_code <- function(branch) {
   gsub(pattern = "^code=", replacement = "", x = branch)
 }

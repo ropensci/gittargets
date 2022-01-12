@@ -30,7 +30,7 @@ Please begin with the installation instructions on the [documentation website](h
 
 ## Remotes
 
-This backend is uses local [Git](http://git-scm.com) only. It is possible to push the snapshotted [data store](https://books.ropensci.org/targets/files.html#internal-data-files) to a cloud service like [GitHub](https://github.com), [GitLab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org), but this is the user's responsibility. Pipelines usually generate large data files, and [GitHub](https://github.com) and its peers have file size limitations. Also, `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com) locally (unless `git_lfs` is `FALSE` in `tar_git_init()`), and [Git LFS](https://git-lfs.github.com) on the cloud is a paid service.
+This backend is uses local [Git](https://git-scm.com) only. It is possible to push the snapshotted [data store](https://books.ropensci.org/targets/files.html#internal-data-files) to a cloud service like [GitHub](https://github.com), [GitLab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org), but this is the user's responsibility. Pipelines usually generate large data files, and [GitHub](https://github.com) and its peers have file size limitations. Also, `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com) locally (unless `git_lfs` is `FALSE` in `tar_git_init()`), and [Git LFS](https://git-lfs.github.com) on the cloud is a paid service.
 
 ## Overall workflow
 

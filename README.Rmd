@@ -82,7 +82,7 @@ tar_outdated()
 #> character(0)
 ```
 
-It is good practice to track the source code in a [version control repository](https://git-scm.com) so you can revert to previous commits or branches. However, the [data store](https://books.ropensci.org/targets/files.html#internal-data-files) is usually too large to keep in the same repository as the code, which typically lives in a cloud platform like [GitHub](http://github.com) where space and bandwidth are pricey. So when you check out an old commit or branch, you revert the code, but not the data. In other words, your targets are out of sync and out of date.
+It is good practice to track the source code in a [version control repository](https://git-scm.com) so you can revert to previous commits or branches. However, the [data store](https://books.ropensci.org/targets/files.html#internal-data-files) is usually too large to keep in the same repository as the code, which typically lives in a cloud platform like [GitHub](https://github.com) where space and bandwidth are pricey. So when you check out an old commit or branch, you revert the code, but not the data. In other words, your targets are out of sync and out of date.
 
 ```{r, eval = FALSE}
 gert::git_branch_checkout(branch = "other-model")

@@ -108,7 +108,7 @@ repository](https://git-scm.com) so you can revert to previous commits
 or branches. However, the [data
 store](https://books.ropensci.org/targets/files.html#internal-data-files)
 is usually too large to keep in the same repository as the code, which
-typically lives in a cloud platform like [GitHub](http://github.com)
+typically lives in a cloud platform like [GitHub](https://github.com)
 where space and bandwidth are pricey. So when you check out an old
 commit or branch, you revert the code, but not the data. In other words,
 your targets are out of sync and out of date.

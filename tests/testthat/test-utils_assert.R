@@ -63,7 +63,7 @@ targets::tar_test("tar_git_assert_repo_data() no branch", {
   expect_silent(tar_git_assert_snapshot(branch = branch, store = store))
 })
 
-tar_test("tar_assert_finite", {
+targets::tar_test("tar_assert_finite", {
   expect_silent(tar_assert_finite(1))
   expect_silent(tar_assert_finite(c(1, 2)))
   expect_error(tar_assert_finite(c(1, Inf)), class = "tar_condition_validate")

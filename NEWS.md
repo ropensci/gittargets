@@ -1,6 +1,6 @@
 # gittargets 0.0.1.9000
 
-
+* Hard reset after checkout in `tar_git_checkout()` in order to recover potentially deleted files (#11).
 
 # gittargets 0.0.1
 

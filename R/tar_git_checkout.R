@@ -83,5 +83,7 @@ tar_git_checkout <- function(
   cli_success("Checked out data snapshot ", commit, ".", verbose = verbose)
   cli_info("Code commit: ", branch, verbose = verbose)
   cli_info("Message: ", first_line(message), verbose = verbose)
+  cli_info("Resetting to HEAD of checked-out snapshot.", verbose = verbose)
+  tar_git_reset_hard(repo = store)
   invisible()
 }

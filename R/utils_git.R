@@ -61,6 +61,16 @@ tar_git_pack_refs <- function(repo, spinner = TRUE) {
   )
 }
 
+tar_git_reset_hard <- function(repo, spinner = TRUE) {
+  processx::run(
+    command = tar_git_binary(),
+    args = c("reset", "--hard", "HEAD"),
+    wd = repo,
+    echo = FALSE,
+    spinner = spinner
+  )
+}
+
 # Get a data snapshot branch name from a code commit hash.
 # The branch name refers to the code commit with "code="
 # followed by the commit hash.

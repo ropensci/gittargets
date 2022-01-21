@@ -76,6 +76,20 @@ targets::tar_test("tar_git_init_repo()", {
   expect_true(file.exists(file.path(repo, ".git")))
 })
 
+targets::tar_test("tar_git_reset_hard()", {
+  skip_os_git()
+  repo <- tempfile()
+  dir.create(repo)
+  gert::git_init(path = repo)
+  writeLines("contents", file.path(repo, "file"))
+  gert::git_add(files = "file", repo = repo)
+  gert::git_commit(message = "First commit", repo = repo)
+  writeLines("new_contents", file.path(repo, "file"))
+  expect_equal(readLines(file.path(repo, "file")), "new_contents")
+  tar_git_reset_hard(repo = repo)
+  expect_equal(readLines(file.path(repo, "file")), "contents")
+})
+
 targets::tar_test("data branch naming", {
   expect_equal(tar_git_branch_snapshot("x"), "code=x")
   expect_equal(tar_git_commit_code("code=x"), "x")

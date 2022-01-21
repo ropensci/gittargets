@@ -28,5 +28,18 @@ targets::tar_test("tar_git_checkout()", {
   tar_git_checkout()
   # Now, the target is up to date! And we did not even have to rerun it!
   expect_equal(targets::tar_outdated(callr_function = NULL), character(0))
+  # Modified files get recovered on checkout.
+  old <- readLines(file.path("_targets", "meta", "meta"))
   expect_equal(targets::tar_read(data), "old_data")
+  writeLines("line", file.path("_targets", "meta", "meta"))
+  expect_equal(readLines(file.path("_targets", "meta", "meta")), "line")
+  tar_git_checkout()
+  expect_equal(readLines(file.path("_targets", "meta", "meta")), old)
+  expect_equal(targets::tar_outdated(callr_function = NULL), character(0))
+  # Deleted files get recovered on checkout.
+  unlink(file.path("_targets", "meta", "meta"))
+  expect_false(file.exists(file.path("_targets", "meta", "meta")))
+  tar_git_checkout()
+  expect_equal(readLines(file.path("_targets", "meta", "meta")), old)
+  expect_equal(targets::tar_outdated(callr_function = NULL), character(0))
 })

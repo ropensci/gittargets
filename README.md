@@ -1,9 +1,8 @@
 
 # gittargets <img src='man/figures/logo-readme.png' align="right" height="139"/>
 
-[![ropensci](https://badges.ropensci.org/486_status.svg)](https://github.com/ropensci/software-review/issues/486)<!--
+[![ropensci](https://badges.ropensci.org/486_status.svg)](https://github.com/ropensci/software-review/issues/486)
 [![CRAN](https://www.r-pkg.org/badges/version/gittargets)](https://CRAN.R-project.org/package=gittargets)
--->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/ropensci/gittargets/workflows/check/badge.svg)](https://github.com/ropensci/gittargets/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/ropensci/gittargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/ropensci/gittargets)
@@ -13,7 +12,7 @@ Pipelines with the [`targets`](https://docs.ropensci.org/targets/) R
 package skip steps that are up to already date. Although this behavior
 reduces the runtime of subsequent runs, it comes at the cost of
 overwriting previous results. Ordinarily, you would need to rerun the
-pipeline in order to recover the targets you had before. However,
+pipeline in order to recover any overwritten targets. However,
 `gittargets` preserves historical output, creating version control
 snapshots of data store. Each data snapshot remembers the
 contemporaneous Git commit of the pipeline source code, so you can

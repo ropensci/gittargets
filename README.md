@@ -8,19 +8,17 @@
 [![codecov](https://codecov.io/gh/ropensci/gittargets/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/ropensci/gittargets)
 [![lint](https://github.com/ropensci/gittargets/workflows/lint/badge.svg)](https://github.com/ropensci/gittargets/actions?query=workflow%3Alint)
 
-Pipelines with the [`targets`](https://docs.ropensci.org/targets/) R
-package skip steps that are up to already date. Although this behavior
-reduces the runtime of subsequent runs, it comes at the cost of
-overwriting previous results. Ordinarily, you would need to rerun the
-pipeline in order to recover any overwritten targets. However,
-`gittargets` preserves historical output, creating version control
-snapshots of data store. Each data snapshot remembers the
-contemporaneous Git commit of the pipeline source code, so you can
-recover the right data when you navigate the Git history. In other
-words, `gittargets` makes it possible to switch commits or branches
-without invalidating the pipeline. You can simply check out the
-up-to-date targets from the past instead of taking the time to recompute
-them from scratch.
+In computationally demanding data analysis pipelines, the
+[`targets`](https://docs.ropensci.org/targets/) R package maintains an
+up-to-date set of results while skipping tasks that do not need to
+rerun. This process increases speed and enhances the reproducibility of
+the final end product, but it also overwrites old output with new
+output, and past results disappear. To preserve historical output, the
+`gittargets` package captures version-controlled snapshots of the data
+store, and each snapshot links to the underlying commit of the source
+code. That way, when the user rolls back the code to a previous branch
+or commit, `gittargets` can recover the data contemporaneous with that
+commit so that all targets remain up to date.
 
 ## Prerequisites
 

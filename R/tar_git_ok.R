@@ -12,7 +12,9 @@
 #'   correctly.
 #' @param verbose Whether to print messages to the console.
 #' @examples
+#' if (Sys.getenv("TAR_EXAMPLES") == "true") {
 #' tar_git_ok()
+#' }
 tar_git_ok <- function(verbose = TRUE) {
   binary <- tar_git_binary()
   if_any(

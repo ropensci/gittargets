@@ -25,7 +25,9 @@ You may find it convenient to run \code{gert::git_config_global()}
 with \code{name} equal to \code{user.name} and \code{user.email}.
 }
 \examples{
+if (Sys.getenv("TAR_EXAMPLES") == "true") {
 tar_git_ok()
+}
 }
 \seealso{
 Other git: 

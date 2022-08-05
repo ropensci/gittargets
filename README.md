@@ -33,7 +33,7 @@ commit so that all targets remain up to date.
     on the [documentation
     website](https://docs.ropensci.org/targets/#how-to-get-started).
 5.  Familiarity with the [`targets` data
-    store](https://books.ropensci.org/targets/files.html#internal-data-files).
+    store](https://books.ropensci.org/targets/data.html).
 
 ## Installation
 
@@ -46,7 +46,7 @@ The package is available to install from any of the following sources.
 | Development | rOpenSci | `install.packages("gittargets", repos = "https://ropensci.r-universe.dev")` |
 
 You will also need command line Git, available at
-<https://git-scm.com/downloads>.[1] Please make sure Git is reachable
+<https://git-scm.com/downloads>.[^1] Please make sure Git is reachable
 from your system path environment variables. To control which Git
 executable `gittargets` uses, you may set the `TAR_GIT` environment
 variable with `usethis::edit_r_environ()` or `Sys.setenv()`. You will
@@ -71,8 +71,7 @@ vignettes](https://docs.ropensci.org/gittargets/articles/index.html).
 ## Motivation
 
 Consider an example pipeline with source code in `_targets.R` and output
-in the [data
-store](https://books.ropensci.org/targets/files.html#internal-data-files).
+in the [data store](https://books.ropensci.org/targets/data.html).
 
 ``` r
 # _targets.R
@@ -103,12 +102,12 @@ tar_outdated()
 It is good practice to track the source code in a [version control
 repository](https://git-scm.com) so you can revert to previous commits
 or branches. However, the [data
-store](https://books.ropensci.org/targets/files.html#internal-data-files)
-is usually too large to keep in the same repository as the code, which
-typically lives in a cloud platform like [GitHub](https://github.com)
-where space and bandwidth are pricey. So when you check out an old
-commit or branch, you revert the code, but not the data. In other words,
-your targets are out of sync and out of date.
+store](https://books.ropensci.org/targets/data.html) is usually too
+large to keep in the same repository as the code, which typically lives
+in a cloud platform like [GitHub](https://github.com) where space and
+bandwidth are pricey. So when you check out an old commit or branch, you
+revert the code, but not the data. In other words, your targets are out
+of sync and out of date.
 
 ``` r
 gert::git_branch_checkout(branch = "other-model")
@@ -140,12 +139,10 @@ backend](https://docs.ropensci.org/gittargets/articles/git.html) are as
 follows.
 
 1.  Create the source code and run the pipeline at least once so the
-    [data
-    store](https://books.ropensci.org/targets/files.html#internal-data-files)
-    exists.
+    [data store](https://books.ropensci.org/targets/data.html) exists.
 2.  `tar_git_init()`: initialize a [Git](https://git-scm.com)/[Git
     LFS](https://git-lfs.github.com) repository for the [data
-    store](https://books.ropensci.org/targets/files.html#internal-data-files).
+    store](https://books.ropensci.org/targets/data.html).
 3.  Bring the pipeline up to date (e.g. with
     [`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html))
     and commit any changes to the source code.
@@ -176,16 +173,16 @@ not scale to enormous amounts of compressed data. Future releases of
 
 ## Alternatives
 
-Newer versions of the `targets` package (&gt;= 0.9.0) support continuous
+Newer versions of the `targets` package (\>= 0.9.0) support continuous
 data versioning through [Amazon Web Services](https://aws.amazon.com)
 for [S3 buckets](https://aws.amazon.com/s3/) with [versioning
 enabled](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html).
 In this approach, `targets` tracks the version ID of each [AWS-backed
-target](https://books.ropensci.org/targets/storage_amazon.html). That
-way, when the metadata file reverts to a prior version, the pipeline
-automatically uses prior versions of targets that were up to date at the
-time the metadata was written. This approach has two distinct advantages
-over `gittargets`:
+target](https://books.ropensci.org/targets/data.html#cloud-storage).
+That way, when the metadata file reverts to a prior version, the
+pipeline automatically uses prior versions of targets that were up to
+date at the time the metadata was written. This approach has two
+distinct advantages over `gittargets`:
 
 1.  Cloud storage reduces the burden of local storage for large data
     pipelines.
@@ -230,6 +227,6 @@ citation("gittargets")
 #>   }
 ```
 
-[1] `gert` does not have these requirements, but `gittargets` does not
-exclusively rely on `gert` because `libgit2` does not automatically work
-with [Git LFS](https://git-lfs.github.com).
+[^1]: `gert` does not have these requirements, but `gittargets` does not
+    exclusively rely on `gert` because `libgit2` does not automatically
+    work with [Git LFS](https://git-lfs.github.com).

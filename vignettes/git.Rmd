@@ -30,14 +30,14 @@ Please begin with the installation instructions on the [documentation website](h
 
 ## Remotes
 
-This backend is uses local [Git](https://git-scm.com) only. It is possible to push the snapshotted [data store](https://books.ropensci.org/targets/files.html#internal-data-files) to a cloud service like [GitHub](https://github.com), [GitLab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org), but this is the user's responsibility. Pipelines usually generate large data files, and [GitHub](https://github.com) and its peers have file size limitations. Also, `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com) locally (unless `git_lfs` is `FALSE` in `tar_git_init()`), and [Git LFS](https://git-lfs.github.com) on the cloud is a paid service.
+This backend is uses local [Git](https://git-scm.com) only. It is possible to push the snapshotted [data store](https://books.ropensci.org/targets/data.html) to a cloud service like [GitHub](https://github.com), [GitLab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org), but this is the user's responsibility. Pipelines usually generate large data files, and [GitHub](https://github.com) and its peers have file size limitations. Also, `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com) locally (unless `git_lfs` is `FALSE` in `tar_git_init()`), and [Git LFS](https://git-lfs.github.com) on the cloud is a paid service.
 
 ## Overall workflow
 
 The most important steps of the Git data backend are as follows. The rest of this vignette walks through these steps in greater depth.
 
-1. Create the source code and run the pipeline at least once so the [data store](https://books.ropensci.org/targets/files.html#internal-data-files) exists.
-1. `tar_git_init()`: initialize a [Git](https://git-scm.com)/[Git-LFS](https://git-lfs.github.com) repository for the [data store](https://books.ropensci.org/targets/files.html#internal-data-files).
+1. Create the source code and run the pipeline at least once so the [data store](https://books.ropensci.org/targets/data.html) exists.
+1. `tar_git_init()`: initialize a [Git](https://git-scm.com)/[Git-LFS](https://git-lfs.github.com) repository for the [data store](https://books.ropensci.org/targets/data.html).
 1. Bring the pipeline up to date (e.g. with [`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html)) and commit any changes to the source code.
 1. `tar_git_snapshot()`: create a data snapshot for the current code commit.
 1. Develop the pipeline. Creating new code commits and code branches early and often, and create data snapshots at key strategic milestones.

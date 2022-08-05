@@ -51,12 +51,16 @@ tar_git_snapshot <- function(
   reporter = targets::tar_config_get("reporter_outdated"),
   envir = parent.frame(),
   callr_function = callr::r,
-  callr_arguments = targets::callr_args_default(callr_function, reporter),
+  callr_arguments = NULL,
   status = interactive(),
   force = FALSE,
   pack_refs = TRUE,
   verbose = TRUE
 ) {
+  callr_arguments <- callr_arguments %|||% callr_args_default(
+    callr_function = callr_function,
+    reporter = reporter
+  )
   tar_assert_file(code)
   tar_assert_file(store)
   targets::tar_assert_lgl(status)

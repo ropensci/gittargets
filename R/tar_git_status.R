@@ -28,8 +28,12 @@ tar_git_status <- function(
   reporter = targets::tar_config_get("reporter_outdated"),
   envir = parent.frame(),
   callr_function = callr::r,
-  callr_arguments = targets::callr_args_default(callr_function, reporter)
+  callr_arguments = NULL
 ) {
+  callr_arguments <- callr_arguments %|||% callr_args_default(
+    callr_function = callr_function,
+    reporter = reporter
+  )
   cli::cli_h1("Data Git status")
   status <- tar_git_status_data(store, stash_gitignore)
   if_any(

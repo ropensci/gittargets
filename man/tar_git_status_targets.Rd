@@ -10,7 +10,7 @@ tar_git_status_targets(
   reporter = targets::tar_config_get("reporter_outdated"),
   envir = parent.frame(),
   callr_function = callr::r,
-  callr_arguments = targets::callr_args_default(callr_function, reporter)
+  callr_arguments = NULL
 )
 }
 \arguments{

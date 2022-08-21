@@ -1,6 +1,6 @@
 # gittargets 0.0.4.9000
 
-* Use `processx::run()` instead of `system2()` in `tar_git_ok()` (#12, @psychelzh).
+* Use `processx::run()` instead of `system2()` in `tar_git_ok()` and set `HOME` to `USERPROFILE` on Windows (#12, @psychelzh).
 
 # gittargets 0.0.4
 

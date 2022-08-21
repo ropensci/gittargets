@@ -4,7 +4,8 @@ tar_git_add <- function(files, repo, spinner = TRUE) {
     args = c("add", files),
     wd = repo,
     echo = FALSE,
-    spinner = spinner
+    spinner = spinner,
+    env = tar_git_env()
   )
 }
 
@@ -14,7 +15,8 @@ tar_git_branch_checkout <- function(branch, repo, force) {
     command = tar_git_binary(),
     args = args,
     wd = repo,
-    echo = FALSE
+    echo = FALSE,
+    env = tar_git_env()
   )
 }
 
@@ -23,7 +25,8 @@ tar_git_branch_create <- function(branch, repo) {
     command = tar_git_binary(),
     args = c("branch", branch),
     wd = repo,
-    echo = FALSE
+    echo = FALSE,
+    env = tar_git_env()
   )
 }
 
@@ -33,7 +36,8 @@ tar_git_commit <- function(message, repo, spinner = TRUE) {
     args = c("commit", "--message", message),
     wd = repo,
     echo = FALSE,
-    spinner = spinner
+    spinner = spinner,
+    env = tar_git_env()
   )
 }
 
@@ -43,12 +47,18 @@ tar_git_commit_all <- function(message, repo, spinner = TRUE) {
     args = c("commit", "--all", "--message", message),
     wd = repo,
     echo = FALSE,
-    spinner = spinner
+    spinner = spinner,
+    env = tar_git_env()
   )
 }
 
 tar_git_init_repo <- function(path) {
-  processx::run(command = tar_git_binary(), args = "init", wd = path)
+  processx::run(
+    command = tar_git_binary(),
+    args = "init",
+    wd = path,
+    env = tar_git_env()
+  )
 }
 
 tar_git_pack_refs <- function(repo, spinner = TRUE) {
@@ -57,7 +67,8 @@ tar_git_pack_refs <- function(repo, spinner = TRUE) {
     args = c("pack-refs", "--all"),
     wd = repo,
     echo = FALSE,
-    spinner = spinner
+    spinner = spinner,
+    env = tar_git_env()
   )
 }
 
@@ -67,7 +78,8 @@ tar_git_reset_hard <- function(repo, spinner = TRUE) {
     args = c("reset", "--hard", "HEAD"),
     wd = repo,
     echo = FALSE,
-    spinner = spinner
+    spinner = spinner,
+    env = tar_git_env()
   )
 }
 
@@ -166,7 +178,8 @@ tar_git_config_global_user_name <- function() {
   out <- processx::run(
     command = tar_git_binary(),
     args = c("config", "--global", "user.name"),
-    echo = FALSE
+    echo = FALSE,
+    env = tar_git_env()
   )
   trimws(out$stdout)
 }
@@ -175,7 +188,16 @@ tar_git_config_global_user_email <- function() {
   out <- processx::run(
     command = tar_git_binary(),
     args = c("config", "--global", "user.email"),
-    echo = FALSE
+    echo = FALSE,
+    env = tar_git_env()
   )
   trimws(out$stdout)
+}
+
+tar_git_env <- function() {
+  if_any(
+    identical(as.character(tolower(Sys.info()["sysname"])), "windows"),
+    c("current", HOME = Sys.getenv("USERPROFILE")),
+    NULL
+  )
 }

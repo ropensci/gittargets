@@ -91,7 +91,18 @@ tar_git_binary <- function() {
     "If you already installed Git",
     "set the TAR_GIT environment variable to the path of the",
     "Git executable. Functions usethis::edit_r_environ() and",
-    "Sys.setenv() can help."
+    "Sys.setenv() can help.",
+    "Sys.getenv(\"TAR_GIT\", unset = Sys.which(\"git\"))",
+    "is currently",
+    out
+  )
+  targets::tar_assert_chr(
+    out,
+    "Sys.getenv(\"TAR_GIT\", unset = Sys.which(\"git\")) must be a character."
+  )
+  targets::tar_assert_scalar(
+    out,
+    "Sys.getenv(\"TAR_GIT\", unset = Sys.which(\"git\")) must have length 1."
   )
   targets::tar_assert_nzchar(out, msg = msg)
   targets::tar_assert_path(out, msg = msg)
@@ -149,4 +160,22 @@ tar_git_stub_write <- function(repo) {
   path <- tar_git_stub_path(repo)
   uuid <- uuid::UUIDgenerate(use.time = NA, n = 1L)
   writeLines(uuid, path)
+}
+
+tar_git_config_global_user_name <- function() {
+  out <- processx::run(
+    command = tar_git_binary(),
+    args = c("config", "--global", "user.name"),
+    echo = FALSE
+  )
+  trimws(out$stdout)
+}
+
+tar_git_config_global_user_email <- function() {
+  out <- processx::run(
+    command = tar_git_binary(),
+    args = c("config", "--global", "user.email"),
+    echo = FALSE
+  )
+  trimws(out$stdout)
 }

@@ -174,10 +174,11 @@ not scale to enormous amounts of compressed data. Future releases of
 ## Alternatives
 
 Newer versions of the `targets` package (\>= 0.9.0) support continuous
-data versioning through [Amazon Web Services](https://aws.amazon.com)
-for [S3 buckets](https://aws.amazon.com/s3/) with [versioning
+data versioning through cloud storage, e.g. [Amazon Web
+Services](https://aws.amazon.com) for [S3
+buckets](https://aws.amazon.com/s3/) with [versioning
 enabled](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html).
-In this approach, `targets` tracks the version ID of each [AWS-backed
+In this approach, `targets` tracks the version ID of each [cloud-backed
 target](https://books.ropensci.org/targets/data.html#cloud-storage).
 That way, when the metadata file reverts to a prior version, the
 pipeline automatically uses prior versions of targets that were up to
@@ -189,11 +190,12 @@ distinct advantages over `gittargets`:
 2.  Target data is uploaded and tracked continuously, which means the
     user does not need to proactively take data snapshots.
 
-However, not all users have access to [AWS](https://aws.amazon.com), not
-everyone is able or willing to pay the monetary costs of cloud storage
-for every single version of every single target, and uploads and
-downloads to and from the cloud may bottleneck some pipelines.
-`gittargets` fills this niche with a data versioning system that is
+However, not all users have access to cloud services like
+[AWS](https://aws.amazon.com), not everyone is able or willing to pay
+the monetary costs of cloud storage for every single version of every
+single target, and uploads and downloads to and from the cloud may
+bottleneck some pipelines. `gittargets` fills this niche with a data
+versioning system that is
 
 1.  Entirely local, and
 2.  Entirely opt-in: users pick and choose when to register data

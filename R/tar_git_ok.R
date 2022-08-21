@@ -12,36 +12,11 @@
 #'   correctly.
 #' @param verbose Whether to print messages to the console.
 #' @examples
-#' if (Sys.getenv("TAR_EXAMPLES") == "true") {
 #' tar_git_ok()
-#' }
 tar_git_ok <- function(verbose = TRUE) {
   binary <- tar_git_binary()
-  if_any(
-    nzchar(binary),
-    cli_success(
-      "Git binary: {.file ",
-      binary,
-      "}",
-      verbose = verbose
-    ),
-    cli_danger(
-      "No Git binary found. ",
-      "Install from {.url https://git-scm.com/downloads/}.",
-      verbose = verbose
-    )
-  )
-  # Cannot test without uninstalling Git.
-  # nocov start
-  if (!nzchar(binary)) {
-    cli_danger("No Git installation found.", verbose = verbose)
-    return(FALSE)
-  }
-  # nocov end
-  user_name <- suppressWarnings(
-    system2("git", c("config", "--global", "user.name"), stdout = TRUE)
-  )
-  user_name <- trimws(user_name)
+  cli_success("Git binary: {.file ", binary, "}", verbose = verbose)
+  user_name <- tar_git_config_global_user_name()
   if_any(
     nzchar(user_name),
     cli_success(
@@ -55,10 +30,7 @@ tar_git_ok <- function(verbose = TRUE) {
       verbose = verbose
     )
   )
-  user_email <- suppressWarnings(
-    system2("git", c("config", "--global", "user.email"), stdout = TRUE)
-  )
-  user_email <- trimws(user_email)
+  user_email <- tar_git_config_global_user_email()
   if_any(
     nzchar(user_email),
     cli_success(

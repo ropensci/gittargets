@@ -1,6 +1,6 @@
 # gittargets 0.0.4.9000
 
-
+* Use `processx::run()` instead of `system2()` in `tar_git_ok()`.
 
 # gittargets 0.0.4
 

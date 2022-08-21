@@ -50,10 +50,6 @@ jobs:
         with:
           upload-snapshots: true
 
-      - uses: r-lib/actions/check-r-package@v2
-        with:
-          upload-snapshots: true
-
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@master

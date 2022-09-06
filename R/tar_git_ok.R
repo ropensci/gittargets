@@ -16,7 +16,21 @@
 tar_git_ok <- function(verbose = TRUE) {
   binary <- tar_git_binary()
   cli_success("Git binary: {.file ", binary, "}", verbose = verbose)
-  user_name <- tar_git_config_global_user_name()
+  success <- tryCatch({
+    user_name <- tar_git_config_global_user_name()
+    user_email <- tar_git_config_global_user_email()
+    TRUE
+  }, error = function(condition) {
+    cli_danger(
+      "Error getting Git global user name and email:",
+      verbose = verbose
+    )
+    cli_danger(conditionMessage(condition), verbose = verbose)
+    FALSE
+  })
+  if (!success) {
+    return(FALSE)
+  }
   if_any(
     nzchar(user_name),
     cli_success(
@@ -30,7 +44,6 @@ tar_git_ok <- function(verbose = TRUE) {
       verbose = verbose
     )
   )
-  user_email <- tar_git_config_global_user_email()
   if_any(
     nzchar(user_email),
     cli_success(

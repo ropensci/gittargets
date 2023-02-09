@@ -1,6 +1,6 @@
 citHeader("To cite gittargets in publications use:")
 
-citEntry(
+bibentry(
   entry = "Manual",
   title = "gittargets: Version Control for the Targets Package",
   author = "William Michael Landau",

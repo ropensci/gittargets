@@ -81,7 +81,7 @@ tar_git_init_lfs <- function(repo, verbose) {
   cli_success(
     "Wrote to ",
     gitattributes,
-    " for git-lfs: {.url https://git-lfs.github.com}.",
+    " for git-lfs: {.url https://git-lfs.com}.",
     verbose = verbose
   )
   tar_git_add(files = basename(gitattributes), repo = repo, spinner = FALSE)

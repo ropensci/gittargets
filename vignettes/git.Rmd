@@ -26,18 +26,18 @@ This tutorial shows how to use `gittargets` with the Git-based data versioning b
 
 ## Installation
 
-Please begin with the installation instructions on the [documentation website](https://docs.ropensci.org/gittargets/). In addition, if your `targets` pipeline generates large data files, consider installing [Git LFS](https://git-lfs.github.com). The Git data backend in `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com), so you should not need to do any manual configuration to reap the performance benefits.
+Please begin with the installation instructions on the [documentation website](https://docs.ropensci.org/gittargets/). In addition, if your `targets` pipeline generates large data files, consider installing [Git LFS](https://git-lfs.com). The Git data backend in `gittargets` automatically opts into [Git LFS](https://git-lfs.com), so you should not need to do any manual configuration to reap the performance benefits.
 
 ## Remotes
 
-This backend is uses local [Git](https://git-scm.com) only. It is possible to push the snapshotted [data store](https://books.ropensci.org/targets/data.html) to a cloud service like [GitHub](https://github.com), [GitLab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org), but this is the user's responsibility. Pipelines usually generate large data files, and [GitHub](https://github.com) and its peers have file size limitations. Also, `gittargets` automatically opts into [Git LFS](https://git-lfs.github.com) locally (unless `git_lfs` is `FALSE` in `tar_git_init()`), and [Git LFS](https://git-lfs.github.com) on the cloud is a paid service.
+This backend is uses local [Git](https://git-scm.com) only. It is possible to push the snapshotted [data store](https://books.ropensci.org/targets/data.html) to a cloud service like [GitHub](https://github.com), [GitLab](https://about.gitlab.com), or [Bitbucket](https://bitbucket.org), but this is the user's responsibility. Pipelines usually generate large data files, and [GitHub](https://github.com) and its peers have file size limitations. Also, `gittargets` automatically opts into [Git LFS](https://git-lfs.com) locally (unless `git_lfs` is `FALSE` in `tar_git_init()`), and [Git LFS](https://git-lfs.com) on the cloud is a paid service.
 
 ## Overall workflow
 
 The most important steps of the Git data backend are as follows. The rest of this vignette walks through these steps in greater depth.
 
 1. Create the source code and run the pipeline at least once so the [data store](https://books.ropensci.org/targets/data.html) exists.
-1. `tar_git_init()`: initialize a [Git](https://git-scm.com)/[Git-LFS](https://git-lfs.github.com) repository for the [data store](https://books.ropensci.org/targets/data.html).
+1. `tar_git_init()`: initialize a [Git](https://git-scm.com)/[Git-LFS](https://git-lfs.com) repository for the [data store](https://books.ropensci.org/targets/data.html).
 1. Bring the pipeline up to date (e.g. with [`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html)) and commit any changes to the source code.
 1. `tar_git_snapshot()`: create a data snapshot for the current code commit.
 1. Develop the pipeline. Creating new code commits and code branches early and often, and create data snapshots at key strategic milestones.
@@ -99,7 +99,7 @@ Before we snapshot the data, we should check that the code is up to date in the 
 tar_git_status()
 ```
 
-Our code and pipeline look ready for a data snapshot. First, we initialize the data repository with `tar_git_init()`. `tar_git_init()` writes a `.gitattributes` file in the data store that automatically opts into [Git LFS](https://git-lfs.github.com). If you have [Git LFS](https://git-lfs.github.com) but do not wish to use it, please remove the `.gitattributes` after calling `tar_git_init()`.
+Our code and pipeline look ready for a data snapshot. First, we initialize the data repository with `tar_git_init()`. `tar_git_init()` writes a `.gitattributes` file in the data store that automatically opts into [Git LFS](https://git-lfs.com). If you have [Git LFS](https://git-lfs.com) but do not wish to use it, please remove the `.gitattributes` after calling `tar_git_init()`.
 
 ```{r}
 tar_git_init()
@@ -229,7 +229,7 @@ Only files inside the `targets` data store are tracked in a `gittargets` data sn
 
 ## Performance
 
-If your `targets` pipeline generates large data files, consider installing [Git LFS](https://git-lfs.github.com). Once you install [Git LFS](https://git-lfs.github.com), it should just work on your project right out of the box because `tar_git_init()` writes the following to `_targets/.gitattributes`:
+If your `targets` pipeline generates large data files, consider installing [Git LFS](https://git-lfs.com). Once you install [Git LFS](https://git-lfs.com), it should just work on your project right out of the box because `tar_git_init()` writes the following to `_targets/.gitattributes`:
 
 ```{sh, eval = FALSE}
 objects filter=lfs diff=lfs merge=lfs -text

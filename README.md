@@ -141,7 +141,7 @@ follows.
 1.  Create the source code and run the pipeline at least once so the
     [data store](https://books.ropensci.org/targets/data.html) exists.
 2.  `tar_git_init()`: initialize a [Git](https://git-scm.com)/[Git
-    LFS](https://git-lfs.github.com) repository for the [data
+    LFS](https://git-lfs.com) repository for the [data
     store](https://books.ropensci.org/targets/data.html).
 3.  Bring the pipeline up to date (e.g. with
     [`tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html))
@@ -169,7 +169,7 @@ The first data versioning system in `gittargets` uses
 [Git](https://git-scm.com), which is designed for source code and may
 not scale to enormous amounts of compressed data. Future releases of
 `gittargets` may explore alternative data backends more powerful than
-[Git LFS](https://git-lfs.github.com).
+[Git LFS](https://git-lfs.com).
 
 ## Alternatives
 
@@ -231,4 +231,4 @@ citation("gittargets")
 
 [^1]: `gert` does not have these requirements, but `gittargets` does not
     exclusively rely on `gert` because `libgit2` does not automatically
-    work with [Git LFS](https://git-lfs.github.com).
+    work with [Git LFS](https://git-lfs.com).

@@ -1,7 +1,7 @@
 citHeader("To cite gittargets in publications use:")
 
 bibentry(
-  entry = "Manual",
+  bibtype = "Manual",
   title = "gittargets: Version Control for the Targets Package",
   author = "William Michael Landau",
   note = "https://docs.ropensci.org/gittargets/, https://github.com/ropensci/gittargets",

@@ -1,6 +1,6 @@
-# gittargets 0.0.5.9000
+# gittargets 0.0.6
 
-
+* Import `callr::r()`.
 
 # gittargets 0.0.5
 

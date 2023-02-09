@@ -11,7 +11,7 @@ Description: In computationally demanding data analysis pipelines,
   That way, when the user rolls back the code to a previous branch or commit,
   'gittargets' can recover the data contemporaneous with that commit so that
   all targets remain up to date.
-Version: 0.0.5.9000
+Version: 0.0.6
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/gittargets/, https://github.com/ropensci/gittargets
 BugReports: https://github.com/ropensci/gittargets/issues
@@ -42,6 +42,7 @@ Authors@R: c(
 Depends:
   R (>= 3.5.0)
 Imports:
+  callr (>= 3.0.0),
   cli (>= 3.1.0),
   data.table (>= 1.12.8),
   gert (>= 1.0.0),

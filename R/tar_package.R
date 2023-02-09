@@ -14,6 +14,7 @@
 #'   the data contemporaneous with that commit so that all targets
 #'   remain up to date.
 #' @family help
+#' @importFrom callr r
 #' @importFrom cli cli_alert_danger cli_alert_info cli_alert_success cli_h1
 #'   col_br_white
 #' @importFrom data.table as.data.table

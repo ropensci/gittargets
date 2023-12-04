@@ -3,7 +3,7 @@ targets::tar_test("tar_git_checkout()", {
   # Work on an initial branch.
   targets::tar_script(tar_target(data, "old_data"))
   targets::tar_make(callr_function = NULL)
-  expect_equal(targets::tar_progress(data)$progress, "built")
+  expect_equal(targets::tar_progress(data)$progress, status_completed())
   expect_equal(targets::tar_read(data), "old_data")
   gert::git_init()
   gert::git_add("_targets.R")
@@ -14,7 +14,7 @@ targets::tar_test("tar_git_checkout()", {
   tar_git_snapshot(status = FALSE, verbose = FALSE)
   targets::tar_script(tar_target(data, "new_data"))
   targets::tar_make(callr_function = NULL)
-  expect_equal(targets::tar_progress(data)$progress, "built")
+  expect_equal(targets::tar_progress(data)$progress, status_completed())
   expect_equal(targets::tar_read(data), "new_data")
   gert::git_branch_create("new_branch")
   gert::git_add("_targets.R")

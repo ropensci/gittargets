@@ -10,7 +10,7 @@ targets::tar_test("tar_git_snapshot()", {
   capture.output(tar_git_snapshot(status = TRUE)) # choose 1
   expect_equal(readLines(gitignore), "*")
   expect_equal(nrow(tar_git_status_data()), 0L)
-  commit <- gert::git_commit_info(repo = getwd())$id
+  commit <- paste0("code=", gert::git_commit_info(repo = getwd())$id)
   branch <- gert::git_branch(repo = store)
   expect_equal(commit, branch)
   message_code <- gert::git_commit_info(repo = getwd())$message

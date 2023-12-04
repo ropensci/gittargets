@@ -1,6 +1,6 @@
-# gittargets 0.0.6.9000
+# gittargets 0.0.7
 
-
+* Migrate to `targets` >= 1.3.2.9004 progress messages.
 
 # gittargets 0.0.6
 

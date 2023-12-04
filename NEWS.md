@@ -1,6 +1,6 @@
 # gittargets 0.0.7
 
-* Migrate to `targets` >= 1.3.2.9004 progress messages.
+* Migrate tests to `targets` >= 1.3.2.9004 progress statuses ("completed" instead of "built", "dispatched" instead of "started").
 
 # gittargets 0.0.6
 

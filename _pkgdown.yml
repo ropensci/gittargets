@@ -1,21 +1,12 @@
 destination: docs/
 navbar:
-  title: gittargets
-  type: default
-  left:
-  - icon: fa-home fa-lg
-    href: index.html
-  - text: Functions
-    href: reference/index.html
-  - text: targets
-    href: https://docs.ropensci.org/targets
-  - text: Vignettes
-    href: articles/index.html
-  - text: News
-    href: news/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/ropensci/gittargets
+  components:
+    targets:
+      text: targets
+      href: https://docs.ropensci.org/targets
+  structure:
+    left: [reference, targets, articles, news]
+    right: [search, github, lightswitch]
 reference:
 - title: Help
   contents:
